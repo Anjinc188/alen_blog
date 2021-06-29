@@ -7,13 +7,13 @@ tags: ["ES6","javaScript"]
 draft: true
 ---
 
-## ES5的构造函数语法
+## ES5的构造函数语法1212212
 
 ##### 1.创建对象的方法有两种
 
 ```javascript
 //字面量
-const obj = {}
+const obj = {} //2222
 
 //构造函数
 const obj = new Object()
