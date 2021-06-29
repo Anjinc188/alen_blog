@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Alen-学无止境</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Alen-学无止境</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 09 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ES6构造函数class与ES5构造函数语法</title>
+      <link>http://localhost:1313/post/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</guid>
+      <description>ES5的构造函数语法 1.创建对象的方法有两种 1 2 3 4 5 //字面量 const obj = {} //构造函数 const obj = new Object() 构造函数就是JavaScript程序定义好的构</description>
+    </item>
+    
+    <item>
+      <title>Go Gorm关联查询排除字段</title>
+      <link>http://localhost:1313/post/go-gorm%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%8E%92%E9%99%A4%E5%AD%97%E6%AE%B5/</link>
+      <pubDate>Thu, 08 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/go-gorm%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%8E%92%E9%99%A4%E5%AD%97%E6%AE%B5/</guid>
+      <description>本章讲解关于gorm模型后如何筛选按需字段 安装gorm 1 go get -u github.com/jinzhu/gorm 一对多使用： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 //日记模型 type Diary struct { Model Uid uint32 `json:&amp;#34;uid&amp;#34;` //</description>
+    </item>
+    
+    <item>
+      <title>Vue3</title>
+      <link>http://localhost:1313/post/vue3.0&#43;typescript%E4%BD%93%E9%AA%8C/</link>
+      <pubDate>Sun, 04 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/vue3.0&#43;typescript%E4%BD%93%E9%AA%8C/</guid>
+      <description>Vue3.0 可以完全支持Vue2.0, 升级以后不需要更改关于Vue的代码 vue3.0创建项目 1 2 3 4 -- 使用vite npm init vite-app 你的项目名 cd 项目名 npm run dev 当然也</description>
+    </item>
+    
+    <item>
+      <title>Go Query采集文章</title>
+      <link>http://localhost:1313/post/go-query%E9%87%87%E9%9B%86%E6%96%87%E7%AB%A0/</link>
+      <pubDate>Tue, 04 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/go-query%E9%87%87%E9%9B%86%E6%96%87%E7%AB%A0/</guid>
+      <description>相信很多小伙伴对爬虫有着很大的兴趣,我们今天来说下go语言的爬虫利器goquery，语法有jquery类似，我有一篇使用php-QueryL</description>
+    </item>
+    
+    <item>
+      <title>使用Logstash把mysql数据同步到elasticsearch</title>
+      <link>http://localhost:1313/post/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch/</link>
+      <pubDate>Sat, 04 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch/</guid>
+      <description>首先 我们要知道elasticsearch是什么 elasticsearch简写es，es是一个高扩展、开源的全文检索和分析引擎，它可以准实时地</description>
+    </item>
+    
+    <item>
+      <title>Php Jwt中间件 用户鉴权</title>
+      <link>http://localhost:1313/post/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/</link>
+      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/</guid>
+      <description>在上一篇文章中大概对jwt有了一个大概的了解，现在我们用tp6配合jwt做一个中间件，实现对用户签发token还有鉴权 签发token 直接开始</description>
+    </item>
+    
+    <item>
+      <title>Tp6&#43;Jwt用户token验证</title>
+      <link>http://localhost:1313/post/tp6&#43;jwt%E7%94%A8%E6%88%B7token%E9%AA%8C%E8%AF%81/</link>
+      <pubDate>Thu, 04 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/tp6&#43;jwt%E7%94%A8%E6%88%B7token%E9%AA%8C%E8%AF%81/</guid>
+      <description>JSON Web Token是什么？ 转载：https://www.liqingbo.cn/docs/jwt/ JSON Web Token (JWT)是一个开放标准(RFC 7519</description>
+    </item>
+    
+    <item>
+      <title>ElasticSearch 和 Kibana网盘下载</title>
+      <link>http://localhost:1313/post/elasticsearch-%E5%92%8C-kibana%E7%BD%91%E7%9B%98%E4%B8%8B%E8%BD%BD/</link>
+      <pubDate>Fri, 03 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/elasticsearch-%E5%92%8C-kibana%E7%BD%91%E7%9B%98%E4%B8%8B%E8%BD%BD/</guid>
+      <description>我们通常在官网download会很慢 因为在墙内需要挂代理，这里贴出一份百度网盘下载 elasticsearch-7.6.0-windows-x86_64 下载地址 提取码：6f7s kibana-7.6.0-windows-x86_64 下载地址 提取码：v8w1 希望可</description>
+    </item>
+    
+    <item>
+      <title>ES6-Set Map基本使用方法</title>
+      <link>http://localhost:1313/post/es6-set-map%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/es6-set-map%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</guid>
+      <description>转载：http://caibaojian.com/es6/set-map.html Set基本用法 ES6提供了新的数据结构Set。它类似于数组</description>
+    </item>
+    
+    <item>
+      <title>php QueryList采集微信公众号文章</title>
+      <link>http://localhost:1313/post/php-querylist%E9%87%87%E9%9B%86%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0/</link>
+      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/php-querylist%E9%87%87%E9%9B%86%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0/</guid>
+      <description>QueryList 是什么 QueryList是一套用于内容采集的PHP工具，它使用更加现代化的开发思想，语法简洁、优雅，可扩展性强。相比传统的使用晦涩的正则表</description>
+    </item>
+    
+  </channel>
+</rss>

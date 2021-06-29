@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ES6 on Alen-学无止境</title>
+    <link>http://localhost:1313/tags/es6/</link>
+    <description>Recent content in ES6 on Alen-学无止境</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 09 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/es6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ES6构造函数class与ES5构造函数语法</title>
+      <link>http://localhost:1313/post/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</guid>
+      <description>ES5的构造函数语法 1.创建对象的方法有两种 1 2 3 4 5 //字面量 const obj = {} //构造函数 const obj = new Object() 构造函数就是JavaScript程序定义好的构</description>
+    </item>
+    
+    <item>
+      <title>ES6-Set Map基本使用方法</title>
+      <link>http://localhost:1313/post/es6-set-map%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/es6-set-map%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</guid>
+      <description>转载：http://caibaojian.com/es6/set-map.html Set基本用法 ES6提供了新的数据结构Set。它类似于数组</description>
+    </item>
+    
+  </channel>
+</rss>
