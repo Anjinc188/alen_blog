@@ -6,7 +6,16 @@
     <description>Recent content in javaScript on Alen-学无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 09 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Jun 2021 16:51:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JS基础 函数、对象和原型、原型链的关系</title>
+      <link>http://localhost:1313/post/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/</link>
+      <pubDate>Tue, 29 Jun 2021 16:51:01 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/</guid>
+      <description>再次学习JS-函数、对象和原型、原型链的关系 JS的原型、原型链一直是比较难理解的内容，不少初学者甚至有一定经验的老鸟都不一定能完全说清楚，更</description>
+    </item>
+    
     <item>
       <title>ES6构造函数class与ES5构造函数语法</title>
       <link>http://localhost:1313/post/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</link>

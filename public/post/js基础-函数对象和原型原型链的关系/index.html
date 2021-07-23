@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>JS基础 函数、对象和原型、原型链的关系 - Alen-学无止境</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Alen" /><meta name="description" content="再次学习JS-函数、对象和原型、原型链的关系 JS的原型、原型链一直是比较难理解的内容，不少初学者甚至有一定经验的老鸟都不一定能完全说清楚，更" /><meta name="keywords" content="ES6, javaScript" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.a659bb31b17a54f7792e1bc783fc75b31118e6a175b42337b03fae0b1a3ef2b5.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="JS基础 函数、对象和原型、原型链的关系" />
+<meta property="og:description" content="再次学习JS-函数、对象和原型、原型链的关系 JS的原型、原型链一直是比较难理解的内容，不少初学者甚至有一定经验的老鸟都不一定能完全说清楚，更" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-29T16:51:01&#43;08:00" />
+<meta property="article:modified_time" content="2021-06-29T16:51:01&#43;08:00" />
+
+<meta itemprop="name" content="JS基础 函数、对象和原型、原型链的关系">
+<meta itemprop="description" content="再次学习JS-函数、对象和原型、原型链的关系 JS的原型、原型链一直是比较难理解的内容，不少初学者甚至有一定经验的老鸟都不一定能完全说清楚，更"><meta itemprop="datePublished" content="2021-06-29T16:51:01&#43;08:00" />
+<meta itemprop="dateModified" content="2021-06-29T16:51:01&#43;08:00" />
+<meta itemprop="wordCount" content="773">
+<meta itemprop="keywords" content="ES6,javaScript," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JS基础 函数、对象和原型、原型链的关系"/>
+<meta name="twitter:description" content="再次学习JS-函数、对象和原型、原型链的关系 JS的原型、原型链一直是比较难理解的内容，不少初学者甚至有一定经验的老鸟都不一定能完全说清楚，更"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Alen</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">文章</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Alen</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">文章</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">JS基础 函数、对象和原型、原型链的关系</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-06-29 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%89%8D%E7%AB%AF/"> 前端 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#再次学习js-函数对象和原型原型链的关系">再次学习JS-函数、对象和原型、原型链的关系</a>
+      <ul>
+        <li><a href="#prototype">prototype</a>
+          <ul>
+            <li><a href="#只有函数有prototype属性">只有函数有prototype属性</a></li>
+            <li><a href="#为什么只有函数有prototype属性">为什么只有函数有prototype属性</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="再次学习js-函数对象和原型原型链的关系">再次学习JS-函数、对象和原型、原型链的关系</h1>
+<blockquote>
+<p>JS的原型、原型链一直是比较难理解的内容，不少初学者甚至有一定经验的老鸟都不一定能完全说清楚，更多的&quot;很可能&quot;是一知半解，而这部分内容又是JS的核心内容，想要技术进阶的话肯定不能对这个概念一知半解，碰到问题靠“猜”，却不理解它的规则！</p>
+</blockquote>
+<h2 id="prototype">prototype</h2>
+<h3 id="只有函数有prototype属性">只有函数有prototype属性</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">// undefined
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">// { constructor: function(){...} }
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="objectprototype怎么解释">Object.prototype怎么解释？</h4>
+<p>其实<code>Object</code>是一个全局对象，也是一个构造函数，以及其他基本类型的全局对象也都是构造函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">outTypeName</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">typeName</span> <span class="o">=</span>  <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">typeName</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">outTypeName</span><span class="p">(</span><span class="nb">Object</span><span class="p">)</span> <span class="c1">//[object Function]
+</span><span class="c1"></span><span class="nx">outTypeName</span><span class="p">(</span><span class="nb">String</span><span class="p">)</span> <span class="c1">// [object Function]
+</span><span class="c1"></span><span class="nx">outTypeName</span><span class="p">(</span><span class="nb">Number</span><span class="p">)</span> <span class="c1">// [object Function]
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="为什么只有函数有prototype属性">为什么只有函数有prototype属性</h3>
+<p>JS通过<code>new</code>来生成对象，但是仅靠构造函数，每次生成的对象都不一样。</p>
+<p>有时候需要在两个对象之间共享属性，由于JS在设计之初没有类的概念，所以JS使用函数的<code>prototype</code>来处理这部分<strong>需要被共享的属性</strong>，通过函数的<code>prototype</code>来模拟类：</p>
+<p>当创建一个函数时，JS会自动为函数添加<code>prototype</code>属性，值是一个有<code>constructor</code>的对象。</p>
+<p>以下是共享属性<code>prototype</code>的栗子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">People</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span>
+<span class="p">}</span>
+<span class="nx">People</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">23</span> <span class="c1">// 岁数
+</span><span class="c1">// 创建两个实例
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">People1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">People</span><span class="p">(</span><span class="s1">&#39;OBKoro1&#39;</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">People2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">People</span><span class="p">(</span><span class="s1">&#39;扣肉&#39;</span><span class="p">)</span>
+<span class="nx">People</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">24</span> <span class="c1">// 长大了一岁
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">People1</span><span class="p">.</span><span class="nx">age</span><span class="p">,</span> <span class="nx">People2</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span> <span class="c1">// 24 24
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">isType</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">typeObj</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;[object String]&#39;</span><span class="o">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;[object Number]&#39;</span><span class="o">:</span> <span class="s1">&#39;number&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;[object Boolean]&#39;</span><span class="o">:</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;[object Null]&#39;</span><span class="o">:</span> <span class="s1">&#39;null&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;[object Undefined]&#39;</span><span class="o">:</span> <span class="s1">&#39;undefined&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;[object Object]&#39;</span><span class="o">:</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;[object Array]&#39;</span><span class="o">:</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;[object Function]&#39;</span><span class="o">:</span> <span class="s1">&#39;function&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;[object Date]&#39;</span><span class="o">:</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="c1">// Object.prototype.toString.call(new Date())
+</span><span class="c1"></span>        <span class="s1">&#39;[object RegExp]&#39;</span><span class="o">:</span> <span class="s1">&#39;regExp&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;[object Map]&#39;</span><span class="o">:</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;[object Set]&#39;</span><span class="o">:</span> <span class="s1">&#39;set&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;[object HTMLDivElement]&#39;</span><span class="o">:</span> <span class="s1">&#39;dom&#39;</span><span class="p">,</span> <span class="c1">// document.querySelector(&#39;#app&#39;)
+</span><span class="c1"></span>        <span class="s1">&#39;[object WeakMap]&#39;</span><span class="o">:</span> <span class="s1">&#39;weakMap&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;[object Window]&#39;</span><span class="o">:</span> <span class="s1">&#39;window&#39;</span><span class="p">,</span>  <span class="c1">// Object.prototype.toString.call(window)
+</span><span class="c1"></span>        <span class="s1">&#39;[object Error]&#39;</span><span class="o">:</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="c1">// new Error(&#39;1&#39;)
+</span><span class="c1"></span>        <span class="s1">&#39;[object Arguments]&#39;</span><span class="o">:</span> <span class="s1">&#39;arguments&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="c1">// 借用Object.prototype.toString()获取数据类型
+</span><span class="c1"></span>    <span class="kd">let</span> <span class="nx">typeName</span> <span class="o">=</span> <span class="nx">typeObj</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="s1">&#39;未知类型&#39;</span> <span class="c1">// 匹配数据类型
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">typeName</span> <span class="o">===</span> <span class="nx">type</span> <span class="c1">// 判断该数据类型是否为传入的类型
+</span><span class="c1"></span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+    <span class="nx">isType</span><span class="p">({},</span> <span class="s1">&#39;object&#39;</span><span class="p">),</span> <span class="c1">// true
+</span><span class="c1"></span>    <span class="nx">isType</span><span class="p">([],</span> <span class="s1">&#39;array&#39;</span><span class="p">),</span> <span class="c1">// true
+</span><span class="c1"></span>    <span class="nx">isType</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span> <span class="s1">&#39;object&#39;</span><span class="p">),</span> <span class="c1">// false
+</span><span class="c1"></span>    <span class="nx">isType</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span> <span class="s1">&#39;date&#39;</span><span class="p">),</span> <span class="c1">// true
+</span><span class="c1"></span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Alen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-06-29
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/es6/">ES6</a>
+          <a href="/tags/javascript/">javaScript</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/callapplymbind%E5%8C%BA%E5%88%AB/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">call,apply,bind区别</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cookie-localstorage-%E4%B8%8E-sessionstorage%E7%9A%84%E5%8C%BA%E5%88%AB/">
+            <span class="next-text nav-default">Cookie, LocalStorage 与 SessionStorage的区别</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Alen</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

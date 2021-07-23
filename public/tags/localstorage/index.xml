@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LocalStorage on Alen-学无止境</title>
+    <link>http://localhost:1313/tags/localstorage/</link>
+    <description>Recent content in LocalStorage on Alen-学无止境</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 29 Jun 2021 16:19:36 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/localstorage/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cookie, LocalStorage 与 SessionStorage的区别</title>
+      <link>http://localhost:1313/post/cookie-localstorage-%E4%B8%8E-sessionstorage%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Tue, 29 Jun 2021 16:19:36 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cookie-localstorage-%E4%B8%8E-sessionstorage%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description>最近找工作面试中，有频繁被面试官问到Cookie, LocalStorage 与 SessionStorage的区别，在此记录一下。 基本概念 Cookie Cookie 是小甜饼的意思。顾名思义</description>
+    </item>
+    
+  </channel>
+</rss>
