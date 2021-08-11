@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Alen-学无止境</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 03 Jul 2021 14:59:06 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Jul 2021 12:40:39 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>排序算法学习记录</title>
+      <link>http://localhost:1313/post/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Wed, 28 Jul 2021 12:40:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
+      <description>1. 冒泡排序 冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他</description>
+    </item>
+    
     <item>
       <title>Html语义化标签的理解</title>
       <link>http://localhost:1313/post/html%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE%E7%9A%84%E7%90%86%E8%A7%A3/</link>
