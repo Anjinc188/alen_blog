@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>使用Logstash把mysql数据同步到elasticsearch - Alen</title><meta name="Description" content="Make it a better place"><meta property="og:title" content="使用Logstash把mysql数据同步到elasticsearch" />
+<meta property="og:description" content="首先 我们要知道elasticsearch是什么 elasticsearch简写es，es是一个高扩展、开源的全文检索和分析引擎，它可以准实时地" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch/" /><meta property="og:image" content="https://static.alenhy.com/alen_avatar.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-07-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-07-04T00:00:00+00:00" /><meta property="og:site_name" content="Alen" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://static.alenhy.com/alen_avatar.jpeg"/>
+
+<meta name="twitter:title" content="使用Logstash把mysql数据同步到elasticsearch"/>
+<meta name="twitter:description" content="首先 我们要知道elasticsearch是什么 elasticsearch简写es，es是一个高扩展、开源的全文检索和分析引擎，它可以准实时地"/>
+<meta name="application-name" content="Alen">
+<meta name="apple-mobile-web-app-title" content="Alen"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://static.alenhy.com/alen_avatar.jpeg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch/" /><link rel="prev" href="http://example.org/posts/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/" /><link rel="next" href="http://example.org/posts/go-query%E9%87%87%E9%9B%86%E6%96%87%E7%AB%A0/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "使用Logstash把mysql数据同步到elasticsearch",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch\/"
+        },"genre": "posts","keywords": "Logstash, elasticsearch","wordcount":  1431 ,
+        "url": "http:\/\/example.org\/posts\/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch\/","datePublished": "2020-07-04T00:00:00+00:00","dateModified": "2020-07-04T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Alen"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Alen"><span class="header-title-pre">(՞• •՞)</span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="请输入搜索内容～" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Alen"><span class="header-title-pre">(՞• •՞)</span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="请输入搜索内容～" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">使用Logstash把mysql数据同步到elasticsearch</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Alen</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>数据处理</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-07-04">2020-07-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1431 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#首先-我们要知道elasticsearch是什么"><strong>首先 我们要知道elasticsearch是什么</strong></a>
+      <ul>
+        <li><a href="#什么是全文检索"><strong>什么是全文检索</strong></a></li>
+        <li><a href="#准备工作">准备工作</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="首先-我们要知道elasticsearch是什么"><strong>首先 我们要知道elasticsearch是什么</strong></h2>
+<blockquote>
+<p>elasticsearch简写es，es是一个高扩展、开源的全文检索和分析引擎，它可以准实时地快速存储、搜索、分析海量的数据</p>
+</blockquote>
+<h3 id="什么是全文检索"><strong>什么是全文检索</strong></h3>
+<p>全文检索是指计算机索引程序通过扫描文章中的每一个词，对每一个词建立一个索引，指明该词在文章中出现的次数和位置，当用户查询时，检索程序就根据事先建立的索引进行查找，并将查找的结果反馈给用户的检索方式。这个过程类似于通过字典中的检索字表查字的过程。全文搜索搜索引擎数据库中的数据。</p>
+<hr>
+<h3 id="准备工作">准备工作</h3>
+<ul>
+<li>
+<p>下面我们通过Logstash把mysql里面的数据同步到elasticsearch,关于mysql安装就不用说了</p>
+</li>
+<li>
+<p>首先要安装elasticsearch <a href="https://www.elastic.co/cn/downloads/elasticsearch" target="_blank" rel="noopener noreffer ">官方下载链接</a></p>
+</li>
+<li>
+<p>logstash <a href="https://www.elastic.co/cn/downloads/logstash" target="_blank" rel="noopener noreffer ">官方下载链接</a></p>
+</li>
+<li>
+<p>kibana <a href="https://www.elastic.co/cn/webinars/getting-started-kibana?elektra=products-kibana&amp;storm=hero&amp;rogue=watch-video" target="_blank" rel="noopener noreffer ">官方下载链接</a></p>
+</li>
+<li>
+<p>建议挂代理 如果不挂代理会很慢，在我<a href="http://blgo.ximi-edu.com/index.php/2020/03/16/first/" target="_blank" rel="noopener noreffer ">另一篇博文</a>上有墙内资源 大家可去download</p>
+<p>环境搭建好下面开始</p>
+</li>
+</ul>
+<hr>
+<h4 id="1安装logstash-input-jdbc">1.安装logstash-input-jdbc</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">安装此插件以及依赖需要在ruby环境下，ruby默认的镜像在国外，所以很慢，需要手动将镜像网站https://rubygems.org/替换为国内的https://gems.ruby-china.com/
+</span></span></code></pre></div><h5 id="111-安装ruby"><strong>1.11 安装ruby</strong></h5>
+<ul>
+<li>我这里是windows系统 <a href="https://rubyinstaller.org/downloads/" target="_blank" rel="noopener noreffer ">ruby官方下载链接</a></li>
+<li>下载安装完之后 验证 ruby -v 返回版本既安装成功</li>
+</ul>
+<hr>
+<h5 id="112安装gem">1.12安装gem</h5>
+<p>Gem是一个管理Ruby库和程序的标准包，MacOS系统自带gem环境(我这里是Windows，所以要安装一下)，可以用gem -v查看版本，gems.ruby-china建议gem版本最好&gt;2.6.x，如果版本较低，可以用 gem update –system更新</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">gem -v
+</span></span><span class="line"><span class="cl">gem update --system
+</span></span></code></pre></div><p>gem sources -l命令的作用是查看当前gem的源，在替换成功后，应该显示如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">*** CURRENT SOURCES ***
+</span></span><span class="line"><span class="cl">https://gems.ruby-china.com/
+</span></span></code></pre></div><p>确保只有 <a href="https://link.zhihu.com/?target=http%3A//gems.ruby-china.com" target="_blank" rel="noopener noreffer ">http://gems.ruby-china.com</a>，即替换成功</p>
+<hr>
+<h5 id="113使用-bundler-的gem-源代码镜像命令httpslinkzhihucomtargethttp3abundleriov15bundle_confightml23gem-source-mirrors或修改gemfile">1.13<strong>使用 Bundler 的<a href="https://link.zhihu.com/?target=http%3A//bundler.io/v1.5/bundle_config.html%23gem-source-mirrors" target="_blank" rel="noopener noreffer ">Gem 源代码镜像命令</a>或修改Gemfile</strong></h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">bundle config mirror.https://rubygems.org https://gems.ruby-china.com
+</span></span></code></pre></div><p>在logstash-7.6.1(其它版本应该一致)根目录下打开Gemfile与Gemfile.lock两个文件 然后更改如下：</p>
+<ul>
+<li>Gemfile</li>
+<li>修改第1行出现的source，将source “<a href="https://rubygems.org/" target="_blank" rel="noopener noreffer ">https://rubygems.org</a>”，改为source “https://gems.ruby-china.com/&quot;</li>
+</ul>
+<p>Gemfile.lock</p>
+<ul>
+<li>修改GEM下的remote，将remote: <a href="https://rubygems.org/" target="_blank" rel="noopener noreffer ">https://rubygems.org</a>，改为remote: <a href="https://gems.ruby-china.com/" target="_blank" rel="noopener noreffer ">https://gems.ruby-china.com/</a></li>
+</ul>
+<hr>
+<h5 id="114-安装logstash-input-jdbc插件">1.14 <strong>安装logstash-input-jdbc插件</strong></h5>
+<ul>
+<li>完成前面的操作之后我们就可以来安装logstash-input-jdbc了</li>
+<li>打开logstash文件夹下的bin目录</li>
+<li>打开终端输入</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">logstash-plugin install logstash-input-jdbc --回车进行安装
+</span></span></code></pre></div><ul>
+<li>安装成功之后就可以开始导入配置了 前提装备还需要mysql-connector-java这个jar包</li>
+<li><a href="https://mvnrepository.com/artifact/mysql/mysql-connector-java" target="_blank" rel="noopener noreffer ">官方下载地址</a></li>
+<li>以上我们的第一步操作就完成了</li>
+</ul>
+<h4 id="2配置logstash的conf文件"><strong>2.配置logstash的conf文件</strong></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">input <span class="o">{</span>
+</span></span><span class="line"><span class="cl">stdin <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">jdbc <span class="o">{</span>
+</span></span><span class="line"><span class="cl">       <span class="nv">jdbc_connection_string</span> <span class="o">=</span>&gt; <span class="s2">&#34;jdbc:mysql://localhost:3306/yt_rjjy?&#34;</span>
+</span></span><span class="line"><span class="cl">       <span class="nv">jdbc_user</span> <span class="o">=</span>&gt; <span class="s2">&#34;root&#34;</span>
+</span></span><span class="line"><span class="cl">       <span class="nv">jdbc_password</span> <span class="o">=</span>&gt; <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">       <span class="nv">jdbc_driver_library</span> <span class="o">=</span>&gt; <span class="s2">&#34;D:\Elastic\logstash-7.6.1\mysql-connector-java-8.0.16.jar&#34;</span>
+</span></span><span class="line"><span class="cl">       <span class="nv">jdbc_driver_class</span> <span class="o">=</span>&gt; <span class="s2">&#34;com.mysql.jdbc.Driver&#34;</span>
+</span></span><span class="line"><span class="cl">       <span class="nv">jdbc_paging_enabled</span> <span class="o">=</span>&gt; <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">       <span class="nv">jdbc_page_size</span> <span class="o">=</span>&gt; <span class="s2">&#34;50000&#34;</span>
+</span></span><span class="line"><span class="cl">       <span class="nv">jdbc_default_timezone</span> <span class="o">=</span>&gt; <span class="s2">&#34;UTC&#34;</span>
+</span></span><span class="line"><span class="cl">       <span class="nv">statement</span> <span class="o">=</span>&gt; <span class="s2">&#34;SELECT * FROM `card`&#34;</span>
+</span></span><span class="line"><span class="cl">       <span class="nv">schedule</span> <span class="o">=</span>&gt; <span class="s2">&#34;* * * * *&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">output <span class="o">{</span>
+</span></span><span class="line"><span class="cl">elasticsearch <span class="o">{</span>
+</span></span><span class="line"><span class="cl">       <span class="c1"># 配置ES集群地址</span>
+</span></span><span class="line"><span class="cl">         <span class="nv">hosts</span> <span class="o">=</span>&gt; <span class="o">[</span><span class="s2">&#34;127.0.0.1:9200&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">         <span class="nv">index</span> <span class="o">=</span>&gt; <span class="s2">&#34;card&#34;</span>
+</span></span><span class="line"><span class="cl">         <span class="nv">document_id</span> <span class="o">=</span>&gt; <span class="s2">&#34;%{id}&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">stdout <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>配置完之后我们去bin目录下 执行cmd命令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">logstash -f D:<span class="se">\E</span>lastic<span class="se">\l</span>ogstash-7.6.1<span class="se">\c</span>onfig<span class="se">\l</span>ogstash-mysql.conf 执行无错误就成功了 如果你用的是mysql的最新的驱动8.多的版本会出现配置错误
+</span></span></code></pre></div><p>具体解决方法：https://blog.csdn.net/u012976879/article/details/85261036</p>
+<p>原文出处：https://zhuanlan.zhihu.com/p/46749126</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-07-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch/" data-title="使用Logstash把mysql数据同步到elasticsearch" data-via="an_jinc" data-hashtags="Logstash,elasticsearch"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch/" data-hashtag="Logstash"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch/" data-title="使用Logstash把mysql数据同步到elasticsearch"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch/" data-title="使用Logstash把mysql数据同步到elasticsearch"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch/" data-title="使用Logstash把mysql数据同步到elasticsearch"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/logstash/">Logstash</a>,&nbsp;<a href="/tags/elasticsearch/">ElasticSearch</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/" class="prev" rel="prev" title="Php Jwt中间件 用户鉴权"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Php Jwt中间件 用户鉴权</a>
+            <a href="/posts/go-query%E9%87%87%E9%9B%86%E6%96%87%E7%AB%A0/" class="next" rel="next" title="Go Query采集文章">Go Query采集文章<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Alen学无止境</div><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.99.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Alen</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a href="https://beian.miit.gov.cn/shouye.html" target="_blank">桂ICP备2022006375号-1</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"Alen-学无止境","id-2":"Alen-学无止境"},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

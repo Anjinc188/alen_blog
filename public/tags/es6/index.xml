@@ -1,38 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>ES6 on Alen-学无止境</title>
-    <link>http://localhost:1313/tags/es6/</link>
-    <description>Recent content in ES6 on Alen-学无止境</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Tue, 29 Jun 2021 16:51:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/es6/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>JS基础 函数、对象和原型、原型链的关系</title>
-      <link>http://localhost:1313/post/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/</link>
-      <pubDate>Tue, 29 Jun 2021 16:51:01 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/</guid>
-      <description>再次学习JS-函数、对象和原型、原型链的关系 JS的原型、原型链一直是比较难理解的内容，不少初学者甚至有一定经验的老鸟都不一定能完全说清楚，更</description>
-    </item>
-    
-    <item>
-      <title>ES6构造函数class与ES5构造函数语法</title>
-      <link>http://localhost:1313/post/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</link>
-      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</guid>
-      <description>ES5的构造函数语法 1.创建对象的方法有两种 1 2 3 4 5 //字面量 const obj = {} //构造函数 const obj = new Object() 构造函数就是JavaScript程序定义好的构</description>
-    </item>
-    
-    <item>
-      <title>ES6-Set Map基本使用方法</title>
-      <link>http://localhost:1313/post/es6-set-map%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</link>
-      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/es6-set-map%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</guid>
-      <description>转载：http://caibaojian.com/es6/set-map.html Set基本用法 ES6提供了新的数据结构Set。它类似于数组</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>ES6 - Tag - Alen</title>
+        <link>http://example.org/tags/es6/</link>
+        <description>ES6 - Tag - Alen</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>anjinc188@gmail.com (Alen)</managingEditor>
+            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Tue, 29 Jun 2021 16:51:01 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/es6/" rel="self" type="application/rss+xml" /><item>
+    <title>JS基础 函数、对象和原型、原型链的关系</title>
+    <link>http://example.org/posts/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/</link>
+    <pubDate>Tue, 29 Jun 2021 16:51:01 &#43;0800</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/</guid>
+    <description><![CDATA[再次学习JS-函数、对象和原型、原型链的关系 JS的原型、原型链一直是比较难理解的内容，不少初学者甚至有一定经验的老鸟都不一定能完全说清楚，更]]></description>
+</item>
+<item>
+    <title>ES6构造函数class与ES5构造函数语法</title>
+    <link>http://example.org/posts/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</link>
+    <pubDate>Mon, 09 Nov 2020 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</guid>
+    <description><![CDATA[ES5的构造函数语法 1.创建对象的方法有两种 //字面量 const obj = {} //构造函数 const obj = new Object() 构造函数就是JavaScript程序定义好的构造函数,我]]></description>
+</item>
+<item>
+    <title>ES6-Set Map基本使用方法</title>
+    <link>http://example.org/posts/es6-set-map%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</link>
+    <pubDate>Thu, 09 Jan 2020 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/es6-set-map%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</guid>
+    <description><![CDATA[转载：http://caibaojian.com/es6/set-map.html Set基本用法 ES6提供了新的数据结构Set。它类似于数组]]></description>
+</item>
+</channel>
 </rss>

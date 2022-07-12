@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Php Jwt中间件 用户鉴权 - Alen</title><meta name="Description" content="Make it a better place"><meta property="og:title" content="Php Jwt中间件 用户鉴权" />
+<meta property="og:description" content="在上一篇文章中大概对jwt有了一个大概的了解，现在我们用tp6配合jwt做一个中间件，实现对用户签发token还有鉴权 签发token 直接开始" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/" /><meta property="og:image" content="https://static.alenhy.com/alen_avatar.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-06-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-06-10T00:00:00+00:00" /><meta property="og:site_name" content="Alen" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://static.alenhy.com/alen_avatar.jpeg"/>
+
+<meta name="twitter:title" content="Php Jwt中间件 用户鉴权"/>
+<meta name="twitter:description" content="在上一篇文章中大概对jwt有了一个大概的了解，现在我们用tp6配合jwt做一个中间件，实现对用户签发token还有鉴权 签发token 直接开始"/>
+<meta name="application-name" content="Alen">
+<meta name="apple-mobile-web-app-title" content="Alen"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://static.alenhy.com/alen_avatar.jpeg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/" /><link rel="prev" href="http://example.org/posts/tp6&#43;jwt%E7%94%A8%E6%88%B7token%E9%AA%8C%E8%AF%81/" /><link rel="next" href="http://example.org/posts/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Php Jwt中间件 用户鉴权",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83\/"
+        },"genre": "posts","keywords": "PHP, thinkphp6.0, JWT","wordcount":  603 ,
+        "url": "http:\/\/example.org\/posts\/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83\/","datePublished": "2020-06-10T00:00:00+00:00","dateModified": "2020-06-10T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Alen"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Alen"><span class="header-title-pre">(՞• •՞)</span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="请输入搜索内容～" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Alen"><span class="header-title-pre">(՞• •՞)</span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="请输入搜索内容～" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Php Jwt中间件 用户鉴权</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Alen</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%90%8E%E7%AB%AF/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>后端</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-06-10">2020-06-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;603 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#签发token">签发token</a></li>
+    <li><a href="#定义中间件">定义中间件</a></li>
+    <li><a href="#使用路由中间件">使用路由中间件</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>在上一篇文章中大概对jwt有了一个大概的了解，现在我们用tp6配合jwt做一个中间件，实现对用户签发token还有鉴权</strong></p>
+<h2 id="签发token">签发token</h2>
+<p>直接开始上代码：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">   <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * 生成用户token
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @param $uid
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return mixed
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">signToken</span><span class="p">(</span><span class="nv">$uid</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;uid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$uid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//生成用户token
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nv">$key</span> <span class="o">=</span> <span class="s1">&#39;******&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$token</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;iss&#34;</span> <span class="o">=&gt;</span> <span class="nv">$key</span><span class="p">,</span>         <span class="c1">//签发者 可以为空
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="s2">&#34;aud&#34;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>           <span class="c1">//面象的用户，可以为空
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="s2">&#34;iat&#34;</span> <span class="o">=&gt;</span> <span class="nx">time</span><span class="p">(),</span>       <span class="c1">//签发时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="s2">&#34;nbf&#34;</span> <span class="o">=&gt;</span> <span class="nx">time</span><span class="p">()</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span>   <span class="c1">//在什么时候jwt开始生效  （这里表示生成100秒后才生效）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="s2">&#34;exp&#34;</span> <span class="o">=&gt;</span> <span class="nx">time</span><span class="p">()</span> <span class="o">+</span> <span class="mi">7200</span><span class="p">,</span> <span class="c1">//token 有效时间(两个小时)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="s2">&#34;uid&#34;</span> <span class="o">=&gt;</span> <span class="nv">$uid</span>
+</span></span><span class="line"><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$jwt</span> <span class="o">=</span> <span class="nx">JWT</span><span class="o">::</span><span class="na">encode</span><span class="p">(</span><span class="nv">$token</span><span class="p">,</span> <span class="nv">$key</span><span class="p">,</span> <span class="s2">&#34;HS256&#34;</span><span class="p">);</span>  <span class="c1">//根据参数生成了 token
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;token&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$jwt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * 解密token
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @param $token
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return object
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">checkToken</span><span class="p">(</span><span class="nv">$token</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//解决时间不同步问题
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">JWT</span><span class="o">::</span><span class="nv">$leeway</span> <span class="o">+=</span> <span class="mi">15</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$key</span> <span class="o">=</span> <span class="s2">&#34;*****&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$info</span> <span class="o">=</span> <span class="nx">JWT</span><span class="o">::</span><span class="na">decode</span><span class="p">(</span><span class="nv">$token</span><span class="p">,</span> <span class="nv">$key</span><span class="p">,</span> <span class="p">[</span><span class="s2">&#34;HS256&#34;</span><span class="p">]);</span> <span class="c1">//解密jwt
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="nv">$info</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><h2 id="定义中间件">定义中间件</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">php think make:middleware Check
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * 路由中间件拦截
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @param $request
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @param \Closure $next
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return array|mixed
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @throws TokenException
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nx">\Closure</span> <span class="nv">$next</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//JWT验证登录
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nv">$token</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;Authorization&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$token</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">renderError</span><span class="p">(</span><span class="nx">Status</span><span class="o">::</span><span class="na">Unauthorized</span><span class="p">,</span> <span class="nx">Status</span><span class="o">::</span><span class="na">NotTokenMsg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//解密token
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">JwtToken</span><span class="o">::</span><span class="na">checkToken</span><span class="p">(</span><span class="nv">$token</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Firebase\JWT\SignatureInvalidException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">//签名不正确
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="nx">TokenException</span><span class="p">(</span><span class="s1">&#39;签名异常&#39;</span><span class="p">,</span> <span class="nx">Status</span><span class="o">::</span><span class="na">TokenExpired</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Firebase\JWT\BeforeValidException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 签名在某个时间点之后才能用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="nx">TokenException</span><span class="p">(</span><span class="s1">&#39;签名在某个时间点之后才能用&#39;</span><span class="p">,</span> <span class="nx">Status</span><span class="o">::</span><span class="na">NotEffect</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Firebase\JWT\ExpiredException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// token过期{}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="nx">TokenException</span><span class="p">(</span><span class="s1">&#39;token已过期&#39;</span><span class="p">,</span> <span class="nx">Status</span><span class="o">::</span><span class="na">TokenExpired</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">//其他错误
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="nx">TokenException</span><span class="p">(</span><span class="s1">&#39;token已过期&#39;</span><span class="p">,</span> <span class="nx">Status</span><span class="o">::</span><span class="na">ERROR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$next</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><h2 id="使用路由中间件">使用路由中间件</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">//验证token接口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">Route</span><span class="o">::</span><span class="na">group</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//上传图片接口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Route</span><span class="o">::</span><span class="na">rule</span><span class="p">(</span><span class="s1">&#39;****/***&#39;</span><span class="p">,</span> <span class="s1">&#39;api/**/**&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;***/***&#39;</span><span class="p">,</span> <span class="s1">&#39;api/**/**&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;***/***&#39;</span><span class="p">,</span> <span class="s1">&#39;api/**/**&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">})</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="p">(</span><span class="nx">\app\api\middleware\UserAuth</span><span class="o">::</span><span class="na">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">allowCrossDomain</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Access-Control-Allow-Origin&#39;</span>        <span class="o">=&gt;</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Access-Control-Allow-Credentials&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;true&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">]);</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-06-10</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/" data-title="Php Jwt中间件 用户鉴权" data-via="an_jinc" data-hashtags="PHP,thinkphp6.0,JWT"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/" data-hashtag="PHP"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/" data-title="Php Jwt中间件 用户鉴权"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/" data-title="Php Jwt中间件 用户鉴权"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/" data-title="Php Jwt中间件 用户鉴权"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/php/">php</a>,&nbsp;<a href="/tags/thinkphp6.0/">thinkphp6.0</a>,&nbsp;<a href="/tags/jwt/">JWT</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/tp6&#43;jwt%E7%94%A8%E6%88%B7token%E9%AA%8C%E8%AF%81/" class="prev" rel="prev" title="Tp6&#43;Jwt用户token验证"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Tp6+Jwt用户token验证</a>
+            <a href="/posts/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch/" class="next" rel="next" title="使用Logstash把mysql数据同步到elasticsearch">使用Logstash把mysql数据同步到elasticsearch<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Alen学无止境</div><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.99.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Alen</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a href="https://beian.miit.gov.cn/shouye.html" target="_blank">桂ICP备2022006375号-1</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"Alen-学无止境","id-2":"Alen-学无止境"},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

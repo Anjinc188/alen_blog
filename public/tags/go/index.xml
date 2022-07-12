@@ -1,29 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Go on Alen-学无止境</title>
-    <link>http://localhost:1313/tags/go/</link>
-    <description>Recent content in Go on Alen-学无止境</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Thu, 08 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/go/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Go Gorm关联查询排除字段</title>
-      <link>http://localhost:1313/post/go-gorm%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%8E%92%E9%99%A4%E5%AD%97%E6%AE%B5/</link>
-      <pubDate>Thu, 08 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/go-gorm%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%8E%92%E9%99%A4%E5%AD%97%E6%AE%B5/</guid>
-      <description>本章讲解关于gorm模型后如何筛选按需字段 安装gorm 1 go get -u github.com/jinzhu/gorm 一对多使用： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 //日记模型 type Diary struct { Model Uid uint32 `json:&amp;#34;uid&amp;#34;` //</description>
-    </item>
-    
-    <item>
-      <title>Go Query采集文章</title>
-      <link>http://localhost:1313/post/go-query%E9%87%87%E9%9B%86%E6%96%87%E7%AB%A0/</link>
-      <pubDate>Tue, 04 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/go-query%E9%87%87%E9%9B%86%E6%96%87%E7%AB%A0/</guid>
-      <description>相信很多小伙伴对爬虫有着很大的兴趣,我们今天来说下go语言的爬虫利器goquery，语法有jquery类似，我有一篇使用php-QueryL</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Go - Tag - Alen</title>
+        <link>http://example.org/tags/go/</link>
+        <description>Go - Tag - Alen</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>anjinc188@gmail.com (Alen)</managingEditor>
+            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Thu, 08 Oct 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/go/" rel="self" type="application/rss+xml" /><item>
+    <title>Go Gorm关联查询排除字段</title>
+    <link>http://example.org/posts/go-gorm%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%8E%92%E9%99%A4%E5%AD%97%E6%AE%B5/</link>
+    <pubDate>Thu, 08 Oct 2020 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/go-gorm%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%8E%92%E9%99%A4%E5%AD%97%E6%AE%B5/</guid>
+    <description><![CDATA[本章讲解关于gorm模型后如何筛选按需字段 安装gorm go get -u github.com/jinzhu/gorm 一对多使用： //日记模型 type Diary struct { Model Uid uint32 `json:&#34;uid&#34;` //用户ID Content string `json:&#34;content&#34;` //日记内容 DiaryImg []DiaryImg `gorm:&#34;ForeignKey:diary_id;AssociationForeignKey:id&#34; json:&#34;diary_img&#34;`]]></description>
+</item>
+<item>
+    <title>Go Query采集文章</title>
+    <link>http://example.org/posts/go-query%E9%87%87%E9%9B%86%E6%96%87%E7%AB%A0/</link>
+    <pubDate>Tue, 04 Aug 2020 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/go-query%E9%87%87%E9%9B%86%E6%96%87%E7%AB%A0/</guid>
+    <description><![CDATA[相信很多小伙伴对爬虫有着很大的兴趣,我们今天来说下go语言的爬虫利器goquery，语法有jquery类似，我有一篇使用php-QueryL]]></description>
+</item>
+</channel>
 </rss>

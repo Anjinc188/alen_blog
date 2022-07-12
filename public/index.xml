@@ -1,164 +1,90 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Alen-学无止境</title>
-    <link>http://localhost:1313/</link>
-    <description>Recent content on Alen-学无止境</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Wed, 11 Aug 2021 23:55:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>有效的括号</title>
-      <link>http://localhost:1313/post/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</link>
-      <pubDate>Wed, 11 Aug 2021 23:55:25 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</guid>
-      <description>题目 给定一个只包括 &#39;(&#39;，&#39;)&#39;，&#39;{&#39;，&#39;}&#39;，&#39;[&#39;，&#39;]&#39; 的字符串 s ，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括</description>
-    </item>
-    
-    <item>
-      <title>斐波那契数列</title>
-      <link>http://localhost:1313/post/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/</link>
-      <pubDate>Wed, 11 Aug 2021 23:10:22 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/</guid>
-      <description>前提 有这么一组数字 1, 1, 2, 3, 5, 8, 13, 21 如果你仔细看～可以发现它的规律 1 2 3 4 21 = 13 + 8 13 = 8 + 5 8 = 5 + 3 5 = 3 + 2 这是斐波那契数列，第n项 = n</description>
-    </item>
-    
-    <item>
-      <title>排序算法学习记录</title>
-      <link>http://localhost:1313/post/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
-      <pubDate>Wed, 28 Jul 2021 12:40:39 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
-      <description>1. 冒泡排序 冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他</description>
-    </item>
-    
-    <item>
-      <title>Html语义化标签的理解</title>
-      <link>http://localhost:1313/post/html%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE%E7%9A%84%E7%90%86%E8%A7%A3/</link>
-      <pubDate>Sat, 03 Jul 2021 14:59:06 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/html%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE%E7%9A%84%E7%90%86%E8%A7%A3/</guid>
-      <description>HTML语义化是什么？ 语义化是指根据内容的结构化（内容语义化），选择合适的标签（代码语义化），便于开发者阅读和写出更优雅的代码的同时，让浏览</description>
-    </item>
-    
-    <item>
-      <title>call,apply,bind区别</title>
-      <link>http://localhost:1313/post/callapplymbind%E5%8C%BA%E5%88%AB/</link>
-      <pubDate>Thu, 01 Jul 2021 23:23:25 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/callapplymbind%E5%8C%BA%E5%88%AB/</guid>
-      <description>首先说下前两者的区别。 call 和 apply 都是为了解决改变 this 的指向。作用都是相同的，只是传参的方式不同。 除了第一个参数外，call 可以接收一个参数列表，a</description>
-    </item>
-    
-    <item>
-      <title>JS基础 函数、对象和原型、原型链的关系</title>
-      <link>http://localhost:1313/post/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/</link>
-      <pubDate>Tue, 29 Jun 2021 16:51:01 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/</guid>
-      <description>再次学习JS-函数、对象和原型、原型链的关系 JS的原型、原型链一直是比较难理解的内容，不少初学者甚至有一定经验的老鸟都不一定能完全说清楚，更</description>
-    </item>
-    
-    <item>
-      <title>Cookie, LocalStorage 与 SessionStorage的区别</title>
-      <link>http://localhost:1313/post/cookie-localstorage-%E4%B8%8E-sessionstorage%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
-      <pubDate>Tue, 29 Jun 2021 16:19:36 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/cookie-localstorage-%E4%B8%8E-sessionstorage%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
-      <description>最近找工作面试中，有频繁被面试官问到Cookie, LocalStorage 与 SessionStorage的区别，在此记录一下。 基本概念 Cookie Cookie 是小甜饼的意思。顾名思义</description>
-    </item>
-    
-    <item>
-      <title>ES6构造函数class与ES5构造函数语法</title>
-      <link>http://localhost:1313/post/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</link>
-      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</guid>
-      <description>ES5的构造函数语法 1.创建对象的方法有两种 1 2 3 4 5 //字面量 const obj = {} //构造函数 const obj = new Object() 构造函数就是JavaScript程序定义好的构</description>
-    </item>
-    
-    <item>
-      <title>Go Gorm关联查询排除字段</title>
-      <link>http://localhost:1313/post/go-gorm%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%8E%92%E9%99%A4%E5%AD%97%E6%AE%B5/</link>
-      <pubDate>Thu, 08 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/go-gorm%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%8E%92%E9%99%A4%E5%AD%97%E6%AE%B5/</guid>
-      <description>本章讲解关于gorm模型后如何筛选按需字段 安装gorm 1 go get -u github.com/jinzhu/gorm 一对多使用： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 //日记模型 type Diary struct { Model Uid uint32 `json:&amp;#34;uid&amp;#34;` //</description>
-    </item>
-    
-    <item>
-      <title>Vue3</title>
-      <link>http://localhost:1313/post/vue3.0&#43;typescript%E4%BD%93%E9%AA%8C/</link>
-      <pubDate>Sun, 04 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/vue3.0&#43;typescript%E4%BD%93%E9%AA%8C/</guid>
-      <description>Vue3.0 可以完全支持Vue2.0, 升级以后不需要更改关于Vue的代码 vue3.0创建项目 1 2 3 4 -- 使用vite npm init vite-app 你的项目名 cd 项目名 npm run dev 当然也</description>
-    </item>
-    
-    <item>
-      <title>Go Query采集文章</title>
-      <link>http://localhost:1313/post/go-query%E9%87%87%E9%9B%86%E6%96%87%E7%AB%A0/</link>
-      <pubDate>Tue, 04 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/go-query%E9%87%87%E9%9B%86%E6%96%87%E7%AB%A0/</guid>
-      <description>相信很多小伙伴对爬虫有着很大的兴趣,我们今天来说下go语言的爬虫利器goquery，语法有jquery类似，我有一篇使用php-QueryL</description>
-    </item>
-    
-    <item>
-      <title>使用Logstash把mysql数据同步到elasticsearch</title>
-      <link>http://localhost:1313/post/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch/</link>
-      <pubDate>Sat, 04 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/%E4%BD%BF%E7%94%A8logstash%E6%8A%8Amysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0elasticsearch/</guid>
-      <description>首先 我们要知道elasticsearch是什么 elasticsearch简写es，es是一个高扩展、开源的全文检索和分析引擎，它可以准实时地</description>
-    </item>
-    
-    <item>
-      <title>Php Jwt中间件 用户鉴权</title>
-      <link>http://localhost:1313/post/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/</link>
-      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/</guid>
-      <description>在上一篇文章中大概对jwt有了一个大概的了解，现在我们用tp6配合jwt做一个中间件，实现对用户签发token还有鉴权 签发token 直接开始</description>
-    </item>
-    
-    <item>
-      <title>Tp6&#43;Jwt用户token验证</title>
-      <link>http://localhost:1313/post/tp6&#43;jwt%E7%94%A8%E6%88%B7token%E9%AA%8C%E8%AF%81/</link>
-      <pubDate>Thu, 04 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/tp6&#43;jwt%E7%94%A8%E6%88%B7token%E9%AA%8C%E8%AF%81/</guid>
-      <description>JSON Web Token是什么？ 转载：https://www.liqingbo.cn/docs/jwt/ JSON Web Token (JWT)是一个开放标准(RFC 7519</description>
-    </item>
-    
-    <item>
-      <title>ElasticSearch 和 Kibana网盘下载</title>
-      <link>http://localhost:1313/post/elasticsearch-%E5%92%8C-kibana%E7%BD%91%E7%9B%98%E4%B8%8B%E8%BD%BD/</link>
-      <pubDate>Fri, 03 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/elasticsearch-%E5%92%8C-kibana%E7%BD%91%E7%9B%98%E4%B8%8B%E8%BD%BD/</guid>
-      <description>我们通常在官网download会很慢 因为在墙内需要挂代理，这里贴出一份百度网盘下载 elasticsearch-7.6.0-windows-x86_64 下载地址 提取码：6f7s kibana-7.6.0-windows-x86_64 下载地址 提取码：v8w1 希望可</description>
-    </item>
-    
-    <item>
-      <title>ES6-Set Map基本使用方法</title>
-      <link>http://localhost:1313/post/es6-set-map%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</link>
-      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/es6-set-map%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</guid>
-      <description>转载：http://caibaojian.com/es6/set-map.html Set基本用法 ES6提供了新的数据结构Set。它类似于数组</description>
-    </item>
-    
-    <item>
-      <title>php QueryList采集微信公众号文章</title>
-      <link>http://localhost:1313/post/php-querylist%E9%87%87%E9%9B%86%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0/</link>
-      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/php-querylist%E9%87%87%E9%9B%86%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0/</guid>
-      <description>QueryList 是什么 QueryList是一套用于内容采集的PHP工具，它使用更加现代化的开发思想，语法简洁、优雅，可扩展性强。相比传统的使用晦涩的正则表</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Alen</title>
+        <link>http://example.org/</link>
+        <description>Make it a better place</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>anjinc188@gmail.com (Alen)</managingEditor>
+            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Wed, 11 Aug 2021 23:55:25 &#43;0800</lastBuildDate>
+            <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>有效的括号</title>
+    <link>http://example.org/posts/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</link>
+    <pubDate>Wed, 11 Aug 2021 23:55:25 &#43;0800</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</guid>
+    <description><![CDATA[题目 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括]]></description>
+</item>
+<item>
+    <title>斐波那契数列</title>
+    <link>http://example.org/posts/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/</link>
+    <pubDate>Wed, 11 Aug 2021 23:10:22 &#43;0800</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/</guid>
+    <description><![CDATA[前提 有这么一组数字 1, 1, 2, 3, 5, 8, 13, 21 如果你仔细看～可以发现它的规律 21 = 13 + 8 13 = 8 + 5 8 = 5 + 3 5 = 3 + 2 这是斐波那契数列，第n项 = n-1项 +]]></description>
+</item>
+<item>
+    <title>排序算法学习记录</title>
+    <link>http://example.org/posts/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
+    <pubDate>Wed, 28 Jul 2021 12:40:39 &#43;0800</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
+    <description><![CDATA[1. 冒泡排序 冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他]]></description>
+</item>
+<item>
+    <title>Html语义化标签的理解</title>
+    <link>http://example.org/posts/html%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE%E7%9A%84%E7%90%86%E8%A7%A3/</link>
+    <pubDate>Sat, 03 Jul 2021 14:59:06 &#43;0800</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/html%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE%E7%9A%84%E7%90%86%E8%A7%A3/</guid>
+    <description><![CDATA[HTML语义化是什么？ 语义化是指根据内容的结构化（内容语义化），选择合适的标签（代码语义化），便于开发者阅读和写出更优雅的代码的同时，让浏览]]></description>
+</item>
+<item>
+    <title>call,apply,bind区别</title>
+    <link>http://example.org/posts/callapplymbind%E5%8C%BA%E5%88%AB/</link>
+    <pubDate>Thu, 01 Jul 2021 23:23:25 &#43;0800</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/callapplymbind%E5%8C%BA%E5%88%AB/</guid>
+    <description><![CDATA[首先说下前两者的区别。 call 和 apply 都是为了解决改变 this 的指向。作用都是相同的，只是传参的方式不同。 除了第一个参数外，call 可以接收一个参数列表，a]]></description>
+</item>
+<item>
+    <title>JS基础 函数、对象和原型、原型链的关系</title>
+    <link>http://example.org/posts/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/</link>
+    <pubDate>Tue, 29 Jun 2021 16:51:01 &#43;0800</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/</guid>
+    <description><![CDATA[再次学习JS-函数、对象和原型、原型链的关系 JS的原型、原型链一直是比较难理解的内容，不少初学者甚至有一定经验的老鸟都不一定能完全说清楚，更]]></description>
+</item>
+<item>
+    <title>Cookie, LocalStorage 与 SessionStorage的区别</title>
+    <link>http://example.org/posts/cookie-localstorage-%E4%B8%8E-sessionstorage%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+    <pubDate>Tue, 29 Jun 2021 16:19:36 &#43;0800</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/cookie-localstorage-%E4%B8%8E-sessionstorage%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+    <description><![CDATA[最近找工作面试中，有频繁被面试官问到Cookie, LocalStorage 与 SessionStorage的区别，在此记录一下。 基本概念 Cookie Cookie 是小甜饼的意思。顾名思义]]></description>
+</item>
+<item>
+    <title>ES6构造函数class与ES5构造函数语法</title>
+    <link>http://example.org/posts/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</link>
+    <pubDate>Mon, 09 Nov 2020 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</guid>
+    <description><![CDATA[ES5的构造函数语法 1.创建对象的方法有两种 //字面量 const obj = {} //构造函数 const obj = new Object() 构造函数就是JavaScript程序定义好的构造函数,我]]></description>
+</item>
+<item>
+    <title>Go Gorm关联查询排除字段</title>
+    <link>http://example.org/posts/go-gorm%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%8E%92%E9%99%A4%E5%AD%97%E6%AE%B5/</link>
+    <pubDate>Thu, 08 Oct 2020 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/go-gorm%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%8E%92%E9%99%A4%E5%AD%97%E6%AE%B5/</guid>
+    <description><![CDATA[本章讲解关于gorm模型后如何筛选按需字段 安装gorm go get -u github.com/jinzhu/gorm 一对多使用： //日记模型 type Diary struct { Model Uid uint32 `json:&#34;uid&#34;` //用户ID Content string `json:&#34;content&#34;` //日记内容 DiaryImg []DiaryImg `gorm:&#34;ForeignKey:diary_id;AssociationForeignKey:id&#34; json:&#34;diary_img&#34;`]]></description>
+</item>
+<item>
+    <title>Vue3</title>
+    <link>http://example.org/posts/vue3.0&#43;typescript%E4%BD%93%E9%AA%8C/</link>
+    <pubDate>Sun, 04 Oct 2020 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/vue3.0&#43;typescript%E4%BD%93%E9%AA%8C/</guid>
+    <description><![CDATA[Vue3.0 可以完全支持Vue2.0, 升级以后不需要更改关于Vue的代码 vue3.0创建项目 -- 使用vite npm init vite-app 你的项目名 cd 项目名 npm run dev 当然也可以使用]]></description>
+</item>
+</channel>
 </rss>

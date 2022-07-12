@@ -1,29 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>thinkphp6.0 on Alen-学无止境</title>
-    <link>http://localhost:1313/tags/thinkphp6.0/</link>
-    <description>Recent content in thinkphp6.0 on Alen-学无止境</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Wed, 10 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/thinkphp6.0/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Php Jwt中间件 用户鉴权</title>
-      <link>http://localhost:1313/post/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/</link>
-      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/</guid>
-      <description>在上一篇文章中大概对jwt有了一个大概的了解，现在我们用tp6配合jwt做一个中间件，实现对用户签发token还有鉴权 签发token 直接开始</description>
-    </item>
-    
-    <item>
-      <title>Tp6&#43;Jwt用户token验证</title>
-      <link>http://localhost:1313/post/tp6&#43;jwt%E7%94%A8%E6%88%B7token%E9%AA%8C%E8%AF%81/</link>
-      <pubDate>Thu, 04 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/tp6&#43;jwt%E7%94%A8%E6%88%B7token%E9%AA%8C%E8%AF%81/</guid>
-      <description>JSON Web Token是什么？ 转载：https://www.liqingbo.cn/docs/jwt/ JSON Web Token (JWT)是一个开放标准(RFC 7519</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>thinkphp6.0 - Tag - Alen</title>
+        <link>http://example.org/tags/thinkphp6.0/</link>
+        <description>thinkphp6.0 - Tag - Alen</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>anjinc188@gmail.com (Alen)</managingEditor>
+            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Wed, 10 Jun 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/thinkphp6.0/" rel="self" type="application/rss+xml" /><item>
+    <title>Php Jwt中间件 用户鉴权</title>
+    <link>http://example.org/posts/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/</link>
+    <pubDate>Wed, 10 Jun 2020 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/php-jwt%E4%B8%AD%E9%97%B4%E4%BB%B6-%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83/</guid>
+    <description><![CDATA[在上一篇文章中大概对jwt有了一个大概的了解，现在我们用tp6配合jwt做一个中间件，实现对用户签发token还有鉴权 签发token 直接开始]]></description>
+</item>
+<item>
+    <title>Tp6&#43;Jwt用户token验证</title>
+    <link>http://example.org/posts/tp6&#43;jwt%E7%94%A8%E6%88%B7token%E9%AA%8C%E8%AF%81/</link>
+    <pubDate>Thu, 04 Jun 2020 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/tp6&#43;jwt%E7%94%A8%E6%88%B7token%E9%AA%8C%E8%AF%81/</guid>
+    <description><![CDATA[JSON Web Token是什么？ 转载：https://www.liqingbo.cn/docs/jwt/ JSON Web Token (JWT)是一个开放标准(RFC 7519]]></description>
+</item>
+</channel>
 </rss>

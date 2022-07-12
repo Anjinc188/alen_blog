@@ -1,20 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Kibana on Alen-学无止境</title>
-    <link>http://localhost:1313/tags/kibana/</link>
-    <description>Recent content in Kibana on Alen-学无止境</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Fri, 03 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/kibana/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>ElasticSearch 和 Kibana网盘下载</title>
-      <link>http://localhost:1313/post/elasticsearch-%E5%92%8C-kibana%E7%BD%91%E7%9B%98%E4%B8%8B%E8%BD%BD/</link>
-      <pubDate>Fri, 03 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/elasticsearch-%E5%92%8C-kibana%E7%BD%91%E7%9B%98%E4%B8%8B%E8%BD%BD/</guid>
-      <description>我们通常在官网download会很慢 因为在墙内需要挂代理，这里贴出一份百度网盘下载 elasticsearch-7.6.0-windows-x86_64 下载地址 提取码：6f7s kibana-7.6.0-windows-x86_64 下载地址 提取码：v8w1 希望可</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Kibana - Tag - Alen</title>
+        <link>http://example.org/tags/kibana/</link>
+        <description>Kibana - Tag - Alen</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>anjinc188@gmail.com (Alen)</managingEditor>
+            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Fri, 03 Apr 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/kibana/" rel="self" type="application/rss+xml" /><item>
+    <title>ElasticSearch 和 Kibana网盘下载</title>
+    <link>http://example.org/posts/elasticsearch-%E5%92%8C-kibana%E7%BD%91%E7%9B%98%E4%B8%8B%E8%BD%BD/</link>
+    <pubDate>Fri, 03 Apr 2020 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/elasticsearch-%E5%92%8C-kibana%E7%BD%91%E7%9B%98%E4%B8%8B%E8%BD%BD/</guid>
+    <description><![CDATA[我们通常在官网download会很慢 因为在墙内需要挂代理，这里贴出一份百度网盘下载 elasticsearch-7.6.0-windows-x86_64 下载地址 提取码：6f7s kibana-7.6.0-windows-x86_64 下载地址 提取码：v8w1 希望可]]></description>
+</item>
+</channel>
 </rss>
