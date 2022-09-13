@@ -4,7 +4,15 @@
         <link>http://example.org/categories/%E5%89%8D%E7%AB%AF/</link>
         <description>前端 - Category - Alen</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>anjinc188@gmail.com (Alen)</managingEditor>
-            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Tue, 29 Jun 2021 16:51:01 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/%E5%89%8D%E7%AB%AF/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Sun, 08 May 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/categories/%E5%89%8D%E7%AB%AF/" rel="self" type="application/rss+xml" /><item>
+    <title>vue实现PayPal</title>
+    <link>http://example.org/posts/vue%E5%AE%9E%E7%8E%B0paypal%E6%94%AF%E4%BB%98/</link>
+    <pubDate>Sun, 08 May 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/vue%E5%AE%9E%E7%8E%B0paypal%E6%94%AF%E4%BB%98/</guid>
+    <description><![CDATA[PayPal我使用的是官方封装继承的集成 PayPal官网有一个内部封装得流程，用户点击按钮触发创建订单事件，然后监听用户成功的回调，把订单I]]></description>
+</item>
+<item>
     <title>JS基础 函数、对象和原型、原型链的关系</title>
     <link>http://example.org/posts/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/</link>
     <pubDate>Tue, 29 Jun 2021 16:51:01 &#43;0800</pubDate>

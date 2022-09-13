@@ -4,7 +4,15 @@
         <link>http://example.org/posts/</link>
         <description>All Posts | Alen</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>anjinc188@gmail.com (Alen)</managingEditor>
-            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Fri, 08 Apr 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Sun, 08 May 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>vue实现PayPal</title>
+    <link>http://example.org/posts/vue%E5%AE%9E%E7%8E%B0paypal%E6%94%AF%E4%BB%98/</link>
+    <pubDate>Sun, 08 May 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/vue%E5%AE%9E%E7%8E%B0paypal%E6%94%AF%E4%BB%98/</guid>
+    <description><![CDATA[PayPal我使用的是官方封装继承的集成 PayPal官网有一个内部封装得流程，用户点击按钮触发创建订单事件，然后监听用户成功的回调，把订单I]]></description>
+</item>
+<item>
     <title>数据结构算法 字符串学习篇</title>
     <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
     <pubDate>Fri, 08 Apr 2022 00:00:00 &#43;0000</pubDate>
@@ -75,14 +83,6 @@
     <author>Alen</author>
     <guid>http://example.org/posts/callapplymbind%E5%8C%BA%E5%88%AB/</guid>
     <description><![CDATA[首先说下前两者的区别。 call 和 apply 都是为了解决改变 this 的指向。作用都是相同的，只是传参的方式不同。 除了第一个参数外，call 可以接收一个参数列表，a]]></description>
-</item>
-<item>
-    <title>JS基础 函数、对象和原型、原型链的关系</title>
-    <link>http://example.org/posts/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/</link>
-    <pubDate>Tue, 29 Jun 2021 16:51:01 &#43;0800</pubDate>
-    <author>Alen</author>
-    <guid>http://example.org/posts/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/</guid>
-    <description><![CDATA[再次学习JS-函数、对象和原型、原型链的关系 JS的原型、原型链一直是比较难理解的内容，不少初学者甚至有一定经验的老鸟都不一定能完全说清楚，更]]></description>
 </item>
 </channel>
 </rss>
