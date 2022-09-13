@@ -8,8 +8,8 @@
 <meta property="og:description" content="本章讲解关于gorm模型后如何筛选按需字段 安装gorm go get -u github.com/jinzhu/gorm 一对多使用： //日记模型 type Diary struct { Model Uid uint32 `json:&#34;uid&#34;` //用户ID Content string `json:&#34;content&#34;` //日记内容 DiaryImg []DiaryImg `gorm:&#34;ForeignKey:diary_id;AssociationForeignKey:id&#34; json:&#34;diary_img&#34;`" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/posts/go-gorm%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%8E%92%E9%99%A4%E5%AD%97%E6%AE%B5/" /><meta property="og:image" content="https://static.alenhy.com/alen_avatar.jpeg"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-10-08T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-10-08T00:00:00+00:00" /><meta property="og:site_name" content="Alen" />
+<meta property="article:published_time" content="2020-10-08T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2020-10-08T00:00:00&#43;00:00" /><meta property="og:site_name" content="Alen" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://static.alenhy.com/alen_avatar.jpeg"/>
@@ -124,38 +124,38 @@
 </nav></div>
             </div><div class="content" id="content"><h3 id="本章讲解关于gorm模型后如何筛选按需字段">本章讲解关于gorm模型后如何筛选按需字段</h3>
 <h5 id="安装gorm">安装gorm</h5>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">go get -u github.com/jinzhu/gorm
-</span></span></code></pre></div><h3 id="一对多使用">一对多使用：</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//日记模型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Diary</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">Model</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">Uid</span>       <span class="kt">uint32</span>         <span class="s">`json:&#34;uid&#34;`</span>                                                           <span class="c1">//用户ID
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Content</span>   <span class="kt">string</span>         <span class="s">`json:&#34;content&#34;`</span>                                                       <span class="c1">//日记内容
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">DiaryImg</span>  <span class="p">[]</span><span class="nx">DiaryImg</span>     <span class="s">`gorm:&#34;ForeignKey:diary_id;AssociationForeignKey:id&#34; json:&#34;diary_img&#34;`</span> <span class="c1">//日记图片
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">DiaryLike</span> <span class="kt">int</span>            <span class="s">`json:&#34;diary_like&#34;`</span>                                                    <span class="c1">//点赞
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Collect</span>   <span class="kt">int</span>            <span class="s">`json:&#34;collect&#34;`</span>                                                       <span class="c1">//收藏
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">//日记图片模型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">DiaryImg</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">Model</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">DiaryId</span>   <span class="kt">int</span>    <span class="s">`json:&#34;diary_id&#34;`</span>   <span class="c1">//日记ID
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">DiaryUrls</span> <span class="kt">string</span> <span class="s">`json:&#34;diary_urls&#34;`</span> <span class="c1">//日记图片路径
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>       
-</span></span></code></pre></div><h3 id="外键">外键：</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">go get -u github.com/jinzhu/gorm
+</code></pre></div><h3 id="一对多使用">一对多使用：</h3>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">//日记模型
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Diary</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Model</span>
+    <span class="nx">Uid</span>       <span class="kt">uint32</span>         <span class="s">`json:&#34;uid&#34;`</span>                                                           <span class="c1">//用户ID
+</span><span class="c1"></span>    <span class="nx">Content</span>   <span class="kt">string</span>         <span class="s">`json:&#34;content&#34;`</span>                                                       <span class="c1">//日记内容
+</span><span class="c1"></span>    <span class="nx">DiaryImg</span>  <span class="p">[]</span><span class="nx">DiaryImg</span>     <span class="s">`gorm:&#34;ForeignKey:diary_id;AssociationForeignKey:id&#34; json:&#34;diary_img&#34;`</span> <span class="c1">//日记图片
+</span><span class="c1"></span>    <span class="nx">DiaryLike</span> <span class="kt">int</span>            <span class="s">`json:&#34;diary_like&#34;`</span>                                                    <span class="c1">//点赞
+</span><span class="c1"></span>    <span class="nx">Collect</span>   <span class="kt">int</span>            <span class="s">`json:&#34;collect&#34;`</span>                                                       <span class="c1">//收藏
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="c1">//日记图片模型
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">DiaryImg</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Model</span>
+    <span class="nx">DiaryId</span>   <span class="kt">int</span>    <span class="s">`json:&#34;diary_id&#34;`</span>   <span class="c1">//日记ID
+</span><span class="c1"></span>    <span class="nx">DiaryUrls</span> <span class="kt">string</span> <span class="s">`json:&#34;diary_urls&#34;`</span> <span class="c1">//日记图片路径
+</span><span class="c1"></span><span class="p">}</span>       
+</code></pre></div><h3 id="外键">外键：</h3>
 <ul>
 <li>为了定义一对多关系， 外键是必须存在的，默认外键的名字是所有者类型的名字加上它的主键。 就像上面的例子，为了定义一个属于 Diary的模型，外键就应该id</li>
 </ul>
 <hr>
 <h3 id="重点"><strong>重点：</strong></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="s">`gorm:&#34;ForeignKey:diary_id;AssociationForeignKey:id&#34; json:&#34;diary_img&#34;`</span>
-</span></span></code></pre></div><p>关联成功之后可以通过 Related 找到 has many 关联关系`</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nf">Model</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">diary</span><span class="p">).</span><span class="nf">Related</span><span class="p">(</span><span class="err">&#39;</span><span class="nx">DiaryImg</span><span class="err">&#39;</span><span class="p">)</span>
-</span></span></code></pre></div><p>那么问题来了，我们如何只需要查询指定的字段呢。我们可以这样使用，一步到位</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nf">Preload</span><span class="p">(</span><span class="s">&#34;DiaryImg&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">         <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Select</span><span class="p">(</span><span class="s">&#34;diary_urls&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}).</span>
-</span></span></code></pre></div><p>这样就解决了我们使用gorm查询按需字段的问题了</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="s">`gorm:&#34;ForeignKey:diary_id;AssociationForeignKey:id&#34; json:&#34;diary_img&#34;`</span>
+</code></pre></div><p>关联成功之后可以通过 Related 找到 has many 关联关系`</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">db</span><span class="p">.</span><span class="nf">Model</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">diary</span><span class="p">).</span><span class="nf">Related</span><span class="p">(</span><span class="err">&#39;</span><span class="nx">DiaryImg</span><span class="err">&#39;</span><span class="p">)</span>
+</code></pre></div><p>那么问题来了，我们如何只需要查询指定的字段呢。我们可以这样使用，一步到位</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nf">Preload</span><span class="p">(</span><span class="s">&#34;DiaryImg&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span> <span class="p">{</span>
+         <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Select</span><span class="p">(</span><span class="s">&#34;diary_urls&#34;</span><span class="p">)</span>
+<span class="p">}).</span>
+</code></pre></div><p>这样就解决了我们使用gorm查询按需字段的问题了</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -182,7 +182,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Alen学无止境</div><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.99.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Alen学无止境</div><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.83.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Alen</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
                     <span class="icp"><a href="https://beian.miit.gov.cn/shouye.html" target="_blank">桂ICP备2022006375号-1</a></span></div>
         </div>

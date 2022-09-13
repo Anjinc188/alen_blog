@@ -8,8 +8,8 @@
 <meta property="og:description" content="JSON Web Token是什么？ 转载：https://www.liqingbo.cn/docs/jwt/ JSON Web Token (JWT)是一个开放标准(RFC 7519" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/posts/tp6&#43;jwt%E7%94%A8%E6%88%B7token%E9%AA%8C%E8%AF%81/" /><meta property="og:image" content="https://static.alenhy.com/alen_avatar.jpeg"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-06-04T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-06-04T00:00:00+00:00" /><meta property="og:site_name" content="Alen" />
+<meta property="article:published_time" content="2020-06-04T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2020-06-04T00:00:00&#43;00:00" /><meta property="og:site_name" content="Alen" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://static.alenhy.com/alen_avatar.jpeg"/>
@@ -136,38 +136,38 @@
 <ul>
 <li>JWT由三个部分组成：header.payload.signature</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">{</span>
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;alg&#34;</span>: <span class="s2">&#34;HS256&#34;</span>,
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;typ&#34;</span>: <span class="s2">&#34;JWT&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></div><p>对应<code>base64UrlEncode</code>编码为：<code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="o">{</span>
+  <span class="s2">&#34;alg&#34;</span>: <span class="s2">&#34;HS256&#34;</span>,
+  <span class="s2">&#34;typ&#34;</span>: <span class="s2">&#34;JWT&#34;</span>
+<span class="o">}</span>
+</code></pre></div><p>对应<code>base64UrlEncode</code>编码为：<code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</code></p>
 <p>说明：该字段为json格式。alg字段指定了生成signature的算法，默认值为 HS256，typ默认值为JWT</p>
 <h2 id="payload部分">payload部分：</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">{</span>
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;sub&#34;</span>: <span class="s2">&#34;1234567890&#34;</span>,
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;name&#34;</span>: <span class="s2">&#34;John Doe&#34;</span>,
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;iat&#34;</span>: <span class="m">1516239022</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></div><p>对应<code>base64UrlEncode</code>编码为：<code>eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="o">{</span>
+  <span class="s2">&#34;sub&#34;</span>: <span class="s2">&#34;1234567890&#34;</span>,
+  <span class="s2">&#34;name&#34;</span>: <span class="s2">&#34;John Doe&#34;</span>,
+  <span class="s2">&#34;iat&#34;</span>: <span class="m">1516239022</span>
+<span class="o">}</span>
+</code></pre></div><p>对应<code>base64UrlEncode</code>编码为：<code>eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ</code></p>
 <p>说明：该字段为json格式，表明用户身份的数据，可以自己自定义字段，很灵活。sub 面向的用户，name 姓名 ,iat 签发时间。例如可自定义示例如下：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;iss&#34;</span>: <span class="s2">&#34;admin&#34;</span>,          //该JWT的签发者
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;iat&#34;</span>: 1535967430,        //签发时间
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;exp&#34;</span>: 1535974630,        //过期时间
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;nbf&#34;</span>: 1535967430,         //该时间之前不接收处理该Token
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;sub&#34;</span>: <span class="s2">&#34;www.admin.com&#34;</span>,   //面向的用户
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;jti&#34;</span>: <span class="s2">&#34;9f10e796726e332cec401c569969e13e&#34;</span>   //该Token唯一标识
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></div><h2 id="signature部分">signature部分：</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">HMACSHA256<span class="o">(</span>
-</span></span><span class="line"><span class="cl">  base64UrlEncode<span class="o">(</span>header<span class="o">)</span> + <span class="s2">&#34;.&#34;</span> +
-</span></span><span class="line"><span class="cl">  base64UrlEncode<span class="o">(</span>payload<span class="o">)</span>,
-</span></span><span class="line"><span class="cl">  <span class="m">123456</span>
-</span></span><span class="line"><span class="cl"><span class="o">)</span>
-</span></span></code></pre></div><p>对应的签名为：<code>keH6T3x1z7mmhKL1T3r9sQdAxxdzB6siemGMr_6ZOwU</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="o">{</span>
+    <span class="s2">&#34;iss&#34;</span>: <span class="s2">&#34;admin&#34;</span>,          //该JWT的签发者
+    <span class="s2">&#34;iat&#34;</span>: 1535967430,        //签发时间
+    <span class="s2">&#34;exp&#34;</span>: 1535974630,        //过期时间
+    <span class="s2">&#34;nbf&#34;</span>: 1535967430,         //该时间之前不接收处理该Token
+    <span class="s2">&#34;sub&#34;</span>: <span class="s2">&#34;www.admin.com&#34;</span>,   //面向的用户
+    <span class="s2">&#34;jti&#34;</span>: <span class="s2">&#34;9f10e796726e332cec401c569969e13e&#34;</span>   //该Token唯一标识
+<span class="o">}</span>
+</code></pre></div><h2 id="signature部分">signature部分：</h2>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">HMACSHA256<span class="o">(</span>
+  base64UrlEncode<span class="o">(</span>header<span class="o">)</span> + <span class="s2">&#34;.&#34;</span> +
+  base64UrlEncode<span class="o">(</span>payload<span class="o">)</span>,
+  <span class="m">123456</span>
+<span class="o">)</span>
+</code></pre></div><p>对应的签名为：<code>keH6T3x1z7mmhKL1T3r9sQdAxxdzB6siemGMr_6ZOwU</code></p>
 <p>最终得到的JWT的Token为(header.payload.signature)：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.keH6T3x1z7mmhKL1T3r9sQdAxxdzB6siemGMr_6ZOwU
-</span></span></code></pre></div><p>说明：对header和payload进行base64UrlEncode编码后进行拼接。通过key（这里是123456）进行HS256算法签名。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.keH6T3x1z7mmhKL1T3r9sQdAxxdzB6siemGMr_6ZOwU
+</code></pre></div><p>说明：对header和payload进行base64UrlEncode编码后进行拼接。通过key（这里是123456）进行HS256算法签名。</p>
 <h2 id="有效载荷">有效载荷</h2>
 <p>有效载荷部分，是JWT的主体内容部分，也是一个JSON对象，包含需要传递的数据。 JWT指定七个默认字段供选择。</p>
 <ul>
@@ -180,16 +180,16 @@
 <li>jti：JWT ID用于标识该JWT</li>
 </ul>
 <p>除以上默认字段外，我们还可以自定义私有字段，如下例：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">   “sub”: “1234567890”,
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">   “name”: “chongchong”,
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">   “admin”: <span class="nb">true</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">}</span> 
-</span></span></code></pre></div><p>请注意，默认情况下JWT是未加密的，任何人都可以解读其内容，因此不要构建隐私信息字段，存放保密信息，以防止信息泄露。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="o">{</span>
+
+   “sub”: “1234567890”,
+
+   “name”: “chongchong”,
+
+   “admin”: <span class="nb">true</span>
+
+<span class="o">}</span> 
+</code></pre></div><p>请注意，默认情况下JWT是未加密的，任何人都可以解读其内容，因此不要构建隐私信息字段，存放保密信息，以防止信息泄露。</p>
 <p>JSON对象也使用Base64 URL算法转换为字符串保存。</p>
 <h2 id="签名哈希">签名哈希</h2>
 <p>签名哈希部分是对上面两部分数据签名，通过指定的算法生成哈希，以确保数据不会被篡改。</p>
@@ -200,128 +200,128 @@
 <p>作为令牌的JWT可以放在URL中（例如api.example/?token=xxx）。 Base64中用的三个字符是”+&quot;，&quot;/“和”=&quot;，由于在URL中有特殊含义，因此Base64URL中对他们做了替换：&quot;=“去掉，&quot;+“用”-“替换，&quot;/“用”_“替换，这就是Base64URL算法，很简单把。</p>
 <h1 id="安装">安装</h1>
 <p>通过composer安装</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">composer require lcobucci/jwt
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">composer require lcobucci/jwt
+</code></pre></div><ul>
 <li>在app/common/下创建一个trait目录</li>
 <li>并且在trait目录下创建JWT.php文件</li>
 <li>如：app/common/trait/JWT.php</li>
 </ul>
 <p>JWT.php代码</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">app\common\traits</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Lcobucci\JWT\Builder</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Lcobucci\JWT\Parser</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Lcobucci\JWT\Signer\Hmac\Sha256</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">trait</span> <span class="nx">JWT</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="nv">$signKey</span> <span class="o">=</span> <span class="s1">&#39;www.liqingbo.cn&#39;</span><span class="p">;</span> <span class="c1">//签名KEY
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="sd">/**
-</span></span></span><span class="line"><span class="cl"><span class="sd">     * 生成json web token 字符串
-</span></span></span><span class="line"><span class="cl"><span class="sd">     * @param int $userId 用户id
-</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return string $token
-</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
-</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="k">function</span> <span class="nf">generateJWT</span><span class="p">(</span><span class="nv">$userId</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">$signer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sha256</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="nx">string</span><span class="p">)(</span><span class="k">new</span> <span class="nx">Builder</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">setIssuer</span><span class="p">(</span><span class="s1">&#39;liqingbo&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">setIssuedAt</span><span class="p">(</span><span class="nx">time</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="nv">$userId</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">sign</span><span class="p">(</span><span class="nv">$signer</span><span class="p">,</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$signKey</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">getToken</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="sd">/**
-</span></span></span><span class="line"><span class="cl"><span class="sd">     * 验证token是否有效
-</span></span></span><span class="line"><span class="cl"><span class="sd">     * @param string $token token字符串aaa.bbb.ccc
-</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return bool
-</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
-</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="k">function</span> <span class="nf">verifyJWT</span><span class="p">(</span><span class="nv">$token</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">$tokenObj</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">parseJWT</span><span class="p">(</span><span class="nv">$token</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">$signer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sha256</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$tokenObj</span><span class="o">-&gt;</span><span class="na">verify</span><span class="p">(</span><span class="nv">$signer</span><span class="p">,</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$signKey</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="sd">/**
-</span></span></span><span class="line"><span class="cl"><span class="sd">     * 将jwt字符串解析成Token对象
-</span></span></span><span class="line"><span class="cl"><span class="sd">     * @param $token
-</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return \Lcobucci\JWT\Token
-</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
-</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="k">function</span> <span class="nf">parseJWT</span><span class="p">(</span><span class="nv">$token</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Parser</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">parse</span><span class="p">((</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$token</span><span class="p">);</span> <span class="c1">// Parses from a string
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="sd">/**
-</span></span></span><span class="line"><span class="cl"><span class="sd">     * 从jwt字符串中获取用户ID
-</span></span></span><span class="line"><span class="cl"><span class="sd">     * @param string $token
-</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return mixed
-</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
-</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="k">function</span> <span class="nf">getUserIdFromJWT</span><span class="p">(</span><span class="nv">$token</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">$tokenObj</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">parseJWT</span><span class="p">(</span><span class="nv">$token</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$tokenObj</span><span class="o">-&gt;</span><span class="na">getClaim</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h5 id="通过上面两步">通过上面两步：</h5>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">namespace</span> <span class="nx">app\common\traits</span><span class="p">;</span>
+
+
+<span class="k">use</span> <span class="nx">Lcobucci\JWT\Builder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Lcobucci\JWT\Parser</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Lcobucci\JWT\Signer\Hmac\Sha256</span><span class="p">;</span>
+
+<span class="k">trait</span> <span class="nx">JWT</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="nv">$signKey</span> <span class="o">=</span> <span class="s1">&#39;www.liqingbo.cn&#39;</span><span class="p">;</span> <span class="c1">//签名KEY
+</span><span class="c1"></span>
+    <span class="sd">/**
+</span><span class="sd">     * 生成json web token 字符串
+</span><span class="sd">     * @param int $userId 用户id
+</span><span class="sd">     * @return string $token
+</span><span class="sd">     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">generateJWT</span><span class="p">(</span><span class="nv">$userId</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$signer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sha256</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="nx">string</span><span class="p">)(</span><span class="k">new</span> <span class="nx">Builder</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">setIssuer</span><span class="p">(</span><span class="s1">&#39;liqingbo&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">setIssuedAt</span><span class="p">(</span><span class="nx">time</span><span class="p">())</span>
+            <span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="nv">$userId</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">sign</span><span class="p">(</span><span class="nv">$signer</span><span class="p">,</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$signKey</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">getToken</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+</span><span class="sd">     * 验证token是否有效
+</span><span class="sd">     * @param string $token token字符串aaa.bbb.ccc
+</span><span class="sd">     * @return bool
+</span><span class="sd">     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">verifyJWT</span><span class="p">(</span><span class="nv">$token</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$tokenObj</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">parseJWT</span><span class="p">(</span><span class="nv">$token</span><span class="p">);</span>
+        <span class="nv">$signer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sha256</span><span class="p">();</span>
+        <span class="k">return</span> <span class="nv">$tokenObj</span><span class="o">-&gt;</span><span class="na">verify</span><span class="p">(</span><span class="nv">$signer</span><span class="p">,</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$signKey</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+</span><span class="sd">     * 将jwt字符串解析成Token对象
+</span><span class="sd">     * @param $token
+</span><span class="sd">     * @return \Lcobucci\JWT\Token
+</span><span class="sd">     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">parseJWT</span><span class="p">(</span><span class="nv">$token</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Parser</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">parse</span><span class="p">((</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$token</span><span class="p">);</span> <span class="c1">// Parses from a string
+</span><span class="c1"></span>    <span class="p">}</span>
+
+    <span class="sd">/**
+</span><span class="sd">     * 从jwt字符串中获取用户ID
+</span><span class="sd">     * @param string $token
+</span><span class="sd">     * @return mixed
+</span><span class="sd">     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">getUserIdFromJWT</span><span class="p">(</span><span class="nv">$token</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$tokenObj</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">parseJWT</span><span class="p">(</span><span class="nv">$token</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$tokenObj</span><span class="o">-&gt;</span><span class="na">getClaim</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h5 id="通过上面两步">通过上面两步：</h5>
 <ul>
 <li>安装JWT</li>
 <li>通过traits公共调用代码</li>
 </ul>
 <p>就可以开始调用了，这里建议放在中间件或者公共控制器里面</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">declare</span> <span class="p">(</span><span class="nx">strict_types</span> <span class="o">=</span> <span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">app\api\controller</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">app\BaseController</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">app\common\traits\JWT</span><span class="p">;</span> <span class="c1">//通过命名空间引入
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">use</span> <span class="nx">think\facade\Request</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">CommonController</span> <span class="k">extends</span> <span class="nx">BaseController</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">use</span> <span class="nx">JWT</span><span class="p">;</span> <span class="c1">//还有这里，别忘记了
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">checkAuth</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">$header</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">header</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">$token</span> <span class="o">=</span> <span class="nv">$header</span><span class="p">[</span><span class="s1">&#39;token&#39;</span><span class="p">];</span> <span class="c1">//获取通过header传过来的token
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 1.先从header取出token字符串
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$token</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nv">$tokenString</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span><span class="nv">$token</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$tokenString</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="nx">exception</span><span class="p">(</span><span class="s2">&#34;token值为空&#34;</span><span class="p">,</span> <span class="mi">100001</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="c1">// 2.验证token是否合法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">verifyJWT</span><span class="p">(</span><span class="nv">$tokenString</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 3.将token字符串转换成Token对象然后取出user_id
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getUserIdFromJWT</span><span class="p">(</span><span class="nv">$tokenString</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                <span class="c1">// 单点登录
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="c1">// 4.在redis里查找token查找数据，如果查不到则返回token不存在
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="c1">//$token = Cache::store(&#39;redis&#39;)-&gt;get(&#39;user_id:&#39; . $userId);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="nx">exception</span><span class="p">(</span><span class="s1">&#39;非法token&#39;</span><span class="p">,</span> <span class="mi">100001</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">exception</span><span class="p">(</span><span class="s1">&#39;请求头缺少token参数&#39;</span><span class="p">,</span> <span class="mi">100001</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">declare</span> <span class="p">(</span><span class="nx">strict_types</span> <span class="o">=</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="k">namespace</span> <span class="nx">app\api\controller</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">app\BaseController</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">app\common\traits\JWT</span><span class="p">;</span> <span class="c1">//通过命名空间引入
+</span><span class="c1"></span><span class="k">use</span> <span class="nx">think\facade\Request</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">CommonController</span> <span class="k">extends</span> <span class="nx">BaseController</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">JWT</span><span class="p">;</span> <span class="c1">//还有这里，别忘记了
+</span><span class="c1"></span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">checkAuth</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$header</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">header</span><span class="p">();</span>
+        <span class="nv">$token</span> <span class="o">=</span> <span class="nv">$header</span><span class="p">[</span><span class="s1">&#39;token&#39;</span><span class="p">];</span> <span class="c1">//获取通过header传过来的token
+</span><span class="c1"></span>
+        <span class="c1">// 1.先从header取出token字符串
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$token</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$tokenString</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span><span class="nv">$token</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$tokenString</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nx">exception</span><span class="p">(</span><span class="s2">&#34;token值为空&#34;</span><span class="p">,</span> <span class="mi">100001</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="c1">// 2.验证token是否合法
+</span><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">verifyJWT</span><span class="p">(</span><span class="nv">$tokenString</span><span class="p">))</span> <span class="p">{</span>
+                <span class="c1">// 3.将token字符串转换成Token对象然后取出user_id
+</span><span class="c1"></span>                <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getUserIdFromJWT</span><span class="p">(</span><span class="nv">$tokenString</span><span class="p">);</span>
+
+                <span class="c1">// 单点登录
+</span><span class="c1"></span>                <span class="c1">// 4.在redis里查找token查找数据，如果查不到则返回token不存在
+</span><span class="c1"></span>                <span class="c1">//$token = Cache::store(&#39;redis&#39;)-&gt;get(&#39;user_id:&#39; . $userId);
+</span><span class="c1"></span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">exception</span><span class="p">(</span><span class="s1">&#39;非法token&#39;</span><span class="p">,</span> <span class="mi">100001</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">exception</span><span class="p">(</span><span class="s1">&#39;请求头缺少token参数&#39;</span><span class="p">,</span> <span class="mi">100001</span><span class="p">);</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -347,7 +347,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Alen学无止境</div><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.99.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Alen学无止境</div><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.83.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Alen</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
                     <span class="icp"><a href="https://beian.miit.gov.cn/shouye.html" target="_blank">桂ICP备2022006375号-1</a></span></div>
         </div>

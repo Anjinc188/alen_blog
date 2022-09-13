@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Sql优化 - Alen</title><meta name="Description" content="Make it a better place"><meta property="og:title" content="Sql优化" />
+<meta property="og:description" content="Sql 常用优化场景 sql优化是一个大家都比较关注的热门话题，无论你在面试，还是工作中，都很有可能会遇到。如果某天你负责的某个线上接口，出现了性能" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/sql%E4%BC%98%E5%8C%96/" /><meta property="og:image" content="https://static.alenhy.com/alen_avatar.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-04T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-03-04T00:00:00&#43;00:00" /><meta property="og:site_name" content="Alen" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://static.alenhy.com/alen_avatar.jpeg"/>
+
+<meta name="twitter:title" content="Sql优化"/>
+<meta name="twitter:description" content="Sql 常用优化场景 sql优化是一个大家都比较关注的热门话题，无论你在面试，还是工作中，都很有可能会遇到。如果某天你负责的某个线上接口，出现了性能"/>
+<meta name="application-name" content="Alen">
+<meta name="apple-mobile-web-app-title" content="Alen"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://static.alenhy.com/alen_avatar.jpeg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/sql%E4%BC%98%E5%8C%96/" /><link rel="prev" href="http://example.org/posts/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" /><link rel="next" href="http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AF%87/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Sql优化",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/sql%E4%BC%98%E5%8C%96\/"
+        },"genre": "posts","keywords": "mysql, sql优化","wordcount":  6327 ,
+        "url": "http:\/\/example.org\/posts\/sql%E4%BC%98%E5%8C%96\/","datePublished": "2022-03-04T00:00:00+00:00","dateModified": "2022-03-04T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Alen"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Alen"><span class="header-title-pre">(՞• •՞)</span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="请输入搜索内容～" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Alen"><span class="header-title-pre">(՞• •՞)</span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="请输入搜索内容～" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Sql优化</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Alen</a></span>&nbsp;<span class="post-category">included in <a href="/categories/mysql/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>mysql</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-03-04">2022-03-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6327 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#sql-常用优化场景">Sql 常用优化场景</a></li>
+        <li><a href="#1-避免使用-select-">1. 避免使用 SELECT *</a></li>
+        <li><a href="#2-使用-union-all-代替union">2. 使用 UNION ALL 代替UNION</a></li>
+        <li><a href="#3-小表驱动大表">3. 小表驱动大表</a></li>
+        <li><a href="#4-批量操作">4. 批量操作</a></li>
+        <li><a href="#5-多用limit">5. 多用LIMIT</a></li>
+        <li><a href="#6-in中值太多">6. IN中值太多</a></li>
+        <li><a href="#7-增量查询">7. 增量查询</a></li>
+        <li><a href="#8-高效的分页">8. 高效的分页</a></li>
+        <li><a href="#9-用连接查询代理子查询">9. 用连接查询代理子查询</a></li>
+        <li><a href="#10-join表不宜过多">10. JOIN表不宜过多</a></li>
+        <li><a href="#11-使用join时要注意">11. 使用JOIN时要注意</a></li>
+        <li><a href="#12-索引控制的数量">12. 索引控制的数量</a></li>
+        <li><a href="#13-选择合理的字段类型">13. 选择合理的字段类型</a></li>
+        <li><a href="#14-提升group-by的效率">14. 提升GROUP BY的效率</a></li>
+        <li><a href="#15-索引优化">15. 索引优化</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="sql-常用优化场景">Sql 常用优化场景</h3>
+<ul>
+<li>sql优化是一个大家都比较关注的热门话题，无论你在面试，还是工作中，都很有可能会遇到。如果某天你负责的某个线上接口，出现了性能问题，需要做优化。那么你首先想到的很有可能是优化sql语句，因为它的改造成本相对于代码来说也要小得多。那么，如何优化sql语句呢？</li>
+<li>这篇文章从15个方面，分享了sql优化的一些小技巧，希望对你有所帮助。</li>
+</ul>
+<h3 id="1-避免使用-select-">1. 避免使用 SELECT *</h3>
+<p>我们很多时候在写sql为了方便，直接使用 **SELECT * ** 一次性查出所有的数据。</p>
+<p>Bad:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>在实际的业务场景中，可能我们真正需要的字段只有其中的一部分，但我们查了很多数据而不用，浪费了数据库资源。如：内存或者CPU。</p>
+<p>此外，多查出来的数据会通过网络IO传输过程中，也会添加数据传输的时间，最重要的问题是：**SELECT * ** 不会走覆盖索引，会出现大量的回表操作，导致sql的查询性能很低。</p>
+<p>如何优化？</p>
+<p>Good：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="n">sex</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></code></pre></div><hr>
+<h3 id="2-使用-union-all-代替union">2. 使用 UNION ALL 代替UNION</h3>
+<p>UNION 关键字，可以获取排重后的数据，而如果使用UNION ALL关键字，可以获取所有数据，包含重复的数据。</p>
+<p>Bad:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="p">(</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">)</span><span class="w"> 
+</span><span class="w">
+</span><span class="w"></span><span class="k">UNION</span><span class="w"> 
+</span><span class="w">
+</span><span class="w"></span><span class="p">(</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w">
+</span></code></pre></div><p>排重的过程需要遍历、排序和比较，它更耗时，更消耗cpu资源。</p>
+<p>所以如果能用union all的时候，尽量不用union。</p>
+<p>Good：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="p">(</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">)</span><span class="w"> 
+</span><span class="w">
+</span><span class="w"></span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="p">(</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w">
+</span></code></pre></div><hr>
+<h3 id="3-小表驱动大表">3. 小表驱动大表</h3>
+<p>小表驱动大表，也就是说用小表的数据集驱动大表的数据集，假如有order和user两张表，其中order表有10000条数据，而user表有100条数据，这时如果想查一下，所有有效的用户下过的订单列表。</p>
+<p>可以使用<code>IN</code>关键字实现：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">order</span><span class="w">
+</span><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>也可以使用<code>EXISTS</code>关键字实现：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">order</span><span class="w">
+</span><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">order</span><span class="p">.</span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">user</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span></code></pre></div><p>前面提到的这种业务场景，使用in关键字去实现业务需求，更加合适。</p>
+<ul>
+<li>
+<p>为什么呢？</p>
+</li>
+<li>
+<p>因为如果sql语句中包含了in关键字，则它会优先执行in里面的<code>子查询语句</code>，然后再执行in外面的语句。如果in里面的数据量很少，作为条件查询速度更快。</p>
+</li>
+<li>
+<p>而如果sql语句中包含了exists关键字，它优先执行exists左边的语句（即主查询语句）。然后把它作为条件，去跟右边的语句匹配。如果匹配上，则可以查询出数据。如果匹配不上，数据就被过滤掉了。</p>
+</li>
+</ul>
+<p>这个需求中，order表有10000条数据，而user表有100条数据。order表是大表，user表是小表。如果order表在左边，则用in关键字性能更好。</p>
+<p>总结一下：</p>
+<ul>
+<li><code>in</code> 适用于左边大表，右边小表。</li>
+<li><code>exists</code> 适用于左边小表，右边大表。</li>
+</ul>
+<p>不管是用in，还是exists关键字，其核心思想都是用小表驱动大表。</p>
+<hr>
+<h3 id="4-批量操作">4. 批量操作</h3>
+<ul>
+<li>如果你有一批数据经过业务处理之后，需要插入数据，该怎么办？</li>
+</ul>
+<p>Bad：</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span><span class="nx">orderItem</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">order</span><span class="p">{</span>
+		  <span class="nx">err</span> <span class="p">=</span> <span class="nx">Db</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">orderItem</span><span class="p">).</span><span class="nx">Error</span>
+      <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;err:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+        <span class="k">return</span>
+      <span class="p">}</span>
+	<span class="p">}</span>
+
+<span class="c1">// 在循环中逐条插入数据 SQL
+</span><span class="c1"></span><span class="nx">insert</span> <span class="nx">into</span> <span class="nf">order</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="nx">code</span><span class="p">,</span><span class="nx">user_id</span><span class="p">)</span> 
+<span class="nf">values</span><span class="p">(</span><span class="mi">123</span><span class="p">,</span><span class="err">&#39;</span><span class="mo">001</span><span class="err">&#39;</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+</code></pre></div><p>该操作需要多次请求数据库，才能完成这批数据的插入。</p>
+<p>但众所周知，我们在代码中，每次远程请求数据库，是会消耗一定性能的。而如果我们的代码需要请求多次数据库，才能完成本次业务功能，势必会消耗更多的性能。</p>
+<p>如何优化？</p>
+<p>在<code>Go</code> <code>Gorm V2</code>版本中已支持批量插入的功能</p>
+<p>Good：</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">users</span> <span class="p">=</span> <span class="p">[]</span><span class="nx">User</span><span class="p">{{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;jinzhu1&#34;</span><span class="p">},</span> <span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;jinzhu2&#34;</span><span class="p">},</span> <span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;jinzhu3&#34;</span><span class="p">}}</span>
+<span class="nx">db</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">users</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">user</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">users</span> <span class="p">{</span>
+  <span class="nx">user</span><span class="p">.</span><span class="nx">ID</span> <span class="c1">// 1,2,3
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="c1">// SQL
+</span><span class="c1"></span><span class="nx">insert</span> <span class="nx">into</span> <span class="nf">order</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="nx">code</span><span class="p">,</span><span class="nx">user_id</span><span class="p">)</span> 
+<span class="nf">values</span><span class="p">(</span><span class="mi">123</span><span class="p">,</span><span class="err">&#39;</span><span class="mo">001</span><span class="err">&#39;</span><span class="p">,</span><span class="mi">100</span><span class="p">),(</span><span class="mi">124</span><span class="p">,</span><span class="err">&#39;</span><span class="mo">002</span><span class="err">&#39;</span><span class="p">,</span><span class="mi">100</span><span class="p">),(</span><span class="mi">125</span><span class="p">,</span><span class="err">&#39;</span><span class="mo">003</span><span class="err">&#39;</span><span class="p">,</span><span class="mi">101</span><span class="p">);</span>
+</code></pre></div><p>这样只需要远程请求一次数据库，sql性能会得到提升，数据量越多，提升越大。</p>
+<p>但需要注意的是，不建议一次批量操作太多的数据，如果数据太多数据库响应也会很慢。批量操作需要把握一个度，建议每批数据尽量控制在500以内。如果数据多于500，则分多批次处理。</p>
+<hr>
+<h3 id="5-多用limit">5. 多用LIMIT</h3>
+<ul>
+<li>有时候，我们需要查询某些数据中的第一条，比如：查询某个用户下的第一个订单，想看看他第一次的首单时间。</li>
+</ul>
+<p>Bad：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">create_date</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">create_date</span><span class="w"> </span><span class="k">asc</span><span class="p">;</span><span class="w">
+</span></code></pre></div><ul>
+<li>
+<p>根据用户id查询订单，按下单时间排序，先查出该用户所有的订单数据，得到一个订单集合。然后在代码中，获取第一个元素的数据，即首单的数据，就能获取首单时间。</p>
+</li>
+<li>
+<p>虽说这种做法在功能上没有问题，但它的效率非常不高，需要先查询出所有的数据，有点浪费资源。</p>
+</li>
+</ul>
+<p>如何优化？</p>
+<p>Good：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">create_date</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">create_date</span><span class="w"> </span><span class="k">asc</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>使用<code>LIMIT 1</code>，只返回该用户下单时间最小的那一条数据即可。</p>
+<p>此外，在删除或者修改数据时，为了防止误操作，导致删除或修改了不相干的数据，也可以在sql语句最后加上limit。</p>
+<p>例如：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">UPDATE</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">edit_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">now</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>这样即使误操作，比如把id搞错了，也不会对太多的数据造成影响。</p>
+<hr>
+<h3 id="6-in中值太多">6. IN中值太多</h3>
+<p>对于批量查询接口，我们通常会使用<code>IN</code>关键字过滤出数据。比如：想通过指定的一些id，批量查询出用户信息。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="n">name</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">...</span><span class="mi">999999</span><span class="p">);</span><span class="w">
+</span></code></pre></div><p>如果我们不做任何限制，该查询语句一次性可能会查询出非常多的数据，很容易导致接口超时。</p>
+<p>这时该怎么办呢？</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="n">name</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">...</span><span class="mi">999999</span><span class="p">)</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>还有一个方案就是：如果ids超过500条记录，可以分批用多线程去查询数据。每批只查500条记录，最后把查询到的数据汇总到一起返回。</p>
+<p>不过这只是一个临时方案，不适合于ids实在太多的场景。因为ids太多，即使能快速查出数据，但如果返回的数据量太大了，网络传输也是非常消耗性能的，接口性能始终好不到哪里去。</p>
+<hr>
+<h3 id="7-增量查询">7. 增量查询</h3>
+<p>有时候，我们需要通过远程接口查询数据，然后同步到另外一个数据库。</p>
+<p>Bad：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="w">
+</span></code></pre></div><p>如果直接获取所有的数据，然后同步过去。这样虽说非常方便，但是带来了一个非常大的问题，就是如果数据很多的话，查询性能会非常差。</p>
+<p>这时该怎么办呢？</p>
+<p>Good：</p>
+<pre><code>SELECT * FROM user WHERE id&gt;#{lastId} AND create_time &gt;= #{lastCreateTime} LIMIT 100;
+</code></pre><p>按id和时间升序，每次只同步一批数据，这一批数据只有100条记录。每次同步完成之后，保存这100条数据中最大的id和时间，给同步下一批数据的时候用。</p>
+<p>通过这种增量查询的方式，能够提升单次查询的效率。</p>
+<hr>
+<h3 id="8-高效的分页">8. 高效的分页</h3>
+<p>有时候，列表页在查询数据时，为了避免一次性返回过多的数据影响接口性能，我们一般会对查询接口做分页处理。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>如果表中数据量少，用limit关键字做分页，没啥问题。但如果表中数据量很多，用它就会出现性能问题。</p>
+<p>比如现在分页参数变成了：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">1000000</span><span class="p">,</span><span class="mi">20</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>mysql会查到1000020条数据，然后丢弃前面的1000000条，只查后面的20条数据，这个是非常浪费资源的。</p>
+<p>那么，这种海量数据该怎么分页呢？</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1000000</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>先找到上次分页最大的id，然后利用id上的索引查询。不过该方案，要求id是连续的，并且有序的。</p>
+<p>还能使用<code>BETWEEN</code>优化分页。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">1000000</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">1000020</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>需要注意的是between要在唯一索引上分页，不然会出现每页大小不一致的问题。</p>
+<hr>
+<h3 id="9-用连接查询代理子查询">9. 用连接查询代理子查询</h3>
+<p>mysql中如果需要从两张以上的表中查询出数据的话，一般有两种实现方式：<code>子查询</code> 和 <code>连接查询</code>。</p>
+<p>子查询的例子如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">status</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span></code></pre></div><p>子查询语句可以通过<code>IN</code>关键字实现，一个查询语句的条件落在另一个select语句的查询结果中。程序先运行在嵌套在最内层的语句，再运行外层的语句。</p>
+<p>子查询语句的优点是简单，结构化，如果涉及的表数量不多的话。</p>
+<p>但缺点是mysql执行子查询时，需要创建临时表，查询完毕后，需要再删除这些临时表，有一些额外的性能消耗。</p>
+<p>这时可以改成连接查询。具体例子如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span></code></pre></div><hr>
+<h3 id="10-join表不宜过多">10. JOIN表不宜过多</h3>
+<p>根据阿里巴巴开发者手册的规定，<code>JOIN</code>表的数量不应该超过<code>3</code>个。</p>
+<p>Bad：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="k">c</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="n">d</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">a</span><span class="w"> 
+</span><span class="w"></span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">a_id</span><span class="w">
+</span><span class="w"></span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">b_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">id</span><span class="w">
+</span><span class="w"></span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">c_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">id</span><span class="w">
+</span><span class="w"></span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">d_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">id</span><span class="w">
+</span><span class="w"></span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">e_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">id</span><span class="w">
+</span><span class="w"></span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">g</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">g</span><span class="p">.</span><span class="n">f_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">id</span><span class="w">
+</span></code></pre></div><p>如果join太多，mysql在选择索引的时候会非常复杂，很容易选错索引。</p>
+<p>并且如果没有命中中，nested loop join 就是分别从两个表读一行数据进行两两对比，复杂度是 n^2。</p>
+<p>所以我们应该尽量控制<code>JOIN</code>表的数量。</p>
+<p>Good：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="k">c</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">d_name</span><span class="w"> 
+</span><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">a</span><span class="w"> 
+</span><span class="w"></span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">a_id</span><span class="w">
+</span><span class="w"></span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">b_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">id</span><span class="w">
+</span></code></pre></div><p>如果实现业务场景中需要查询出另外几张表中的数据，可以在a、b、c表中<code>冗余专门的字段</code>，比如：在表a中冗余d_name字段，保存需要查询出的数据。</p>
+<p>不过我之前也见过有些ERP系统，并发量不大，但业务比较复杂，需要<code>JOIN</code>十几张表才能查询出数据。</p>
+<p>所以<code>JOIN</code>表的数量要根据系统的实际情况决定，不能一概而论，尽量越少越好。</p>
+<hr>
+<h3 id="11-使用join时要注意">11. 使用JOIN时要注意</h3>
+<p>我们在涉及到多张表联合查询的时候，一般会使用<code>JOIN</code>关键字。</p>
+<p>而JOIN使用最多的是LEFT JOIN和INNER JOIN。</p>
+<ul>
+<li><code>LEFT JOIN</code>：求两个表的交集外加左表剩下的数据。</li>
+<li><code>INNER JOIN</code>：求两个表交集的数据。</li>
+</ul>
+<p>使用INNER JOIN的示例如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="n">o</span><span class="p">.</span><span class="n">code</span><span class="p">,</span><span class="n">u</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>如果两张表使用INNER JOIN关联，MySQL会自动选择两张表中的小表，去驱动大表，所以性能上不会有太大的问题。</p>
+<p>使用left join的示例如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="n">o</span><span class="p">.</span><span class="n">code</span><span class="p">,</span><span class="n">u</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>如果两张表使用LEFT JOIN关联，MySQL会默认用LEFT JOIN关键字左边的表，去驱动它右边的表。如果左边的表数据很多时，就会出现性能问题。</p>
+<blockquote>
+<p>要特别注意的是在用LEFT JOIN关联查询时，左边要用小表，右边可以用大表。如果能用INNER JOIN的地方，尽量少用LEFT JOIN。</p>
+</blockquote>
+<hr>
+<h3 id="12-索引控制的数量">12. 索引控制的数量</h3>
+<p>众所周知，索引能够显著的提升查询sql的性能，但索引数量并非越多越好。</p>
+<p>因为表中新增数据时，需要同时为它创建索引，而索引是需要额外的存储空间的，而且还会有一定的性能消耗。</p>
+<p>阿里巴巴的开发者手册中规定，单表的索引数量应该尽量控制在<code>5</code>个以内，并且单个索引中的字段数不超过<code>5</code>个。</p>
+<p>mysql使用的B+树的结构来保存索引的，在insert、update和delete操作时，需要更新B+树索引。如果索引过多，会消耗很多额外的性能。</p>
+<p>那么，问题来了，如果表中的索引太多，超过了5个该怎么办？</p>
+<p>这个问题要辩证的看，如果你的系统并发量不高，表中的数据量也不多，其实超过5个也可以，只要不要超过太多就行。</p>
+<p>但对于一些高并发的系统，请务必遵守单表索引数量不要超过5的限制。</p>
+<p>那么，高并发系统如何优化索引数量？</p>
+<p>能够建联合索引，就别建单个索引，可以删除无用的单个索引。</p>
+<p>将部分查询功能迁移到其他类型的数据库中，比如：Elastic Seach、HBase等，在业务表中只需要建几个关键索引即可。</p>
+<hr>
+<h3 id="13-选择合理的字段类型">13. 选择合理的字段类型</h3>
+<p><code>char</code>表示固定字符串类型，该类型的字段存储空间的固定的，会浪费存储空间。</p>
+<pre><code>alter table order 
+add column code char(20) NOT NULL;
+</code></pre><p><code>varchar</code>表示变长字符串类型，该类型的字段存储空间会根据实际数据的长度调整，不会浪费存储空间。</p>
+<pre><code>alter table order 
+add column code varchar(20) NOT NULL;
+</code></pre><ul>
+<li>
+<p>如果是长度固定的字段，比如用户手机号，一般都是11位的，可以定义成char类型，长度是11字节。</p>
+</li>
+<li>
+<p>但如果是企业名称字段，假如定义成char类型，就有问题了。</p>
+</li>
+<li>
+<p>如果长度定义得太长，比如定义成了200字节，而实际企业长度只有50字节，则会浪费150字节的存储空间。</p>
+</li>
+<li>
+<p>如果长度定义得太短，比如定义成了50字节，但实际企业名称有100字节，就会存储不下，而抛出异常。</p>
+</li>
+<li>
+<p>所以建议将企业名称改成varchar类型，变长字段存储空间小，可以节省存储空间，而且对于查询来说，在一个相对较小的字段内搜索效率显然要高些。</p>
+</li>
+</ul>
+<p>我们在选择字段类型时，应该遵循这样的原则：</p>
+<ol>
+<li>能用数字类型，就不用字符串，因为字符的处理往往比数字要慢。</li>
+<li>尽可能使用小的类型，比如：用bit存布尔值，用tinyint存枚举值等。</li>
+<li>长度固定的字符串字段，用char类型。</li>
+<li>长度可变的字符串字段，用varchar类型。</li>
+<li>金额字段用decimal，避免精度丢失问题。</li>
+</ol>
+<p>还有很多原则，这里就不一一列举了。</p>
+<hr>
+<h3 id="14-提升group-by的效率">14. 提升GROUP BY的效率</h3>
+<p>我们有很多业务场景需要使用<code>group by</code>关键字，它主要的功能是去重和分组。</p>
+<p>通常它会跟<code>having</code>一起配合使用，表示分组后再根据一定的条件过滤数据。</p>
+<p><strong>反例：</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">user_id</span><span class="p">,</span><span class="n">user_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="k">having</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>这种写法性能不好，它先把所有的订单根据用户id分组之后，再去过滤用户id大于等于200的用户。</p>
+<p>分组是一个相对耗时的操作，为什么我们不先缩小数据的范围之后，再分组呢？</p>
+<p><strong>正例：</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">user_id</span><span class="p">,</span><span class="n">user_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">user_id</span><span class="w">
+</span></code></pre></div><p>使用WHERE条件在分组前，就把多余的数据过滤掉了，这样分组时效率就会更高一些。</p>
+<blockquote>
+<p>其实这是一种思路，不仅限于GROUP BY的优化。我们的sql语句在做一些耗时的操作之前，应尽可能缩小数据范围，这样能提升sql整体的性能。</p>
+</blockquote>
+<hr>
+<h3 id="15-索引优化">15. 索引优化</h3>
+<p>sql优化当中，有一个非常重要的内容就是：<code>索引优化</code>。</p>
+<p>很多时候sql语句，走了索引，和没有走索引，执行效率差别很大。所以索引优化被作为sql优化的首选。</p>
+<p>索引优化的第一步是：检查sql语句有没有走索引。</p>
+<p>那么，如何查看sql走了索引没？</p>
+<p>可以使用<code>explain</code>命令，查看mysql的执行计划。</p>
+<p>例如：</p>
+<pre><code>explain select * from `order` where code='002';
+</code></pre><p>结果：<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srh12xmAaI6TZBZaPVU13tmEaRT9ibvoaMp0lGrvmRyV2dfCdCY5M01Ruw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1"
+        data-srcset="https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srh12xmAaI6TZBZaPVU13tmEaRT9ibvoaMp0lGrvmRyV2dfCdCY5M01Ruw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1, https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srh12xmAaI6TZBZaPVU13tmEaRT9ibvoaMp0lGrvmRyV2dfCdCY5M01Ruw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1 1.5x, https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srh12xmAaI6TZBZaPVU13tmEaRT9ibvoaMp0lGrvmRyV2dfCdCY5M01Ruw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1 2x"
+        data-sizes="auto"
+        alt="https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srh12xmAaI6TZBZaPVU13tmEaRT9ibvoaMp0lGrvmRyV2dfCdCY5M01Ruw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1"
+        title="图片" />通过这几列可以判断索引使用情况，执行计划包含列的含义如下图所示：<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srhRJiaf4SicPlQ725icaeYAgLlmhTz7UVFfMpPx82njv3JKUicnvuBeaKuVQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1"
+        data-srcset="https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srhRJiaf4SicPlQ725icaeYAgLlmhTz7UVFfMpPx82njv3JKUicnvuBeaKuVQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1, https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srhRJiaf4SicPlQ725icaeYAgLlmhTz7UVFfMpPx82njv3JKUicnvuBeaKuVQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1 1.5x, https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srhRJiaf4SicPlQ725icaeYAgLlmhTz7UVFfMpPx82njv3JKUicnvuBeaKuVQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1 2x"
+        data-sizes="auto"
+        alt="https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srhRJiaf4SicPlQ725icaeYAgLlmhTz7UVFfMpPx82njv3JKUicnvuBeaKuVQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1"
+        title="图片" />如果你想进一步了解explain的详细用法，可以看看我的另一篇文章《<a href="https://mp.weixin.qq.com/s?__biz=MzUxODkzNTQ3Nw==&amp;mid=2247485392&amp;idx=1&amp;sn=a0a2728179e20ad09487f09e0a785ec2&amp;chksm=f980010acef7881c0591beb4e90220de5c283a63c74e02910830f4cb99922c388ee0226e7c88&amp;token=393604486&amp;lang=zh_CN&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreffer ">explain | 索引优化的这把绝世好剑，你真的会用吗？</a>》</p>
+<p>说实话，sql语句没有走索引，排除没有建索引之外，最大的可能性是索引失效了。</p>
+<p>下面说说索引失效的常见原因：<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srhPUxuOdm28F1LkrKrHxItEX79Yey6orTlywyQEFB4JymRVOQIa3MUXg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1"
+        data-srcset="https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srhPUxuOdm28F1LkrKrHxItEX79Yey6orTlywyQEFB4JymRVOQIa3MUXg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1, https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srhPUxuOdm28F1LkrKrHxItEX79Yey6orTlywyQEFB4JymRVOQIa3MUXg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1 1.5x, https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srhPUxuOdm28F1LkrKrHxItEX79Yey6orTlywyQEFB4JymRVOQIa3MUXg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1 2x"
+        data-sizes="auto"
+        alt="https://mmbiz.qpic.cn/mmbiz_png/uL371281oDEU1Oia130N2IFx8rmOZ0srhPUxuOdm28F1LkrKrHxItEX79Yey6orTlywyQEFB4JymRVOQIa3MUXg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1"
+        title="图片" />如果不是上面的这些原因，则需要再进一步排查一下其他原因。</p>
+<p>此外，你有没有遇到过这样一种情况：明明是同一条sql，只有入参不同而已。有的时候走的索引a，有的时候却走的索引b？</p>
+<p>没错，有时候mysql会选错索引。</p>
+<p>必要时可以使用<code>force index</code>来强制查询sql走某个索引。</p>
+<p>至于为什么mysql会选错索引，后面有专门的文章介绍的，这里先留点悬念。</p>
+<hr>
+<p>转载：<a href="https://mp.weixin.qq.com/s?__biz=MzkwNjMwMTgzMQ==&amp;mid=2247490473&amp;idx=1&amp;sn=ba07d64aa8c89054bd263efd660d3a3f&amp;chksm=c0ebc341f79c4a579a6f41465df0459a696ab8ef0499a5f6fd76269af1064fde0286afdb027d&amp;token=2041133408&amp;lang=zh_CN&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreffer ">原文链接</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-03-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/sql%E4%BC%98%E5%8C%96/" data-title="Sql优化" data-via="an_jinc" data-hashtags="mysql,sql优化"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/sql%E4%BC%98%E5%8C%96/" data-hashtag="mysql"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/sql%E4%BC%98%E5%8C%96/" data-title="Sql优化"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/sql%E4%BC%98%E5%8C%96/" data-title="Sql优化"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/sql%E4%BC%98%E5%8C%96/" data-title="Sql优化"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/mysql/">mysql</a>,&nbsp;<a href="/tags/sql%E4%BC%98%E5%8C%96/">sql优化</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" class="prev" rel="prev" title="有效的括号"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>有效的括号</a>
+            <a href="/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AF%87/" class="next" rel="next" title="数据结构算法 数组学习篇">数据结构算法 数组学习篇<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Alen学无止境</div><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.83.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Alen</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a href="https://beian.miit.gov.cn/shouye.html" target="_blank">桂ICP备2022006375号-1</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"Alen-学无止境","id-2":"Alen-学无止境"},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

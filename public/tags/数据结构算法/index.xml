@@ -1,0 +1,32 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>数据结构算法 - Tag - Alen</title>
+        <link>http://example.org/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/</link>
+        <description>数据结构算法 - Tag - Alen</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>anjinc188@gmail.com (Alen)</managingEditor>
+            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Fri, 08 Apr 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+    <title>数据结构算法 字符串学习篇</title>
+    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
+    <pubDate>Fri, 08 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%A6%E4%B9%A0%E7%AF%87/</guid>
+    <description><![CDATA[题目练习 反转字符串 题目链接 解题思路：使用双指针left right 互换位置，当left&lt;=right时候循环条件结束 代码示例： // 反转字符串 func reverseString(s []byte)]]></description>
+</item>
+<item>
+    <title>数据结构算法 哈希表学习篇</title>
+    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
+    <pubDate>Tue, 05 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87/</guid>
+    <description><![CDATA[题目练习 有效的字母异位词 题目链接 解题思路：定义一个数组叫做record用来上记录字符串s里字符出现的次数。 需要把字符映射到数组也就是哈希表的]]></description>
+</item>
+<item>
+    <title>数据结构算法 数组学习篇</title>
+    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
+    <pubDate>Mon, 04 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AF%87/</guid>
+    <description><![CDATA[数组理论基础 数组是非常基础的数据结构，在面试中，考察数组的题目一般在思维上都不难，主要是考察对代码的掌控能力 也就是说，想法很简单，但实现起来]]></description>
+</item>
+</channel>
+</rss>

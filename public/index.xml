@@ -4,9 +4,41 @@
         <link>http://example.org/</link>
         <description>Make it a better place</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>anjinc188@gmail.com (Alen)</managingEditor>
-            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Wed, 11 Aug 2021 23:55:25 &#43;0800</lastBuildDate>
+            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Fri, 08 Apr 2022 00:00:00 &#43;0000</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>数据结构算法 字符串学习篇</title>
+    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
+    <pubDate>Fri, 08 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%A6%E4%B9%A0%E7%AF%87/</guid>
+    <description><![CDATA[题目练习 反转字符串 题目链接 解题思路：使用双指针left right 互换位置，当left&lt;=right时候循环条件结束 代码示例： // 反转字符串 func reverseString(s []byte)]]></description>
+</item>
+<item>
+    <title>数据结构算法 哈希表学习篇</title>
+    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
+    <pubDate>Tue, 05 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87/</guid>
+    <description><![CDATA[题目练习 有效的字母异位词 题目链接 解题思路：定义一个数组叫做record用来上记录字符串s里字符出现的次数。 需要把字符映射到数组也就是哈希表的]]></description>
+</item>
+<item>
+    <title>数据结构算法 数组学习篇</title>
+    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
+    <pubDate>Mon, 04 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AF%87/</guid>
+    <description><![CDATA[数组理论基础 数组是非常基础的数据结构，在面试中，考察数组的题目一般在思维上都不难，主要是考察对代码的掌控能力 也就是说，想法很简单，但实现起来]]></description>
+</item>
+<item>
+    <title>Sql优化</title>
+    <link>http://example.org/posts/sql%E4%BC%98%E5%8C%96/</link>
+    <pubDate>Fri, 04 Mar 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/sql%E4%BC%98%E5%8C%96/</guid>
+    <description><![CDATA[Sql 常用优化场景 sql优化是一个大家都比较关注的热门话题，无论你在面试，还是工作中，都很有可能会遇到。如果某天你负责的某个线上接口，出现了性能]]></description>
+</item>
+<item>
     <title>有效的括号</title>
     <link>http://example.org/posts/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</link>
     <pubDate>Wed, 11 Aug 2021 23:55:25 &#43;0800</pubDate>
@@ -53,38 +85,6 @@
     <author>Alen</author>
     <guid>http://example.org/posts/js%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB/</guid>
     <description><![CDATA[再次学习JS-函数、对象和原型、原型链的关系 JS的原型、原型链一直是比较难理解的内容，不少初学者甚至有一定经验的老鸟都不一定能完全说清楚，更]]></description>
-</item>
-<item>
-    <title>Cookie, LocalStorage 与 SessionStorage的区别</title>
-    <link>http://example.org/posts/cookie-localstorage-%E4%B8%8E-sessionstorage%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
-    <pubDate>Tue, 29 Jun 2021 16:19:36 &#43;0800</pubDate>
-    <author>Alen</author>
-    <guid>http://example.org/posts/cookie-localstorage-%E4%B8%8E-sessionstorage%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
-    <description><![CDATA[最近找工作面试中，有频繁被面试官问到Cookie, LocalStorage 与 SessionStorage的区别，在此记录一下。 基本概念 Cookie Cookie 是小甜饼的意思。顾名思义]]></description>
-</item>
-<item>
-    <title>ES6构造函数class与ES5构造函数语法</title>
-    <link>http://example.org/posts/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</link>
-    <pubDate>Mon, 09 Nov 2020 00:00:00 &#43;0000</pubDate>
-    <author>Alen</author>
-    <guid>http://example.org/posts/es6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0class%E4%B8%8Ees5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95/</guid>
-    <description><![CDATA[ES5的构造函数语法 1.创建对象的方法有两种 //字面量 const obj = {} //构造函数 const obj = new Object() 构造函数就是JavaScript程序定义好的构造函数,我]]></description>
-</item>
-<item>
-    <title>Go Gorm关联查询排除字段</title>
-    <link>http://example.org/posts/go-gorm%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%8E%92%E9%99%A4%E5%AD%97%E6%AE%B5/</link>
-    <pubDate>Thu, 08 Oct 2020 00:00:00 &#43;0000</pubDate>
-    <author>Alen</author>
-    <guid>http://example.org/posts/go-gorm%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%8E%92%E9%99%A4%E5%AD%97%E6%AE%B5/</guid>
-    <description><![CDATA[本章讲解关于gorm模型后如何筛选按需字段 安装gorm go get -u github.com/jinzhu/gorm 一对多使用： //日记模型 type Diary struct { Model Uid uint32 `json:&#34;uid&#34;` //用户ID Content string `json:&#34;content&#34;` //日记内容 DiaryImg []DiaryImg `gorm:&#34;ForeignKey:diary_id;AssociationForeignKey:id&#34; json:&#34;diary_img&#34;`]]></description>
-</item>
-<item>
-    <title>Vue3</title>
-    <link>http://example.org/posts/vue3.0&#43;typescript%E4%BD%93%E9%AA%8C/</link>
-    <pubDate>Sun, 04 Oct 2020 00:00:00 &#43;0000</pubDate>
-    <author>Alen</author>
-    <guid>http://example.org/posts/vue3.0&#43;typescript%E4%BD%93%E9%AA%8C/</guid>
-    <description><![CDATA[Vue3.0 可以完全支持Vue2.0, 升级以后不需要更改关于Vue的代码 vue3.0创建项目 -- 使用vite npm init vite-app 你的项目名 cd 项目名 npm run dev 当然也可以使用]]></description>
 </item>
 </channel>
 </rss>

@@ -8,8 +8,8 @@
 <meta property="og:description" content="题目 给定一个只包括 &#39;(&#39;，&#39;)&#39;，&#39;{&#39;，&#39;}&#39;，&#39;[&#39;，&#39;]&#39; 的字符串 s ，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/posts/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" /><meta property="og:image" content="https://static.alenhy.com/alen_avatar.jpeg"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-08-11T23:55:25+08:00" />
-<meta property="article:modified_time" content="2021-08-11T23:55:25+08:00" /><meta property="og:site_name" content="Alen" />
+<meta property="article:published_time" content="2021-08-11T23:55:25&#43;08:00" />
+<meta property="article:modified_time" content="2021-08-11T23:55:25&#43;08:00" /><meta property="og:site_name" content="Alen" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://static.alenhy.com/alen_avatar.jpeg"/>
@@ -17,7 +17,7 @@
 <meta name="twitter:title" content="有效的括号"/>
 <meta name="twitter:description" content="题目 给定一个只包括 &#39;(&#39;，&#39;)&#39;，&#39;{&#39;，&#39;}&#39;，&#39;[&#39;，&#39;]&#39; 的字符串 s ，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括"/>
 <meta name="application-name" content="Alen">
-<meta name="apple-mobile-web-app-title" content="Alen"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://static.alenhy.com/alen_avatar.jpeg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" /><link rel="prev" href="http://example.org/posts/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="Alen"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://static.alenhy.com/alen_avatar.jpeg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" /><link rel="prev" href="http://example.org/posts/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/" /><link rel="next" href="http://example.org/posts/sql%E4%BC%98%E5%8C%96/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -131,50 +131,50 @@
 </li>
 </ul>
 <p><strong>示例 1：</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">输入：s <span class="o">=</span> <span class="s2">&#34;()&#34;</span>
-</span></span><span class="line"><span class="cl">输出：true
-</span></span></code></pre></div><p><strong>示例 2：</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">输入：s <span class="o">=</span> <span class="s2">&#34;()[]{}&#34;</span>
-</span></span><span class="line"><span class="cl">输出：true
-</span></span></code></pre></div><p><strong>示例 3：</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">输入：s <span class="o">=</span> <span class="s2">&#34;(]&#34;</span>
-</span></span><span class="line"><span class="cl">输出：false
-</span></span></code></pre></div><p><strong>示例 4：</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">输入：s <span class="o">=</span> <span class="s2">&#34;([)]&#34;</span>
-</span></span><span class="line"><span class="cl">输出：false
-</span></span></code></pre></div><p><strong>示例 5：</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">输入：s <span class="o">=</span> <span class="s2">&#34;{[]}&#34;</span>
-</span></span><span class="line"><span class="cl">输出：true
-</span></span></code></pre></div><hr>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">输入：s <span class="o">=</span> <span class="s2">&#34;()&#34;</span>
+输出：true
+</code></pre></div><p><strong>示例 2：</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">输入：s <span class="o">=</span> <span class="s2">&#34;()[]{}&#34;</span>
+输出：true
+</code></pre></div><p><strong>示例 3：</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">输入：s <span class="o">=</span> <span class="s2">&#34;(]&#34;</span>
+输出：false
+</code></pre></div><p><strong>示例 4：</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">输入：s <span class="o">=</span> <span class="s2">&#34;([)]&#34;</span>
+输出：false
+</code></pre></div><p><strong>示例 5：</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">输入：s <span class="o">=</span> <span class="s2">&#34;{[]}&#34;</span>
+输出：true
+</code></pre></div><hr>
 <h3 id="解题思路">解题思路</h3>
 <blockquote>
 <p>实现思路：例如可以给定一个栈，然后遍历str，如果发现有左括号就把右括号push进栈里面，然后出栈与当前元素对比，如果不想等：则return false，最后判断栈是否为空，如果栈已空，则证明全部已经对比完成，return true。</p>
 </blockquote>
 <h3 id="实现代码">实现代码</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 括号储存可以使用ES6提供的Map方法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">isValid</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 此处写法类似于 maps.set(key,value)....
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">maps</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">([</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="s1">&#39;(&#39;</span><span class="p">,</span><span class="s1">&#39;)&#39;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="s1">&#39;{&#39;</span><span class="p">,</span><span class="s1">&#39;}&#39;</span><span class="p">],</span>		
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="s1">&#39;[&#39;</span><span class="p">,</span><span class="s1">&#39;]&#39;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">    <span class="p">]),</span>
-</span></span><span class="line"><span class="cl">     <span class="nx">stack</span> <span class="o">=</span> <span class="p">[];</span>
-</span></span><span class="line"><span class="cl">  	 <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">       	<span class="k">if</span><span class="p">(</span><span class="nx">maps</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">s</span><span class="p">[</span><span class="nx">i</span><span class="p">])){</span>
-</span></span><span class="line"><span class="cl">           <span class="c1">// 把右括号压入栈中
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>           <span class="nx">stack</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">maps</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">s</span><span class="p">[</span><span class="nx">i</span><span class="p">]))</span> 
-</span></span><span class="line"><span class="cl">        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">           <span class="c1">// 出栈比较
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>           <span class="k">if</span><span class="p">(</span><span class="nx">stack</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="o">!==</span> <span class="nx">s</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span> 	
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">     <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  	  <span class="k">if</span><span class="p">(</span><span class="nx">stack</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>		
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">
+<span class="c1">// 括号储存可以使用ES6提供的Map方法
+</span><span class="c1"></span>
+<span class="kd">var</span> <span class="nx">isValid</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 此处写法类似于 maps.set(key,value)....
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">maps</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">([</span>
+      <span class="p">[</span><span class="s1">&#39;(&#39;</span><span class="p">,</span><span class="s1">&#39;)&#39;</span><span class="p">],</span>
+      <span class="p">[</span><span class="s1">&#39;{&#39;</span><span class="p">,</span><span class="s1">&#39;}&#39;</span><span class="p">],</span>		
+      <span class="p">[</span><span class="s1">&#39;[&#39;</span><span class="p">,</span><span class="s1">&#39;]&#39;</span><span class="p">],</span>
+    <span class="p">]),</span>
+     <span class="nx">stack</span> <span class="o">=</span> <span class="p">[];</span>
+  	 <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+       	<span class="k">if</span><span class="p">(</span><span class="nx">maps</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">s</span><span class="p">[</span><span class="nx">i</span><span class="p">])){</span>
+           <span class="c1">// 把右括号压入栈中
+</span><span class="c1"></span>           <span class="nx">stack</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">maps</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">s</span><span class="p">[</span><span class="nx">i</span><span class="p">]))</span> 
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+           <span class="c1">// 出栈比较
+</span><span class="c1"></span>           <span class="k">if</span><span class="p">(</span><span class="nx">stack</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="o">!==</span> <span class="nx">s</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span> 	
+        <span class="p">}</span>
+     <span class="p">}</span>
+  	  <span class="k">if</span><span class="p">(</span><span class="nx">stack</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>		
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -195,11 +195,12 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/" class="prev" rel="prev" title="斐波那契数列"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>斐波那契数列</a></div>
+    <div class="post-nav"><a href="/posts/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/" class="prev" rel="prev" title="斐波那契数列"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>斐波那契数列</a>
+            <a href="/posts/sql%E4%BC%98%E5%8C%96/" class="next" rel="next" title="Sql优化">Sql优化<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Alen学无止境</div><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.99.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Alen学无止境</div><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.83.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Alen</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
                     <span class="icp"><a href="https://beian.miit.gov.cn/shouye.html" target="_blank">桂ICP备2022006375号-1</a></span></div>
         </div>

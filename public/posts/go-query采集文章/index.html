@@ -8,8 +8,8 @@
 <meta property="og:description" content="相信很多小伙伴对爬虫有着很大的兴趣,我们今天来说下go语言的爬虫利器goquery，语法有jquery类似，我有一篇使用php-QueryL" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/posts/go-query%E9%87%87%E9%9B%86%E6%96%87%E7%AB%A0/" /><meta property="og:image" content="https://static.alenhy.com/alen_avatar.jpeg"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-08-04T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-08-04T00:00:00+00:00" /><meta property="og:site_name" content="Alen" />
+<meta property="article:published_time" content="2020-08-04T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2020-08-04T00:00:00&#43;00:00" /><meta property="og:site_name" content="Alen" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://static.alenhy.com/alen_avatar.jpeg"/>
@@ -125,100 +125,104 @@
 </blockquote>
 <p>本文前部分参考 飞雪无痕 的 《golang goquery selector(选择器) 示例大全》</p>
 <h2 id="安装">安装</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">go</span> <span class="nx">get</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">PuerkitoBio</span><span class="o">/</span><span class="nx">goquery</span>
-</span></span></code></pre></div><h4 id="基于html-element-元素的选择器">基于HTML Element 元素的选择器</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">html</span> <span class="o">:=</span> <span class="s">`&lt;body&gt;
-</span></span></span><span class="line"><span class="cl"><span class="s">				&lt;div&gt;这是一个div里面的内容&lt;/div&gt;
-</span></span></span><span class="line"><span class="cl"><span class="s">				&lt;div&gt;这是一个div2里面的内容&lt;/div&gt;
-</span></span></span><span class="line"><span class="cl"><span class="s">				&lt;span&gt;这是一个span里面的内容&lt;/span&gt;
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">			&lt;/body&gt;
-</span></span></span><span class="line"><span class="cl"><span class="s">			`</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">dom</span><span class="p">,</span><span class="nx">err</span><span class="o">:=</span><span class="nx">goquery</span><span class="p">.</span><span class="nf">NewDocumentFromReader</span><span class="p">(</span><span class="nx">strings</span><span class="p">.</span><span class="nf">NewReader</span><span class="p">(</span><span class="nx">html</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span><span class="o">!=</span><span class="kc">nil</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalln</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">dom</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">&#34;div&#34;</span><span class="p">).</span><span class="nf">Each</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">selection</span> <span class="o">*</span><span class="nx">goquery</span><span class="p">.</span><span class="nx">Selection</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">selection</span><span class="p">.</span><span class="nf">Text</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">	<span class="p">})</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>以上示例，可以把<code>div</code>元素筛选出来，而<code>body</code>,<code>span</code>并不会被筛选</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">go</span> <span class="nx">get</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">PuerkitoBio</span><span class="o">/</span><span class="nx">goquery</span>
+</code></pre></div><h4 id="基于html-element-元素的选择器">基于HTML Element 元素的选择器</h4>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">html</span> <span class="o">:=</span> <span class="s">`&lt;body&gt;
+</span><span class="s">				&lt;div&gt;这是一个div里面的内容&lt;/div&gt;
+</span><span class="s">				&lt;div&gt;这是一个div2里面的内容&lt;/div&gt;
+</span><span class="s">				&lt;span&gt;这是一个span里面的内容&lt;/span&gt;
+</span><span class="s">
+</span><span class="s">			&lt;/body&gt;
+</span><span class="s">			`</span>
+	<span class="nx">dom</span><span class="p">,</span><span class="nx">err</span><span class="o">:=</span><span class="nx">goquery</span><span class="p">.</span><span class="nf">NewDocumentFromReader</span><span class="p">(</span><span class="nx">strings</span><span class="p">.</span><span class="nf">NewReader</span><span class="p">(</span><span class="nx">html</span><span class="p">))</span>
+	<span class="k">if</span> <span class="nx">err</span><span class="o">!=</span><span class="kc">nil</span><span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalln</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">dom</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">&#34;div&#34;</span><span class="p">).</span><span class="nf">Each</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">selection</span> <span class="o">*</span><span class="nx">goquery</span><span class="p">.</span><span class="nx">Selection</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">selection</span><span class="p">.</span><span class="nf">Text</span><span class="p">())</span>
+	<span class="p">})</span>
+<span class="p">}</span>
+
+</code></pre></div><p>以上示例，可以把<code>div</code>元素筛选出来，而<code>body</code>,<code>span</code>并不会被筛选</p>
 <hr>
 <h4 id="id-选择器">ID 选择器</h4>
 <p>这个是使用频次最多的，类似于上面的例子，有两个<code>div</code>元素，其实我们只需要其中的一个，那么我们只需要给这个标记一个唯一的<code>id</code>即可，这样我们就可以使用<code>id</code>选择器，精确定位了。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">html</span> <span class="o">:=</span> <span class="s">`&lt;body&gt;
-</span></span></span><span class="line"><span class="cl"><span class="s">				&lt;div&gt;这是一个div里面的内容&lt;/div&gt;
-</span></span></span><span class="line"><span class="cl"><span class="s">				&lt;div&gt;这是一个div2里面的内容&lt;/div&gt;
-</span></span></span><span class="line"><span class="cl"><span class="s">				&lt;span&gt;这是一个span里面的内容&lt;/span&gt;
-</span></span></span><span class="line"><span class="cl"><span class="s">			&lt;/body&gt;	`</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">dom</span><span class="p">,</span><span class="nx">err</span><span class="o">:=</span><span class="nx">goquery</span><span class="p">.</span><span class="nf">NewDocumentFromReader</span><span class="p">(</span><span class="nx">strings</span><span class="p">.</span><span class="nf">NewReader</span><span class="p">(</span><span class="nx">html</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span><span class="o">!=</span><span class="kc">nil</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalln</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">dom</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">&#34;#div1&#34;</span><span class="p">).</span><span class="nf">Each</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">selection</span> <span class="o">*</span><span class="nx">goquery</span><span class="p">.</span><span class="nx">Selection</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">selection</span><span class="p">.</span><span class="nf">Text</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">	<span class="p">})</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><hr>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">html</span> <span class="o">:=</span> <span class="s">`&lt;body&gt;
+</span><span class="s">				&lt;div&gt;这是一个div里面的内容&lt;/div&gt;
+</span><span class="s">				&lt;div&gt;这是一个div2里面的内容&lt;/div&gt;
+</span><span class="s">				&lt;span&gt;这是一个span里面的内容&lt;/span&gt;
+</span><span class="s">			&lt;/body&gt;	`</span>
+	<span class="nx">dom</span><span class="p">,</span><span class="nx">err</span><span class="o">:=</span><span class="nx">goquery</span><span class="p">.</span><span class="nf">NewDocumentFromReader</span><span class="p">(</span><span class="nx">strings</span><span class="p">.</span><span class="nf">NewReader</span><span class="p">(</span><span class="nx">html</span><span class="p">))</span>
+	<span class="k">if</span> <span class="nx">err</span><span class="o">!=</span><span class="kc">nil</span><span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalln</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">dom</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">&#34;#div1&#34;</span><span class="p">).</span><span class="nf">Each</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">selection</span> <span class="o">*</span><span class="nx">goquery</span><span class="p">.</span><span class="nx">Selection</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">selection</span><span class="p">.</span><span class="nf">Text</span><span class="p">())</span>
+	<span class="p">})</span>
+<span class="p">}</span>
+
+</code></pre></div><hr>
 <h2 id="实战">实战</h2>
 <p>下面我们已实战为例，爬取微信公众号文章的内容，直接上代码</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">result</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">urls</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">logger</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">dom</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">goquery</span><span class="p">.</span><span class="nf">NewDocumentFromReader</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Article</span> <span class="o">:=</span> <span class="nx">Article</span><span class="p">{}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">dom</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">&#34;#article&#34;</span><span class="p">).</span><span class="nf">Each</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">s</span> <span class="o">*</span><span class="nx">goquery</span><span class="p">.</span><span class="nx">Selection</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">Article</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">&#34;.article-title&#34;</span><span class="p">).</span><span class="nf">Text</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">Article</span><span class="p">.</span><span class="nx">Content</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">&#34;.article-content&#34;</span><span class="p">).</span><span class="nf">Html</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="p">})</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">dom</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">&#34;head&#34;</span><span class="p">).</span><span class="nf">Each</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">s</span> <span class="o">*</span><span class="nx">goquery</span><span class="p">.</span><span class="nx">Selection</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">Article</span><span class="p">.</span><span class="nx">Description</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">`meta[name=&#34;description&#34;]`</span><span class="p">).</span><span class="nf">Attr</span><span class="p">(</span><span class="s">&#34;content&#34;</span><span class="p">)</span> <span class="c1">//文章描述
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">})</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">doc</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">goquery</span><span class="p">.</span><span class="nf">NewDocumentFromReader</span><span class="p">(</span><span class="nx">strings</span><span class="p">.</span><span class="nf">NewReader</span><span class="p">(</span><span class="nx">Article</span><span class="p">.</span><span class="nx">Content</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">doc</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">&#34;img&#34;</span><span class="p">).</span><span class="nf">Each</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">s</span> <span class="o">*</span><span class="nx">goquery</span><span class="p">.</span><span class="nx">Selection</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">Src</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Attr</span><span class="p">(</span><span class="s">&#34;src&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">//qiniuFetch 处理微信图片防盗链
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">imageUrl</span> <span class="o">:=</span> <span class="nf">qiniuFetch</span><span class="p">(</span><span class="nx">Src</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">imageUrl</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">			<span class="nx">s</span><span class="p">.</span><span class="nf">SetAttr</span><span class="p">(</span><span class="s">&#34;src&#34;</span><span class="p">,</span> <span class="nx">imageUrl</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="p">})</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">content</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">doc</span><span class="p">.</span><span class="nf">Html</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">content</span> <span class="p">=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Replace</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span> <span class="s">&#34;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">content</span> <span class="p">=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Replace</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span> <span class="s">&#34;&lt;/body&gt;&lt;/html&gt;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">qiniuFetch</span><span class="p">(</span><span class="nx">imgSrc</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">imageUrl</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">AccessKey</span> <span class="p">=</span> <span class="s">&#34;******&#34;</span>  <span class="c1">//ACCESS_KEY
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">SecretKey</span> <span class="p">=</span> <span class="s">&#34;******&#34;</span>  <span class="c1">//SECRET_KEY
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">domain</span>    <span class="p">=</span> <span class="s">&#34;******&#34;</span>  <span class="c1">//七牛域名
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">bucket</span>    <span class="p">=</span> <span class="s">&#34;******&#34;</span>  <span class="c1">//存储空间名称
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">mac</span> <span class="o">:=</span> <span class="nx">qbox</span><span class="p">.</span><span class="nf">NewMac</span><span class="p">(</span><span class="nx">AccessKey</span><span class="p">,</span> <span class="nx">SecretKey</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">cfg</span> <span class="o">:=</span> <span class="nx">storage</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">Zone</span><span class="p">:</span>          <span class="o">&amp;</span><span class="nx">storage</span><span class="p">.</span><span class="nx">ZoneHuanan</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">UseHTTPS</span><span class="p">:</span>      <span class="kc">false</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">UseCdnDomains</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">bucketManager</span> <span class="o">:=</span> <span class="nx">storage</span><span class="p">.</span><span class="nf">NewBucketManager</span><span class="p">(</span><span class="nx">mac</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">cfg</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">fetchRet</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">bucketManager</span><span class="p">.</span><span class="nf">FetchWithoutKey</span><span class="p">(</span><span class="nx">imgSrc</span><span class="p">,</span> <span class="nx">bucket</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">logger</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;fetch error&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="s">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">domain</span> <span class="o">+</span> <span class="nx">fetchRet</span><span class="p">.</span><span class="nx">Key</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>剩余部分可自行根据需求存入数据库中</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">result</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">urls</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">logger</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">dom</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">goquery</span><span class="p">.</span><span class="nf">NewDocumentFromReader</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+	<span class="nx">Article</span> <span class="o">:=</span> <span class="nx">Article</span><span class="p">{}</span>
+
+	<span class="nx">dom</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">&#34;#article&#34;</span><span class="p">).</span><span class="nf">Each</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">s</span> <span class="o">*</span><span class="nx">goquery</span><span class="p">.</span><span class="nx">Selection</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">Article</span><span class="p">.</span><span class="nx">Title</span> <span class="p">=</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">&#34;.article-title&#34;</span><span class="p">).</span><span class="nf">Text</span><span class="p">()</span>
+		<span class="nx">Article</span><span class="p">.</span><span class="nx">Content</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">&#34;.article-content&#34;</span><span class="p">).</span><span class="nf">Html</span><span class="p">()</span>
+	<span class="p">})</span>
+
+	<span class="nx">dom</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">&#34;head&#34;</span><span class="p">).</span><span class="nf">Each</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">s</span> <span class="o">*</span><span class="nx">goquery</span><span class="p">.</span><span class="nx">Selection</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">Article</span><span class="p">.</span><span class="nx">Description</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">`meta[name=&#34;description&#34;]`</span><span class="p">).</span><span class="nf">Attr</span><span class="p">(</span><span class="s">&#34;content&#34;</span><span class="p">)</span> <span class="c1">//文章描述
+</span><span class="c1"></span>	<span class="p">})</span>
+
+	<span class="nx">doc</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">goquery</span><span class="p">.</span><span class="nf">NewDocumentFromReader</span><span class="p">(</span><span class="nx">strings</span><span class="p">.</span><span class="nf">NewReader</span><span class="p">(</span><span class="nx">Article</span><span class="p">.</span><span class="nx">Content</span><span class="p">))</span>
+	<span class="nx">doc</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">&#34;img&#34;</span><span class="p">).</span><span class="nf">Each</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">s</span> <span class="o">*</span><span class="nx">goquery</span><span class="p">.</span><span class="nx">Selection</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">Src</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Attr</span><span class="p">(</span><span class="s">&#34;src&#34;</span><span class="p">)</span>
+        <span class="c1">//qiniuFetch 处理微信图片防盗链
+</span><span class="c1"></span>		<span class="nx">imageUrl</span> <span class="o">:=</span> <span class="nf">qiniuFetch</span><span class="p">(</span><span class="nx">Src</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nx">imageUrl</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+			<span class="nx">s</span><span class="p">.</span><span class="nf">SetAttr</span><span class="p">(</span><span class="s">&#34;src&#34;</span><span class="p">,</span> <span class="nx">imageUrl</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">})</span>
+
+	<span class="nx">content</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">doc</span><span class="p">.</span><span class="nf">Html</span><span class="p">()</span>
+	<span class="nx">content</span> <span class="p">=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Replace</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span> <span class="s">&#34;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+	<span class="nx">content</span> <span class="p">=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Replace</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span> <span class="s">&#34;&lt;/body&gt;&lt;/html&gt;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">qiniuFetch</span><span class="p">(</span><span class="nx">imgSrc</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">imageUrl</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="p">(</span>
+		<span class="nx">AccessKey</span> <span class="p">=</span> <span class="s">&#34;******&#34;</span>  <span class="c1">//ACCESS_KEY
+</span><span class="c1"></span>		<span class="nx">SecretKey</span> <span class="p">=</span> <span class="s">&#34;******&#34;</span>  <span class="c1">//SECRET_KEY
+</span><span class="c1"></span>		<span class="nx">domain</span>    <span class="p">=</span> <span class="s">&#34;******&#34;</span>  <span class="c1">//七牛域名
+</span><span class="c1"></span>		<span class="nx">bucket</span>    <span class="p">=</span> <span class="s">&#34;******&#34;</span>  <span class="c1">//存储空间名称
+</span><span class="c1"></span>	<span class="p">)</span>
+
+	<span class="nx">mac</span> <span class="o">:=</span> <span class="nx">qbox</span><span class="p">.</span><span class="nf">NewMac</span><span class="p">(</span><span class="nx">AccessKey</span><span class="p">,</span> <span class="nx">SecretKey</span><span class="p">)</span>
+	<span class="nx">cfg</span> <span class="o">:=</span> <span class="nx">storage</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+		<span class="nx">Zone</span><span class="p">:</span>          <span class="o">&amp;</span><span class="nx">storage</span><span class="p">.</span><span class="nx">ZoneHuanan</span><span class="p">,</span>
+		<span class="nx">UseHTTPS</span><span class="p">:</span>      <span class="kc">false</span><span class="p">,</span>
+		<span class="nx">UseCdnDomains</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+	<span class="p">}</span>
+
+	<span class="nx">bucketManager</span> <span class="o">:=</span> <span class="nx">storage</span><span class="p">.</span><span class="nf">NewBucketManager</span><span class="p">(</span><span class="nx">mac</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">cfg</span><span class="p">)</span>
+	<span class="nx">fetchRet</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">bucketManager</span><span class="p">.</span><span class="nf">FetchWithoutKey</span><span class="p">(</span><span class="nx">imgSrc</span><span class="p">,</span> <span class="nx">bucket</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">logger</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;fetch error&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+		<span class="k">return</span> <span class="s">&#34;&#34;</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">domain</span> <span class="o">+</span> <span class="nx">fetchRet</span><span class="p">.</span><span class="nx">Key</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div><p>剩余部分可自行根据需求存入数据库中</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -245,7 +249,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Alen学无止境</div><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.99.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Alen学无止境</div><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.83.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Alen</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
                     <span class="icp"><a href="https://beian.miit.gov.cn/shouye.html" target="_blank">桂ICP备2022006375号-1</a></span></div>
         </div>
