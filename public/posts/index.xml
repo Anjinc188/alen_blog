@@ -6,6 +6,22 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>anjinc188@gmail.com (Alen)</managingEditor>
             <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Sun, 08 May 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
     <title>vue实现PayPal</title>
+    <link>http://example.org/posts/telegram%E6%8E%88%E6%9D%83%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91/</link>
+    <pubDate>Sun, 08 May 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/telegram%E6%8E%88%E6%9D%83%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91/</guid>
+    <description><![CDATA[PayPal我使用的是官方封装继承的集成 PayPal官网有一个内部封装得流程，用户点击按钮触发创建订单事件，然后监听用户成功的回调，把订单I]]></description>
+</item>
+<item>
+    <title>vue实现PayPal</title>
+    <link>http://example.org/posts/twitter%E6%8E%88%E6%9D%83/</link>
+    <pubDate>Sun, 08 May 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/twitter%E6%8E%88%E6%9D%83/</guid>
+    <description><![CDATA[PayPal我使用的是官方封装继承的集成 PayPal官网有一个内部封装得流程，用户点击按钮触发创建订单事件，然后监听用户成功的回调，把订单I]]></description>
+</item>
+<item>
+    <title>vue实现PayPal</title>
     <link>http://example.org/posts/vue%E5%AE%9E%E7%8E%B0paypal%E6%94%AF%E4%BB%98/</link>
     <pubDate>Sun, 08 May 2022 00:00:00 &#43;0000</pubDate>
     <author>Alen</author>
@@ -37,6 +53,14 @@
     <description><![CDATA[数组理论基础 数组是非常基础的数据结构，在面试中，考察数组的题目一般在思维上都不难，主要是考察对代码的掌控能力 也就是说，想法很简单，但实现起来]]></description>
 </item>
 <item>
+    <title>数据结构算法 数组学习篇</title>
+    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
+    <pubDate>Mon, 04 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87/</guid>
+    <description><![CDATA[数组理论基础 数组是非常基础的数据结构，在面试中，考察数组的题目一般在思维上都不难，主要是考察对代码的掌控能力 也就是说，想法很简单，但实现起来]]></description>
+</item>
+<item>
     <title>Sql优化</title>
     <link>http://example.org/posts/sql%E4%BC%98%E5%8C%96/</link>
     <pubDate>Fri, 04 Mar 2022 00:00:00 &#43;0000</pubDate>
@@ -59,30 +83,6 @@
     <author>Alen</author>
     <guid>http://example.org/posts/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/</guid>
     <description><![CDATA[前提 有这么一组数字 1, 1, 2, 3, 5, 8, 13, 21 如果你仔细看～可以发现它的规律 21 = 13 + 8 13 = 8 + 5 8 = 5 + 3 5 = 3 + 2 这是斐波那契数列，第n项 = n-1项 +]]></description>
-</item>
-<item>
-    <title>排序算法学习记录</title>
-    <link>http://example.org/posts/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
-    <pubDate>Wed, 28 Jul 2021 12:40:39 &#43;0800</pubDate>
-    <author>Alen</author>
-    <guid>http://example.org/posts/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
-    <description><![CDATA[1. 冒泡排序 冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他]]></description>
-</item>
-<item>
-    <title>Html语义化标签的理解</title>
-    <link>http://example.org/posts/html%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE%E7%9A%84%E7%90%86%E8%A7%A3/</link>
-    <pubDate>Sat, 03 Jul 2021 14:59:06 &#43;0800</pubDate>
-    <author>Alen</author>
-    <guid>http://example.org/posts/html%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE%E7%9A%84%E7%90%86%E8%A7%A3/</guid>
-    <description><![CDATA[HTML语义化是什么？ 语义化是指根据内容的结构化（内容语义化），选择合适的标签（代码语义化），便于开发者阅读和写出更优雅的代码的同时，让浏览]]></description>
-</item>
-<item>
-    <title>call,apply,bind区别</title>
-    <link>http://example.org/posts/callapplymbind%E5%8C%BA%E5%88%AB/</link>
-    <pubDate>Thu, 01 Jul 2021 23:23:25 &#43;0800</pubDate>
-    <author>Alen</author>
-    <guid>http://example.org/posts/callapplymbind%E5%8C%BA%E5%88%AB/</guid>
-    <description><![CDATA[首先说下前两者的区别。 call 和 apply 都是为了解决改变 this 的指向。作用都是相同的，只是传参的方式不同。 除了第一个参数外，call 可以接收一个参数列表，a]]></description>
 </item>
 </channel>
 </rss>

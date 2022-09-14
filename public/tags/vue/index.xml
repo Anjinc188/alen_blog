@@ -6,6 +6,22 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>anjinc188@gmail.com (Alen)</managingEditor>
             <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Sun, 08 May 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/vue/" rel="self" type="application/rss+xml" /><item>
     <title>vue实现PayPal</title>
+    <link>http://example.org/posts/telegram%E6%8E%88%E6%9D%83%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91/</link>
+    <pubDate>Sun, 08 May 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/telegram%E6%8E%88%E6%9D%83%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91/</guid>
+    <description><![CDATA[PayPal我使用的是官方封装继承的集成 PayPal官网有一个内部封装得流程，用户点击按钮触发创建订单事件，然后监听用户成功的回调，把订单I]]></description>
+</item>
+<item>
+    <title>vue实现PayPal</title>
+    <link>http://example.org/posts/twitter%E6%8E%88%E6%9D%83/</link>
+    <pubDate>Sun, 08 May 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/twitter%E6%8E%88%E6%9D%83/</guid>
+    <description><![CDATA[PayPal我使用的是官方封装继承的集成 PayPal官网有一个内部封装得流程，用户点击按钮触发创建订单事件，然后监听用户成功的回调，把订单I]]></description>
+</item>
+<item>
+    <title>vue实现PayPal</title>
     <link>http://example.org/posts/vue%E5%AE%9E%E7%8E%B0paypal%E6%94%AF%E4%BB%98/</link>
     <pubDate>Sun, 08 May 2022 00:00:00 &#43;0000</pubDate>
     <author>Alen</author>
