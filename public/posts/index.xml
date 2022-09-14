@@ -4,7 +4,15 @@
         <link>http://example.org/posts/</link>
         <description>All Posts | Alen</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>anjinc188@gmail.com (Alen)</managingEditor>
-            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Sun, 08 May 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Sat, 04 Jun 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>数据结构算法 链表学习篇</title>
+    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
+    <pubDate>Sat, 04 Jun 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87/</guid>
+    <description><![CDATA[移除链表元素 题目链接 解题思路：使用虚拟头节点遍历，找到对应的val值，把所需要删除的值指向Next.Next即可。 代码示例： /** * Definition for singly-linked list. * type]]></description>
+</item>
+<item>
     <title>vue实现PayPal</title>
     <link>http://example.org/posts/vue%E5%AE%9E%E7%8E%B0paypal%E6%94%AF%E4%BB%98/</link>
     <pubDate>Sun, 08 May 2022 00:00:00 &#43;0000</pubDate>
@@ -34,14 +42,6 @@
     <pubDate>Mon, 04 Apr 2022 00:00:00 &#43;0000</pubDate>
     <author>Alen</author>
     <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AF%87/</guid>
-    <description><![CDATA[数组理论基础 数组是非常基础的数据结构，在面试中，考察数组的题目一般在思维上都不难，主要是考察对代码的掌控能力 也就是说，想法很简单，但实现起来]]></description>
-</item>
-<item>
-    <title>数据结构算法 数组学习篇</title>
-    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
-    <pubDate>Mon, 04 Apr 2022 00:00:00 &#43;0000</pubDate>
-    <author>Alen</author>
-    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87/</guid>
     <description><![CDATA[数组理论基础 数组是非常基础的数据结构，在面试中，考察数组的题目一般在思维上都不难，主要是考察对代码的掌控能力 也就是说，想法很简单，但实现起来]]></description>
 </item>
 <item>
