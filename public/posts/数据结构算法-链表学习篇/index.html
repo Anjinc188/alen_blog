@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87\/"
-        },"genre": "posts","keywords": "数据结构算法, 链表","wordcount":  126 ,
+        },"genre": "posts","keywords": "数据结构算法, 链表","wordcount":  325 ,
         "url": "http:\/\/example.org\/posts\/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87\/","datePublished": "2022-06-06T00:00:00+00:00","dateModified": "2022-06-06T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -103,7 +103,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">数据结构算法 链表学习篇</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Alen</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>数据结构算法</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-06-06">2022-06-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;126 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-06-06">2022-06-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;325 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -115,6 +115,7 @@
     <li>
       <ul>
         <li><a href="#移除链表元素">移除链表元素</a></li>
+        <li><a href="#反转链表">反转链表</a></li>
       </ul>
     </li>
   </ul>
@@ -150,6 +151,37 @@
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="nx">dummyHead</span><span class="p">.</span><span class="nx">Next</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="反转链表">反转链表</h3>
+<ul>
+<li>
+<p><a href="https://leetcode.cn/problems/reverse-linked-list/" target="_blank" rel="noopener noreffer ">题目链接</a></p>
+</li>
+<li>
+<p>解题思路：其实只需要改变链表的next指针的指向，直接将链表反转 ，而不用重新定义一个新的链表。在遍历链表时，将当前节点的next 指针改为指向前一个节点。由于节点没有引用其前一个节点，因此必须事先存储其前一个节点。在更改引用之前，还需要存储后一个节点。最后返回新的头引用。</p>
+</li>
+<li>
+<p>代码示例：</p>
+</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-Go" data-lang="Go"><span class="cm">/**
+</span><span class="cm"> * Definition for singly-linked list.
+</span><span class="cm"> * type ListNode struct {
+</span><span class="cm"> *     Val int
+</span><span class="cm"> *     Next *ListNode
+</span><span class="cm"> * }
+</span><span class="cm"> */</span>
+<span class="kd">func</span> <span class="nf">reverseList</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+   <span class="kd">var</span> <span class="nx">prev</span> <span class="o">*</span><span class="nx">ListNode</span>
+   <span class="nx">curr</span> <span class="o">:=</span> <span class="nx">head</span>
+
+    <span class="k">for</span> <span class="nx">curr</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">{</span>
+      <span class="nx">next</span> <span class="o">:=</span> <span class="nx">curr</span><span class="p">.</span><span class="nx">Next</span>
+      <span class="nx">curr</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">prev</span>
+      <span class="nx">prev</span> <span class="p">=</span> <span class="nx">curr</span>
+      <span class="nx">curr</span> <span class="p">=</span> <span class="nx">next</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">prev</span>
 <span class="p">}</span>
 </code></pre></div><p>持续学习更新～</p>
 </div><div class="post-footer" id="post-footer">
