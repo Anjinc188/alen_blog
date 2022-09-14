@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87\/"
-        },"genre": "posts","keywords": "数据结构算法, 链表","wordcount":  443 ,
+        },"genre": "posts","keywords": "数据结构算法, 链表","wordcount":  651 ,
         "url": "http:\/\/example.org\/posts\/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87\/","datePublished": "2022-06-06T00:00:00+00:00","dateModified": "2022-06-06T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -103,8 +103,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">数据结构算法 链表学习篇</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Alen</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>数据结构算法</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-06-06">2022-06-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;443 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-06-06">2022-06-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;651 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -209,7 +209,33 @@
     <span class="p">}</span>
     <span class="k">return</span> <span class="kc">false</span>
 <span class="p">}</span>
-</code></pre></div><p>持续学习更新～</p>
+</code></pre></div><ul>
+<li>还有一种双指针的解法，设置一个快慢指针，如果有环，快慢指针会在环里打圈圈，并且快指针会套慢指针的圈(判断相等)。这个方法比哈希表快，这是因为：本解法不需要为哈希表分配内存，不需要查找哈希表。注意：需要先移动，再判断是否相等，否则可能会把初始情况误判为存在有环。</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-Go" data-lang="Go"><span class="cm">/**
+</span><span class="cm"> * Definition for singly-linked list.
+</span><span class="cm"> * type ListNode struct {
+</span><span class="cm"> *     Val int
+</span><span class="cm"> *     Next *ListNode
+</span><span class="cm"> * }
+</span><span class="cm"> */</span>
+<span class="kd">func</span> <span class="nf">hasCycle</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="nx">slow</span> <span class="o">:=</span> <span class="nx">head</span>         <span class="c1">// 快指针
+</span><span class="c1"></span>    <span class="nx">fast</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>    <span class="c1">// 慢指针
+</span><span class="c1"></span>
+    <span class="c1">// 循环终止条件
+</span><span class="c1"></span>    <span class="k">for</span> <span class="nx">fast</span> <span class="o">!=</span> <span class="nx">slow</span><span class="p">{</span>
+        <span class="k">if</span> <span class="nx">fast</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span><span class="kc">nil</span><span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span>
+        <span class="p">}</span>
+        <span class="c1">// 快慢指针往前跑
+</span><span class="c1"></span>        <span class="nx">slow</span> <span class="p">=</span> <span class="nx">slow</span><span class="p">.</span><span class="nx">Next</span>
+        <span class="nx">fast</span> <span class="p">=</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div><hr>
+<p>持续学习更新～</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
