@@ -4,7 +4,23 @@
         <link>http://example.org/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/</link>
         <description>数据结构算法 - Category - Alen</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>anjinc188@gmail.com (Alen)</managingEditor>
-            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Mon, 06 Jun 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Mon, 20 Jun 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+    <title>数据结构算法 二叉树学习篇</title>
+    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
+    <pubDate>Mon, 20 Jun 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AF%87/</guid>
+    <description><![CDATA[前序遍历 题目链接 解题思路：前序遍历：中左右、使用递归法遍历 定义 (root) 表示当前遍历到 root 节点的答案。按照定义，我们只要递归调用 (root-&gt;left) 来遍历 root 节点的左子树]]></description>
+</item>
+<item>
+    <title>数据结构算法 二叉树理论篇&#34;</title>
+    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA/</link>
+    <pubDate>Wed, 15 Jun 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA/</guid>
+    <description><![CDATA[文章出自代码随想录，很良心的一个网站平台。 二叉树的种类 满二叉树 满二叉树：如果一棵二叉树只有度为0的结点和度为2的结点，并且度为0的结点在同一]]></description>
+</item>
+<item>
     <title>数据结构算法 链表学习篇</title>
     <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
     <pubDate>Mon, 06 Jun 2022 00:00:00 &#43;0000</pubDate>
@@ -19,22 +35,6 @@
     <author>Alen</author>
     <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%A6%E4%B9%A0%E7%AF%87/</guid>
     <description><![CDATA[题目练习 反转字符串 题目链接 解题思路：使用双指针left right 互换位置，当left&lt;=right时候循环条件结束 代码示例： // 反转字符串 func reverseString(s []byte)]]></description>
-</item>
-<item>
-    <title>数据结构算法 二叉树学习篇</title>
-    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
-    <pubDate>Tue, 05 Apr 2022 00:00:00 &#43;0000</pubDate>
-    <author>Alen</author>
-    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AF%87/</guid>
-    <description><![CDATA[前序遍历 题目链接 解题思路：前序遍历：中左右、使用递归法遍历 定义 (root) 表示当前遍历到 root 节点的答案。按照定义，我们只要递归调用 (root-&gt;left) 来遍历 root 节点的左子树]]></description>
-</item>
-<item>
-    <title>数据结构算法 二叉树理论篇&#34;</title>
-    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA/</link>
-    <pubDate>Tue, 05 Apr 2022 00:00:00 &#43;0000</pubDate>
-    <author>Alen</author>
-    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA/</guid>
-    <description><![CDATA[文章出自代码随想录，很良心的一个网站平台。 二叉树的种类 满二叉树 满二叉树：如果一棵二叉树只有度为0的结点和度为2的结点，并且度为0的结点在同一]]></description>
 </item>
 <item>
     <title>数据结构算法 哈希表学习篇</title>
