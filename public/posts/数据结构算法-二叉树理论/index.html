@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>数据结构算法 二叉树理论篇&#34; - Alen</title><meta name="Description" content="Make it a better place"><meta property="og:title" content="数据结构算法 二叉树理论篇&#34;" />
+<meta property="og:description" content="文章出自代码随想录，很良心的一个网站平台。 二叉树的种类 满二叉树 满二叉树：如果一棵二叉树只有度为0的结点和度为2的结点，并且度为0的结点在同一" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA/" /><meta property="og:image" content="https://static.alenhy.com/alen_avatar.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-05T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-04-05T00:00:00&#43;00:00" /><meta property="og:site_name" content="Alen" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://static.alenhy.com/alen_avatar.jpeg"/>
+
+<meta name="twitter:title" content="数据结构算法 二叉树理论篇&#34;"/>
+<meta name="twitter:description" content="文章出自代码随想录，很良心的一个网站平台。 二叉树的种类 满二叉树 满二叉树：如果一棵二叉树只有度为0的结点和度为2的结点，并且度为0的结点在同一"/>
+<meta name="application-name" content="Alen">
+<meta name="apple-mobile-web-app-title" content="Alen"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://static.alenhy.com/alen_avatar.jpeg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA/" /><link rel="prev" href="http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87/" /><link rel="next" href="http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AF%87/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "数据结构算法 二叉树理论篇\"",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA\/"
+        },"genre": "posts","keywords": "数据结构算法, 二叉树","wordcount":  1772 ,
+        "url": "http:\/\/example.org\/posts\/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA\/","datePublished": "2022-04-05T00:00:00+00:00","dateModified": "2022-04-05T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Alen"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Alen"><span class="header-title-pre">(՞• •՞)</span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="请输入搜索内容～" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Alen"><span class="header-title-pre">(՞• •՞)</span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="请输入搜索内容～" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">数据结构算法 二叉树理论篇"</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Alen</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>数据结构算法</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-04-05">2022-04-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1772 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#二叉树的种类">二叉树的种类</a>
+      <ul>
+        <li><a href="#满二叉树">满二叉树</a></li>
+        <li><a href="#完全二叉树">完全二叉树</a></li>
+        <li><a href="#二叉搜索树">二叉搜索树</a></li>
+        <li><a href="#平衡二叉搜索树">平衡二叉搜索树</a></li>
+      </ul>
+    </li>
+    <li><a href="#二叉树的存储方式">二叉树的存储方式</a></li>
+    <li><a href="#二叉树的遍历方式">二叉树的遍历方式</a></li>
+    <li><a href="#二叉树的定义">二叉树的定义</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p>文章出自<a href="https://www.programmercarl.com/" target="_blank" rel="noopener noreffer ">代码随想录</a>，很良心的一个网站平台。</p>
+</blockquote>
+<h2 id="二叉树的种类">二叉树的种类</h2>
+<h3 id="满二叉树">满二叉树</h3>
+<p>满二叉树：如果一棵二叉树只有度为0的结点和度为2的结点，并且度为0的结点在同一层上，则这棵二叉树为满二叉树。</p>
+<p>如图所示：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=ZWE0NmQ3OGMxZTk0NjEzNDVkZWJiNDE4MjY4ODEwMjdfRzBmVTAyWVVjcnFrSjJmSVpwOHdRbERjZ0tiVHozOElfVG9rZW46Ym94Y25kbHlhRHNIa3JrTlo2VkQ0aG1Id29kXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA"
+        data-srcset="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=ZWE0NmQ3OGMxZTk0NjEzNDVkZWJiNDE4MjY4ODEwMjdfRzBmVTAyWVVjcnFrSjJmSVpwOHdRbERjZ0tiVHozOElfVG9rZW46Ym94Y25kbHlhRHNIa3JrTlo2VkQ0aG1Id29kXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA, https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=ZWE0NmQ3OGMxZTk0NjEzNDVkZWJiNDE4MjY4ODEwMjdfRzBmVTAyWVVjcnFrSjJmSVpwOHdRbERjZ0tiVHozOElfVG9rZW46Ym94Y25kbHlhRHNIa3JrTlo2VkQ0aG1Id29kXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA 1.5x, https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=ZWE0NmQ3OGMxZTk0NjEzNDVkZWJiNDE4MjY4ODEwMjdfRzBmVTAyWVVjcnFrSjJmSVpwOHdRbERjZ0tiVHozOElfVG9rZW46Ym94Y25kbHlhRHNIa3JrTlo2VkQ0aG1Id29kXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA 2x"
+        data-sizes="auto"
+        alt="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=ZWE0NmQ3OGMxZTk0NjEzNDVkZWJiNDE4MjY4ODEwMjdfRzBmVTAyWVVjcnFrSjJmSVpwOHdRbERjZ0tiVHozOElfVG9rZW46Ym94Y25kbHlhRHNIa3JrTlo2VkQ0aG1Id29kXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA"
+        title="img" /></p>
+<p>这棵二叉树为满二叉树，也可以说深度为k，有2^k-1个节点的二叉树。</p>
+<h3 id="完全二叉树">完全二叉树</h3>
+<p>什么是完全二叉树？</p>
+<p>完全二叉树的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。若最底层为第 h 层，则该层包含 1~ 2^(h-1)  个节点。</p>
+<p>大家要自己看完全二叉树的定义，很多同学对完全二叉树其实不是真正的懂了。</p>
+<p>来举一个典型的例子如题：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=N2NjMTk5MzkyM2RmNTA1YjY2Y2ZhZDdlZDliYjIwYzhfd1BkUm1NNmt6Qlp6cGVia2pleWkxR3EzVnJ1RERTOU9fVG9rZW46Ym94Y25VZWNWS3JMN2VieUJCOWEyQjVvMXdkXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA"
+        data-srcset="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=N2NjMTk5MzkyM2RmNTA1YjY2Y2ZhZDdlZDliYjIwYzhfd1BkUm1NNmt6Qlp6cGVia2pleWkxR3EzVnJ1RERTOU9fVG9rZW46Ym94Y25VZWNWS3JMN2VieUJCOWEyQjVvMXdkXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA, https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=N2NjMTk5MzkyM2RmNTA1YjY2Y2ZhZDdlZDliYjIwYzhfd1BkUm1NNmt6Qlp6cGVia2pleWkxR3EzVnJ1RERTOU9fVG9rZW46Ym94Y25VZWNWS3JMN2VieUJCOWEyQjVvMXdkXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA 1.5x, https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=N2NjMTk5MzkyM2RmNTA1YjY2Y2ZhZDdlZDliYjIwYzhfd1BkUm1NNmt6Qlp6cGVia2pleWkxR3EzVnJ1RERTOU9fVG9rZW46Ym94Y25VZWNWS3JMN2VieUJCOWEyQjVvMXdkXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA 2x"
+        data-sizes="auto"
+        alt="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=N2NjMTk5MzkyM2RmNTA1YjY2Y2ZhZDdlZDliYjIwYzhfd1BkUm1NNmt6Qlp6cGVia2pleWkxR3EzVnJ1RERTOU9fVG9rZW46Ym94Y25VZWNWS3JMN2VieUJCOWEyQjVvMXdkXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA"
+        title="img" />刚刚讲过优先级队列其实是一个堆，堆就是一棵完全二叉树，同时保证父子节点的顺序关系。</p>
+<h3 id="二叉搜索树">二叉搜索树</h3>
+<p>前面介绍的树，都没有数值的，而二叉搜索树是有数值的了，二叉搜索树是一个有序树。</p>
+<ul>
+<li>
+<p>若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</p>
+</li>
+<li>
+<p>若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</p>
+</li>
+<li>
+<p>它的左、右子树也分别为二叉排序树</p>
+</li>
+</ul>
+<p>下面这两棵树都是搜索树</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=ZDYwMzYwOTA5NjIwNDVjZTZkNDE1YmUyZWFhNzE1NDJfYnBaQmRGeXZ5SHFkbFBwRnR4aVExNkRTdDREQ2hxdXdfVG9rZW46Ym94Y25GVHk3ZHZtS1hlVVI1UTNoenQ0cUZiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA"
+        data-srcset="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=ZDYwMzYwOTA5NjIwNDVjZTZkNDE1YmUyZWFhNzE1NDJfYnBaQmRGeXZ5SHFkbFBwRnR4aVExNkRTdDREQ2hxdXdfVG9rZW46Ym94Y25GVHk3ZHZtS1hlVVI1UTNoenQ0cUZiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA, https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=ZDYwMzYwOTA5NjIwNDVjZTZkNDE1YmUyZWFhNzE1NDJfYnBaQmRGeXZ5SHFkbFBwRnR4aVExNkRTdDREQ2hxdXdfVG9rZW46Ym94Y25GVHk3ZHZtS1hlVVI1UTNoenQ0cUZiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA 1.5x, https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=ZDYwMzYwOTA5NjIwNDVjZTZkNDE1YmUyZWFhNzE1NDJfYnBaQmRGeXZ5SHFkbFBwRnR4aVExNkRTdDREQ2hxdXdfVG9rZW46Ym94Y25GVHk3ZHZtS1hlVVI1UTNoenQ0cUZiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA 2x"
+        data-sizes="auto"
+        alt="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=ZDYwMzYwOTA5NjIwNDVjZTZkNDE1YmUyZWFhNzE1NDJfYnBaQmRGeXZ5SHFkbFBwRnR4aVExNkRTdDREQ2hxdXdfVG9rZW46Ym94Y25GVHk3ZHZtS1hlVVI1UTNoenQ0cUZiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA"
+        title="img" /></p>
+<h3 id="平衡二叉搜索树">平衡二叉搜索树</h3>
+<p>平衡二叉搜索树：又被称为AVL（Adelson-Velsky and Landis）树，且具有以下性质：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。</p>
+<p>如图：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=NTNlZDE3YjY1NzNiZDE5YTE4NjMzNTU1MDQzZDY0MjVfTFlUSWZlMm9pdUF4ZUdWSDh1TGo5QXU2RVI1U3JabmpfVG9rZW46Ym94Y25FdnN5QmZJakhkVHVmVDRCTmVBRnpiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA"
+        data-srcset="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=NTNlZDE3YjY1NzNiZDE5YTE4NjMzNTU1MDQzZDY0MjVfTFlUSWZlMm9pdUF4ZUdWSDh1TGo5QXU2RVI1U3JabmpfVG9rZW46Ym94Y25FdnN5QmZJakhkVHVmVDRCTmVBRnpiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA, https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=NTNlZDE3YjY1NzNiZDE5YTE4NjMzNTU1MDQzZDY0MjVfTFlUSWZlMm9pdUF4ZUdWSDh1TGo5QXU2RVI1U3JabmpfVG9rZW46Ym94Y25FdnN5QmZJakhkVHVmVDRCTmVBRnpiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA 1.5x, https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=NTNlZDE3YjY1NzNiZDE5YTE4NjMzNTU1MDQzZDY0MjVfTFlUSWZlMm9pdUF4ZUdWSDh1TGo5QXU2RVI1U3JabmpfVG9rZW46Ym94Y25FdnN5QmZJakhkVHVmVDRCTmVBRnpiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA 2x"
+        data-sizes="auto"
+        alt="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=NTNlZDE3YjY1NzNiZDE5YTE4NjMzNTU1MDQzZDY0MjVfTFlUSWZlMm9pdUF4ZUdWSDh1TGo5QXU2RVI1U3JabmpfVG9rZW46Ym94Y25FdnN5QmZJakhkVHVmVDRCTmVBRnpiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA"
+        title="img" /></p>
+<p>最后一棵 不是平衡二叉树，因为它的左右两个子树的高度差的绝对值超过了1。</p>
+<p>C++中map、set、multimap，multiset的底层实现都是平衡二叉搜索树，所以map、set的增删操作时间时间复杂度是logn，注意我这里没有说unordered_map、unordered_set，unordered_map、unordered_map底层实现是哈希表。</p>
+<h2 id="二叉树的存储方式">二叉树的存储方式</h2>
+<p>二叉树可以链式存储，也可以顺序存储。</p>
+<p>那么链式存储方式就用指针， 顺序存储的方式就是用数组。</p>
+<p>顾名思义就是顺序存储的元素在内存是连续分布的，而链式存储则是通过指针把分布在散落在各个地址的节点串联一起。</p>
+<p>链式存储如图：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=Yjg1NGEyODEzZjg4MDhmZTI0YTllMTk2MmIzZTY1NTdfZUpoZ3ZNdjNIRTBkSmJGbjBSSEtqaXFwQk5iMEhJTXpfVG9rZW46Ym94Y25HZm5vUXBxc1dIZXVHVTNhNWNnYVdoXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA"
+        data-srcset="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=Yjg1NGEyODEzZjg4MDhmZTI0YTllMTk2MmIzZTY1NTdfZUpoZ3ZNdjNIRTBkSmJGbjBSSEtqaXFwQk5iMEhJTXpfVG9rZW46Ym94Y25HZm5vUXBxc1dIZXVHVTNhNWNnYVdoXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA, https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=Yjg1NGEyODEzZjg4MDhmZTI0YTllMTk2MmIzZTY1NTdfZUpoZ3ZNdjNIRTBkSmJGbjBSSEtqaXFwQk5iMEhJTXpfVG9rZW46Ym94Y25HZm5vUXBxc1dIZXVHVTNhNWNnYVdoXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA 1.5x, https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=Yjg1NGEyODEzZjg4MDhmZTI0YTllMTk2MmIzZTY1NTdfZUpoZ3ZNdjNIRTBkSmJGbjBSSEtqaXFwQk5iMEhJTXpfVG9rZW46Ym94Y25HZm5vUXBxc1dIZXVHVTNhNWNnYVdoXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA 2x"
+        data-sizes="auto"
+        alt="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=Yjg1NGEyODEzZjg4MDhmZTI0YTllMTk2MmIzZTY1NTdfZUpoZ3ZNdjNIRTBkSmJGbjBSSEtqaXFwQk5iMEhJTXpfVG9rZW46Ym94Y25HZm5vUXBxc1dIZXVHVTNhNWNnYVdoXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA"
+        title="img" /></p>
+<p>链式存储是大家很熟悉的一种方式，那么我们来看看如何顺序存储呢？</p>
+<p>其实就是用数组来存储二叉树，顺序存储的方式如图：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=NWUzMTZiYTQ0MTI4N2I4Njc3ODQzM2MyODEzY2MxZjlfVXBjNVg1SVV6TFd0QUFuU2NQZDlpY2hXMWJvQUltQzlfVG9rZW46Ym94Y25yZWlscVlNR2VIQlc3TkRBVlkwRHRiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA"
+        data-srcset="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=NWUzMTZiYTQ0MTI4N2I4Njc3ODQzM2MyODEzY2MxZjlfVXBjNVg1SVV6TFd0QUFuU2NQZDlpY2hXMWJvQUltQzlfVG9rZW46Ym94Y25yZWlscVlNR2VIQlc3TkRBVlkwRHRiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA, https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=NWUzMTZiYTQ0MTI4N2I4Njc3ODQzM2MyODEzY2MxZjlfVXBjNVg1SVV6TFd0QUFuU2NQZDlpY2hXMWJvQUltQzlfVG9rZW46Ym94Y25yZWlscVlNR2VIQlc3TkRBVlkwRHRiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA 1.5x, https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=NWUzMTZiYTQ0MTI4N2I4Njc3ODQzM2MyODEzY2MxZjlfVXBjNVg1SVV6TFd0QUFuU2NQZDlpY2hXMWJvQUltQzlfVG9rZW46Ym94Y25yZWlscVlNR2VIQlc3TkRBVlkwRHRiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA 2x"
+        data-sizes="auto"
+        alt="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=NWUzMTZiYTQ0MTI4N2I4Njc3ODQzM2MyODEzY2MxZjlfVXBjNVg1SVV6TFd0QUFuU2NQZDlpY2hXMWJvQUltQzlfVG9rZW46Ym94Y25yZWlscVlNR2VIQlc3TkRBVlkwRHRiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA"
+        title="img" /></p>
+<p>用数组来存储二叉树如何遍历的呢？</p>
+<p>如果父节点的数组下标是 i，那么它的左孩子就是 i * 2 + 1，右孩子就是 i * 2 + 2。</p>
+<p>但是用链式表示的二叉树，更有利于我们理解，所以一般我们都是用链式存储二叉树。</p>
+<h2 id="二叉树的遍历方式">二叉树的遍历方式</h2>
+<p>关于二叉树的遍历方式，要知道二叉树遍历的基本方式都有哪些。</p>
+<p>一些同学用做了很多二叉树的题目了，可能知道前中后序遍历，可能知道层序遍历，但是却没有框架。</p>
+<p>这里把二叉树的几种遍历方式列出来，就可以一一串起来了。</p>
+<p>二叉树主要有两种遍历方式：</p>
+<ol>
+<li>
+<p>深度优先遍历：先往深走，遇到叶子节点再往回走。</p>
+</li>
+<li>
+<p>广度优先遍历：一层一层的去遍历。</p>
+</li>
+</ol>
+<p>这两种遍历是图论中最基本的两种遍历方式，后面在介绍图论的时候 还会介绍到。</p>
+<p>那么从深度优先遍历和广度优先遍历进一步拓展，才有如下遍历方式：</p>
+<ul>
+<li>
+<p>深度优先遍历</p>
+<ul>
+<li>前序遍历（递归法，迭代法）</li>
+<li>中序遍历（递归法，迭代法）</li>
+<li>后序遍历（递归法，迭代法）</li>
+</ul>
+</li>
+<li>
+<p>广度优先遍历</p>
+<ul>
+<li>层次遍历（迭代法）</li>
+</ul>
+</li>
+</ul>
+<p>在深度优先遍历中：有三个顺序，前中后序遍历， 有同学总分不清这三个顺序，经常搞混，我这里教大家一个技巧。</p>
+<p>这里前中后，其实指的就是中间节点的遍历顺序，只要大家记住 前中后序指的就是中间节点的位置就可以了。</p>
+<p>看如下中间节点的顺序，就可以发现，中间节点的顺序就是所谓的遍历方式</p>
+<ul>
+<li>
+<p>前序遍历：中左右</p>
+</li>
+<li>
+<p>中序遍历：左中右</p>
+</li>
+<li>
+<p>后序遍历：左右中</p>
+</li>
+</ul>
+<p>大家可以对着如下图，看看自己理解的前后中序有没有问题。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=OGRjYjkwYmQwYTM5MjJlMTdjZjBhMzdkMjg2MDFlNTlfQkJ2UUNvbG54WHJ3MUdtVVFVTUtWQmhlR3Ftdk4zNGJfVG9rZW46Ym94Y25ETDJMTWRBWDVZMGlLUk42MWIwT2ZiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA"
+        data-srcset="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=OGRjYjkwYmQwYTM5MjJlMTdjZjBhMzdkMjg2MDFlNTlfQkJ2UUNvbG54WHJ3MUdtVVFVTUtWQmhlR3Ftdk4zNGJfVG9rZW46Ym94Y25ETDJMTWRBWDVZMGlLUk42MWIwT2ZiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA, https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=OGRjYjkwYmQwYTM5MjJlMTdjZjBhMzdkMjg2MDFlNTlfQkJ2UUNvbG54WHJ3MUdtVVFVTUtWQmhlR3Ftdk4zNGJfVG9rZW46Ym94Y25ETDJMTWRBWDVZMGlLUk42MWIwT2ZiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA 1.5x, https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=OGRjYjkwYmQwYTM5MjJlMTdjZjBhMzdkMjg2MDFlNTlfQkJ2UUNvbG54WHJ3MUdtVVFVTUtWQmhlR3Ftdk4zNGJfVG9rZW46Ym94Y25ETDJMTWRBWDVZMGlLUk42MWIwT2ZiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA 2x"
+        data-sizes="auto"
+        alt="https://cyetdnpf4c.feishu.cn/space/api/box/stream/download/asynccode/?code=OGRjYjkwYmQwYTM5MjJlMTdjZjBhMzdkMjg2MDFlNTlfQkJ2UUNvbG54WHJ3MUdtVVFVTUtWQmhlR3Ftdk4zNGJfVG9rZW46Ym94Y25ETDJMTWRBWDVZMGlLUk42MWIwT2ZiXzE2NjMyMjM2MDM6MTY2MzIyNzIwM19WNA"
+        title="img" /></p>
+<p>最后再说一说二叉树中深度优先和广度优先遍历实现方式，我们做二叉树相关题目，经常会使用递归的方式来实现深度优先遍历，也就是实现前中后序遍历，使用递归是比较方便的。</p>
+<p>之前我们讲栈与队列的时候，就说过栈其实就是递归的一种是实现结构，也就说前中后序遍历的逻辑其实都是可以借助栈使用非递归的方式来实现的。</p>
+<p>而广度优先遍历的实现一般使用队列来实现，这也是队列先进先出的特点所决定的，因为需要先进先出的结构，才能一层一层的来遍历二叉树。</p>
+<h2 id="二叉树的定义">二叉树的定义</h2>
+<p>刚刚我们说过了二叉树有两种存储方式顺序存储，和链式存储，顺序存储就是用数组来存，这个定义没啥可说的，我们来看看链式存储的二叉树节点的定义方式。</p>
+<div class="highlight"><pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">type</span> <span class="nx">TreeNode</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Val</span> <span class="kt">int</span>
+    <span class="nx">Left</span> <span class="o">*</span><span class="nx">TreeNode</span>
+    <span class="nx">Right</span> <span class="o">*</span><span class="nx">TreeNode</span>
+<span class="p">}</span>
+</code></pre></div><hr>
+<p>开始实战进入题目练习～</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-04-05</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA/" data-title="数据结构算法 二叉树理论篇&#34;" data-via="an_jinc" data-hashtags="数据结构算法,二叉树"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA/" data-hashtag="数据结构算法"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA/" data-title="数据结构算法 二叉树理论篇&#34;"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA/" data-title="数据结构算法 二叉树理论篇&#34;"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA/" data-title="数据结构算法 二叉树理论篇&#34;"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/">数据结构算法</a>,&nbsp;<a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87/" class="prev" rel="prev" title="数据结构算法 哈希表学习篇"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>数据结构算法 哈希表学习篇</a>
+            <a href="/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AF%87/" class="next" rel="next" title="数据结构算法 二叉树学习篇">数据结构算法 二叉树学习篇<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Alen学无止境</div><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.83.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Alen</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a href="https://beian.miit.gov.cn/shouye.html" target="_blank">桂ICP备2022006375号-1</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"Alen-学无止境","id-2":"Alen-学无止境"},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -31,6 +31,22 @@
     <description><![CDATA[题目练习 反转字符串 题目链接 解题思路：使用双指针left right 互换位置，当left&lt;=right时候循环条件结束 代码示例： // 反转字符串 func reverseString(s []byte)]]></description>
 </item>
 <item>
+    <title>数据结构算法 二叉树学习篇</title>
+    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
+    <pubDate>Tue, 05 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AF%87/</guid>
+    <description><![CDATA[前序遍历 题目链接 解题思路：前序遍历：中左右、使用递归法遍历 定义 (root) 表示当前遍历到 root 节点的答案。按照定义，我们只要递归调用 (root-&gt;left) 来遍历 root 节点的左子树]]></description>
+</item>
+<item>
+    <title>数据结构算法 二叉树理论篇&#34;</title>
+    <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA/</link>
+    <pubDate>Tue, 05 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA/</guid>
+    <description><![CDATA[文章出自代码随想录，很良心的一个网站平台。 二叉树的种类 满二叉树 满二叉树：如果一棵二叉树只有度为0的结点和度为2的结点，并且度为0的结点在同一]]></description>
+</item>
+<item>
     <title>数据结构算法 哈希表学习篇</title>
     <link>http://example.org/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AF%87/</link>
     <pubDate>Tue, 05 Apr 2022 00:00:00 &#43;0000</pubDate>
@@ -69,22 +85,6 @@
     <author>Alen</author>
     <guid>http://example.org/posts/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/</guid>
     <description><![CDATA[前提 有这么一组数字 1, 1, 2, 3, 5, 8, 13, 21 如果你仔细看～可以发现它的规律 21 = 13 + 8 13 = 8 + 5 8 = 5 + 3 5 = 3 + 2 这是斐波那契数列，第n项 = n-1项 +]]></description>
-</item>
-<item>
-    <title>排序算法学习记录</title>
-    <link>http://example.org/posts/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
-    <pubDate>Wed, 28 Jul 2021 12:40:39 &#43;0800</pubDate>
-    <author>Alen</author>
-    <guid>http://example.org/posts/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
-    <description><![CDATA[1. 冒泡排序 冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他]]></description>
-</item>
-<item>
-    <title>Html语义化标签的理解</title>
-    <link>http://example.org/posts/html%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE%E7%9A%84%E7%90%86%E8%A7%A3/</link>
-    <pubDate>Sat, 03 Jul 2021 14:59:06 &#43;0800</pubDate>
-    <author>Alen</author>
-    <guid>http://example.org/posts/html%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE%E7%9A%84%E7%90%86%E8%A7%A3/</guid>
-    <description><![CDATA[HTML语义化是什么？ 语义化是指根据内容的结构化（内容语义化），选择合适的标签（代码语义化），便于开发者阅读和写出更优雅的代码的同时，让浏览]]></description>
 </item>
 </channel>
 </rss>
