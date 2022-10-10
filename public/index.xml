@@ -4,9 +4,17 @@
         <link>http://example.org/</link>
         <description>Make it a better place</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>anjinc188@gmail.com (Alen)</managingEditor>
-            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Thu, 22 Sep 2022 00:00:00 &#43;0000</lastBuildDate>
+            <webMaster>anjinc188@gmail.com (Alen)</webMaster><lastBuildDate>Fri, 23 Sep 2022 00:00:00 &#43;0000</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>设计模式(02)-工厂模式</title>
+    <link>http://example.org/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</link>
+    <pubDate>Fri, 23 Sep 2022 00:00:00 &#43;0000</pubDate>
+    <author>Alen</author>
+    <guid>http://example.org/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</guid>
+    <description><![CDATA[简单工厂模式 首先来看，如果没有工厂模式，在开发者创建一个类的对象时，如果有很多不同种类的对象将会如何实现，代码如下： package main import &#34;fmt&#34; //水果类 type Fruit struct]]></description>
+</item>
+<item>
     <title>设计模式(01)-面向对象设计原则</title>
     <link>http://example.org/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F01-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</link>
     <pubDate>Thu, 22 Sep 2022 00:00:00 &#43;0000</pubDate>
@@ -77,14 +85,6 @@
     <author>Alen</author>
     <guid>http://example.org/posts/sql%E4%BC%98%E5%8C%96/</guid>
     <description><![CDATA[Sql 常用优化场景 sql优化是一个大家都比较关注的热门话题，无论你在面试，还是工作中，都很有可能会遇到。如果某天你负责的某个线上接口，出现了性能]]></description>
-</item>
-<item>
-    <title>有效的括号</title>
-    <link>http://example.org/posts/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</link>
-    <pubDate>Wed, 11 Aug 2021 23:55:25 &#43;0800</pubDate>
-    <author>Alen</author>
-    <guid>http://example.org/posts/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</guid>
-    <description><![CDATA[题目 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括]]></description>
 </item>
 </channel>
 </rss>

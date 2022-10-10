@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>设计模式(02)-工厂模式 - Alen</title><meta name="Description" content="Make it a better place"><meta property="og:title" content="设计模式(02)-工厂模式" />
+<meta property="og:description" content="简单工厂模式 首先来看，如果没有工厂模式，在开发者创建一个类的对象时，如果有很多不同种类的对象将会如何实现，代码如下： package main import &#34;fmt&#34; //水果类 type Fruit struct" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" /><meta property="og:image" content="https://static.alenhy.com/alen_avatar.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-09-23T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-09-23T00:00:00&#43;00:00" /><meta property="og:site_name" content="Alen" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://static.alenhy.com/alen_avatar.jpeg"/>
+
+<meta name="twitter:title" content="设计模式(02)-工厂模式"/>
+<meta name="twitter:description" content="简单工厂模式 首先来看，如果没有工厂模式，在开发者创建一个类的对象时，如果有很多不同种类的对象将会如何实现，代码如下： package main import &#34;fmt&#34; //水果类 type Fruit struct"/>
+<meta name="application-name" content="Alen">
+<meta name="apple-mobile-web-app-title" content="Alen"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://static.alenhy.com/alen_avatar.jpeg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" /><link rel="prev" href="http://example.org/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F01-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "设计模式(02)-工厂模式",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F\/"
+        },"genre": "posts","keywords": "设计模式, 面向对象, 抽象, 工厂模式","wordcount":  3885 ,
+        "url": "http:\/\/example.org\/posts\/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F\/","datePublished": "2022-09-23T00:00:00+00:00","dateModified": "2022-09-23T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Alen"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Alen"><span class="header-title-pre">(՞• •՞)</span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="请输入搜索内容～" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Alen"><span class="header-title-pre">(՞• •՞)</span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="请输入搜索内容～" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">设计模式(02)-工厂模式</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Alen</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>设计模式</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-09-23">2022-09-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3885 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#简单工厂模式"><strong>简单工厂模式</strong></a>
+      <ul>
+        <li><a href="#11-简单工厂模式实现">1.1 简单工厂模式实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#工厂方法模式"><strong>工厂方法模式</strong></a>
+      <ul>
+        <li><a href="#21-工厂方法模式的优缺点">2.1 工厂方法模式的优缺点</a></li>
+      </ul>
+    </li>
+    <li><a href="#抽象工厂方法模式"><strong>抽象工厂方法模式</strong></a>
+      <ul>
+        <li><a href="#31-抽象工厂方法模式的实现">3.1 抽象工厂方法模式的实现</a></li>
+        <li><a href="#312-抽象工厂模式的优缺点">3.1.2 抽象工厂模式的优缺点</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="简单工厂模式"><strong>简单工厂模式</strong></h2>
+<p>首先来看，如果没有工厂模式，在开发者创建一个类的对象时，如果有很多不同种类的对象将会如何实现，代码如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kn">package</span> <span class="nx">main</span>
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="c1">//水果类
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Fruit</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="c1">//...
+</span><span class="c1"></span>        <span class="c1">//...
+</span><span class="c1"></span>        <span class="c1">//...
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">f</span> <span class="o">*</span><span class="nx">Fruit</span><span class="p">)</span> <span class="nf">Show</span><span class="p">(</span><span class="nx">name</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="nx">name</span> <span class="o">==</span> <span class="s">&#34;apple&#34;</span> <span class="p">{</span>
+                <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;我是苹果&#34;</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">name</span> <span class="o">==</span> <span class="s">&#34;banana&#34;</span> <span class="p">{</span>
+                <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;我是香蕉&#34;</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">name</span> <span class="o">==</span> <span class="s">&#34;pear&#34;</span> <span class="p">{</span>
+                <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;我是梨&#34;</span><span class="p">)</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//创建一个Fruit对象
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewFruit</span><span class="p">(</span><span class="nx">name</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">Fruit</span> <span class="p">{</span>
+        <span class="nx">fruit</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Fruit</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nx">name</span> <span class="o">==</span> <span class="s">&#34;apple&#34;</span> <span class="p">{</span>
+                <span class="c1">//创建apple逻辑
+</span><span class="c1"></span>        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">name</span> <span class="o">==</span> <span class="s">&#34;banana&#34;</span> <span class="p">{</span>
+                <span class="c1">//创建banana逻辑
+</span><span class="c1"></span>        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">name</span> <span class="o">==</span> <span class="s">&#34;pear&#34;</span> <span class="p">{</span>
+                <span class="c1">//创建pear逻辑
+</span><span class="c1"></span>        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">fruit</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">apple</span> <span class="o">:=</span> <span class="nf">NewFruit</span><span class="p">(</span><span class="s">&#34;apple&#34;</span><span class="p">)</span>
+        <span class="nx">apple</span><span class="p">.</span><span class="nf">Show</span><span class="p">(</span><span class="s">&#34;apple&#34;</span><span class="p">)</span>
+
+        <span class="nx">banana</span> <span class="o">:=</span> <span class="nf">NewFruit</span><span class="p">(</span><span class="s">&#34;banana&#34;</span><span class="p">)</span>
+        <span class="nx">banana</span><span class="p">.</span><span class="nf">Show</span><span class="p">(</span><span class="s">&#34;banana&#34;</span><span class="p">)</span>
+
+        <span class="nx">pear</span> <span class="o">:=</span> <span class="nf">NewFruit</span><span class="p">(</span><span class="s">&#34;pear&#34;</span><span class="p">)</span>
+        <span class="nx">pear</span><span class="p">.</span><span class="nf">Show</span><span class="p">(</span><span class="s">&#34;pear&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><p>不难看出，Fruit类是一个“巨大的”类，在该类的设计中存在如下几个问题：</p>
+<ol>
+<li>
+<p>在Fruit类中包含很多“if…else…”代码块，整个类的代码相当冗长，代码越长，阅读难度、维护难度和测试难度也越大；而且大量条件语句的存在还将影响系统的性能，程序在执行过程中需要做大量的条件判断。</p>
+</li>
+<li>
+<p>Fruit类的职责过重，它负责初始化和显示所有的水果对象，将各种水果对象的初始化代码和显示代码集中在一个类中实现，违反了“单一职责原则”，不利于类的重用和维护；</p>
+</li>
+<li>
+<p>当需要增加新类型的水果时，必须修改Fruit类的构造函数NewFruit()和其他相关方法源代码，违反了“开闭原则”。</p>
+</li>
+</ol>
+<h3 id="11-简单工厂模式实现">1.1 简单工厂模式实现</h3>
+<p>简单工厂方法模式的实现代码如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="c1">// ======= 抽象层 =========
+</span><span class="c1"></span>
+<span class="c1">//水果类(抽象接口)
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Fruit</span> <span class="kd">interface</span> <span class="p">{</span>
+        <span class="nf">Show</span><span class="p">()</span>         <span class="c1">//接口的某方法
+</span><span class="c1"></span><span class="p">}</span>
+<span class="c1">// ======= 基础类模块 =========
+</span><span class="c1"></span>
+<span class="kd">type</span> <span class="nx">Apple</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">Fruit</span>  <span class="c1">//为了易于理解显示继承(此行可以省略)
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">apple</span> <span class="o">*</span><span class="nx">Apple</span><span class="p">)</span> <span class="nf">Show</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;我是苹果&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Banana</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">Fruit</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">banana</span> <span class="o">*</span><span class="nx">Banana</span><span class="p">)</span> <span class="nf">Show</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;我是香蕉&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Pear</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">Fruit</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">pear</span> <span class="o">*</span><span class="nx">Pear</span><span class="p">)</span> <span class="nf">Show</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;我是梨&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// ========= 工厂模块  =========
+</span><span class="c1">//一个工厂， 有一个生产水果的机器，返回一个抽象水果的指针
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Factory</span> <span class="kd">struct</span> <span class="p">{}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">fac</span> <span class="o">*</span><span class="nx">Factory</span><span class="p">)</span> <span class="nf">CreateFruit</span><span class="p">(</span><span class="nx">kind</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Fruit</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">fruit</span> <span class="nx">Fruit</span>
+
+        <span class="k">if</span> <span class="nx">kind</span> <span class="o">==</span> <span class="s">&#34;apple&#34;</span> <span class="p">{</span>
+                <span class="nx">fruit</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Apple</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">kind</span> <span class="o">==</span> <span class="s">&#34;banana&#34;</span> <span class="p">{</span>
+                <span class="nx">fruit</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Banana</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">kind</span> <span class="o">==</span> <span class="s">&#34;pear&#34;</span> <span class="p">{</span>
+                <span class="nx">fruit</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Pear</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">fruit</span>
+<span class="p">}</span>
+
+
+<span class="c1">// ==========业务逻辑层==============
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">factory</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Factory</span><span class="p">)</span>
+
+        <span class="nx">apple</span> <span class="o">:=</span> <span class="nx">factory</span><span class="p">.</span><span class="nf">CreateFruit</span><span class="p">(</span><span class="s">&#34;apple&#34;</span><span class="p">)</span>
+        <span class="nx">apple</span><span class="p">.</span><span class="nf">Show</span><span class="p">()</span>
+
+        <span class="nx">banana</span> <span class="o">:=</span> <span class="nx">factory</span><span class="p">.</span><span class="nf">CreateFruit</span><span class="p">(</span><span class="s">&#34;banana&#34;</span><span class="p">)</span>
+        <span class="nx">banana</span><span class="p">.</span><span class="nf">Show</span><span class="p">()</span>
+
+        <span class="nx">pear</span> <span class="o">:=</span> <span class="nx">factory</span><span class="p">.</span><span class="nf">CreateFruit</span><span class="p">(</span><span class="s">&#34;pear&#34;</span><span class="p">)</span>
+        <span class="nx">pear</span><span class="p">.</span><span class="nf">Show</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div><ol>
+<li>
+<h2 id="工厂方法模式"><strong>工厂方法模式</strong></h2>
+</li>
+</ol>
+<ul>
+<li>
+<p><strong>抽象工厂（Abstract Factory）角色</strong>：工厂方法模式的核心，任何工厂类都必须实现这个接口。</p>
+</li>
+<li>
+<p><strong>工厂（Concrete Factory）角色</strong>：具体工厂类是抽象工厂的一个实现，负责实例化产品对象。</p>
+</li>
+<li>
+<p><strong>抽象产品（Abstract Product）角色</strong>：工厂方法模式所创建的所有对象的父类，它负责描述所有实例所共有的公共接口。</p>
+</li>
+<li>
+<p><strong>具体产品（Concrete Product）角色</strong>：工厂方法模式所创建的具体实例对象。</p>
+</li>
+</ul>
+<p>实现的代码如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="c1">// ======= 抽象层 =========
+</span><span class="c1"></span>
+<span class="c1">//水果类(抽象接口)
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Fruit</span> <span class="kd">interface</span> <span class="p">{</span>
+        <span class="nf">Show</span><span class="p">()</span>         <span class="c1">//接口的某方法
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="c1">//工厂类(抽象接口)
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">AbstractFactory</span> <span class="kd">interface</span> <span class="p">{</span>
+        <span class="nf">CreateFruit</span><span class="p">()</span> <span class="nx">Fruit</span> <span class="c1">//生产水果类(抽象)的生产器方法
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="c1">// ======= 基础类模块 =========
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Apple</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">Fruit</span>  <span class="c1">//为了易于理解显示继承(此行可以省略)
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">apple</span> <span class="o">*</span><span class="nx">Apple</span><span class="p">)</span> <span class="nf">Show</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;我是苹果&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Banana</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">Fruit</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">banana</span> <span class="o">*</span><span class="nx">Banana</span><span class="p">)</span> <span class="nf">Show</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;我是香蕉&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Pear</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">Fruit</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">pear</span> <span class="o">*</span><span class="nx">Pear</span><span class="p">)</span> <span class="nf">Show</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;我是梨&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// ========= 工厂模块  =========
+</span><span class="c1">//具体的苹果工厂
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">AppleFactory</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">AbstractFactory</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">fac</span> <span class="o">*</span><span class="nx">AppleFactory</span><span class="p">)</span> <span class="nf">CreateFruit</span><span class="p">()</span> <span class="nx">Fruit</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">fruit</span> <span class="nx">Fruit</span>
+
+        <span class="c1">//生产一个具体的苹果
+</span><span class="c1"></span>        <span class="nx">fruit</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Apple</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">fruit</span>
+<span class="p">}</span>
+
+<span class="c1">//具体的香蕉工厂
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">BananaFactory</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">AbstractFactory</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">fac</span> <span class="o">*</span><span class="nx">BananaFactory</span><span class="p">)</span> <span class="nf">CreateFruit</span><span class="p">()</span> <span class="nx">Fruit</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">fruit</span> <span class="nx">Fruit</span>
+
+        <span class="c1">//生产一个具体的香蕉
+</span><span class="c1"></span>        <span class="nx">fruit</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Banana</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">fruit</span>
+<span class="p">}</span>
+
+
+<span class="c1">//具体的梨工厂
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">PearFactory</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">AbstractFactory</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">fac</span> <span class="o">*</span><span class="nx">PearFactory</span><span class="p">)</span> <span class="nf">CreateFruit</span><span class="p">()</span> <span class="nx">Fruit</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">fruit</span> <span class="nx">Fruit</span>
+
+        <span class="c1">//生产一个具体的梨
+</span><span class="c1"></span>        <span class="nx">fruit</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Pear</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">fruit</span>
+<span class="p">}</span>
+
+<span class="c1">//======= 业务逻辑层 =======
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="cm">/*
+</span><span class="cm">            本案例为了突出根据依赖倒转原则与面向接口编程特性。
+</span><span class="cm">            一些变量的定义将使用显示类型声明方式
+</span><span class="cm">        */</span>
+
+        <span class="c1">// 需求1：需要一个具体的苹果对象
+</span><span class="c1"></span>        <span class="c1">// 1-先要一个具体的苹果工厂
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">appleFac</span> <span class="nx">AbstractFactory</span>
+        <span class="nx">appleFac</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">AppleFactory</span><span class="p">)</span>
+        <span class="c1">// 2-生产相对应的具体水果
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">apple</span> <span class="nx">Fruit</span>
+        <span class="nx">apple</span> <span class="p">=</span> <span class="nx">appleFac</span><span class="p">.</span><span class="nf">CreateFruit</span><span class="p">()</span>
+
+        <span class="nx">apple</span><span class="p">.</span><span class="nf">Show</span><span class="p">()</span>
+
+
+        <span class="c1">// 需求2：需要一个具体的香蕉对象
+</span><span class="c1"></span>        <span class="c1">// 1-先要一个具体的香蕉工厂
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">bananaFac</span> <span class="nx">AbstractFactory</span>
+        <span class="nx">bananaFac</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">BananaFactory</span><span class="p">)</span>
+        <span class="c1">//2-生产相对应的具体水果
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">banana</span> <span class="nx">Fruit</span>
+        <span class="nx">banana</span> <span class="p">=</span> <span class="nx">bananaFac</span><span class="p">.</span><span class="nf">CreateFruit</span><span class="p">()</span>
+
+        <span class="nx">banana</span><span class="p">.</span><span class="nf">Show</span><span class="p">()</span>
+
+        <span class="c1">// 需求3：需要一个具体的梨对象
+</span><span class="c1"></span>        <span class="c1">// 1-先要一个具体的梨工厂
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">pearFac</span> <span class="nx">AbstractFactory</span>
+        <span class="nx">pearFac</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">PearFactory</span><span class="p">)</span>
+        <span class="c1">// 2-生产相对应的具体水果
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">pear</span> <span class="nx">Fruit</span>
+        <span class="nx">pear</span> <span class="p">=</span> <span class="nx">pearFac</span><span class="p">.</span><span class="nf">CreateFruit</span><span class="p">()</span>
+
+        <span class="nx">pear</span><span class="p">.</span><span class="nf">Show</span><span class="p">()</span>
+
+        <span class="c1">// 需求4：需要一个日本的苹果？
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div><ul>
+<li>
+<p>上述代码是通过面向抽象层开发，业务逻辑层的main()函数逻辑，依然是只与工厂耦合，且只与抽象的工厂和抽象的水果类耦合，这样就遵循了面向抽象层接口编程的原则。</p>
+</li>
+<li>
+<p>那么抽象的工厂方法模式如何体现“开闭原则”的。接下来可以尝试在原有的代码上添加一种新产品的生产，如“日本苹果”，具体的代码如下：</p>
+</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="c1">// ======= 抽象层 =========
+</span><span class="c1"></span>
+<span class="c1">//水果类(抽象接口)
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Fruit</span> <span class="kd">interface</span> <span class="p">{</span>
+        <span class="nf">Show</span><span class="p">()</span>         <span class="c1">// 接口的某方法
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="c1">//工厂类(抽象接口)
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">AbstractFactory</span> <span class="kd">interface</span> <span class="p">{</span>
+        <span class="nf">CreateFruit</span><span class="p">()</span> <span class="nx">Fruit</span> <span class="c1">// 生产水果类(抽象)的生产器方法
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="c1">// ======= 基础类模块 =========
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Apple</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">Fruit</span>  <span class="c1">// 为了易于理解显示继承(此行可以省略)
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">apple</span> <span class="o">*</span><span class="nx">Apple</span><span class="p">)</span> <span class="nf">Show</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;我是苹果&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Banana</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">Fruit</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">banana</span> <span class="o">*</span><span class="nx">Banana</span><span class="p">)</span> <span class="nf">Show</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;我是香蕉&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Pear</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">Fruit</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">pear</span> <span class="o">*</span><span class="nx">Pear</span><span class="p">)</span> <span class="nf">Show</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;我是梨&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">//(+) 新增一个&#34;日本苹果&#34;
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">JapanApple</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">Fruit</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">jp</span> <span class="o">*</span><span class="nx">JapanApple</span><span class="p">)</span> <span class="nf">Show</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;我是日本苹果&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// ========= 工厂模块  =========
+</span><span class="c1">//具体的苹果工厂
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">AppleFactory</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">AbstractFactory</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">fac</span> <span class="o">*</span><span class="nx">AppleFactory</span><span class="p">)</span> <span class="nf">CreateFruit</span><span class="p">()</span> <span class="nx">Fruit</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">fruit</span> <span class="nx">Fruit</span>
+
+        <span class="c1">//生产一个具体的苹果
+</span><span class="c1"></span>        <span class="nx">fruit</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Apple</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">fruit</span>
+<span class="p">}</span>
+
+<span class="c1">//具体的香蕉工厂
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">BananaFactory</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">AbstractFactory</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">fac</span> <span class="o">*</span><span class="nx">BananaFactory</span><span class="p">)</span> <span class="nf">CreateFruit</span><span class="p">()</span> <span class="nx">Fruit</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">fruit</span> <span class="nx">Fruit</span>
+
+        <span class="c1">//生产一个具体的香蕉
+</span><span class="c1"></span>        <span class="nx">fruit</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Banana</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">fruit</span>
+<span class="p">}</span>
+
+
+<span class="c1">//具体的梨工厂
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">PearFactory</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">AbstractFactory</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">fac</span> <span class="o">*</span><span class="nx">PearFactory</span><span class="p">)</span> <span class="nf">CreateFruit</span><span class="p">()</span> <span class="nx">Fruit</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">fruit</span> <span class="nx">Fruit</span>
+
+        <span class="c1">//生产一个具体的梨
+</span><span class="c1"></span>        <span class="nx">fruit</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Pear</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">fruit</span>
+<span class="p">}</span>
+
+<span class="c1">//具体的日本工厂
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">JapanAppleFactory</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">AbstractFactory</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">fac</span> <span class="o">*</span><span class="nx">JapanAppleFactory</span><span class="p">)</span> <span class="nf">CreateFruit</span><span class="p">()</span> <span class="nx">Fruit</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">fruit</span> <span class="nx">Fruit</span>
+
+        <span class="c1">//生产一个具体的日本苹果
+</span><span class="c1"></span>        <span class="nx">fruit</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">JapanApple</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">fruit</span>
+<span class="p">}</span>
+
+<span class="c1">// ========= 业务逻辑层  =========
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="cm">/*
+</span><span class="cm">                本案例为了突出根据依赖倒转原则与面向接口编程特性。
+</span><span class="cm">            一些变量的定义将使用显示类型声明方式
+</span><span class="cm">        */</span>
+
+        <span class="c1">//需求1：需要一个具体的苹果对象
+</span><span class="c1"></span>        <span class="c1">//1-先要一个具体的苹果工厂
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">appleFac</span> <span class="nx">AbstractFactory</span>
+        <span class="nx">appleFac</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">AppleFactory</span><span class="p">)</span>
+        <span class="c1">//2-生产相对应的具体水果
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">apple</span> <span class="nx">Fruit</span>
+        <span class="nx">apple</span> <span class="p">=</span> <span class="nx">appleFac</span><span class="p">.</span><span class="nf">CreateFruit</span><span class="p">()</span>
+
+        <span class="nx">apple</span><span class="p">.</span><span class="nf">Show</span><span class="p">()</span>
+
+
+        <span class="c1">//需求2：需要一个具体的香蕉对象
+</span><span class="c1"></span>        <span class="c1">//1-先要一个具体的香蕉工厂
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">bananaFac</span> <span class="nx">AbstractFactory</span>
+        <span class="nx">bananaFac</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">BananaFactory</span><span class="p">)</span>
+        <span class="c1">//2-生产相对应的具体水果
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">banana</span> <span class="nx">Fruit</span>
+        <span class="nx">banana</span> <span class="p">=</span> <span class="nx">bananaFac</span><span class="p">.</span><span class="nf">CreateFruit</span><span class="p">()</span>
+
+        <span class="nx">banana</span><span class="p">.</span><span class="nf">Show</span><span class="p">()</span>
+
+        <span class="c1">//需求3：需要一个具体的梨对象
+</span><span class="c1"></span>        <span class="c1">//1-先要一个具体的梨工厂
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">pearFac</span> <span class="nx">AbstractFactory</span>
+        <span class="nx">pearFac</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">PearFactory</span><span class="p">)</span>
+        <span class="c1">//2-生产相对应的具体水果
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">pear</span> <span class="nx">Fruit</span>
+        <span class="nx">pear</span> <span class="p">=</span> <span class="nx">pearFac</span><span class="p">.</span><span class="nf">CreateFruit</span><span class="p">()</span>
+
+        <span class="nx">pear</span><span class="p">.</span><span class="nf">Show</span><span class="p">()</span>
+
+        <span class="c1">//需求4：需要一个日本的苹果？
+</span><span class="c1"></span>        <span class="c1">//1-先要一个具体的日本评估工厂
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">japanAppleFac</span> <span class="nx">AbstractFactory</span>
+        <span class="nx">japanAppleFac</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">JapanAppleFactory</span><span class="p">)</span>
+        <span class="c1">//2-生产相对应的具体水果
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">japanApple</span> <span class="nx">Fruit</span>
+        <span class="nx">japanApple</span> <span class="p">=</span> <span class="nx">japanAppleFac</span><span class="p">.</span><span class="nf">CreateFruit</span><span class="p">()</span>
+
+        <span class="nx">japanApple</span><span class="p">.</span><span class="nf">Show</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li>可以看见，新增的基本类“日本苹果”，和“具体的工厂” 均没有改动之前的任何代码。完全符合开闭原则思想。新增的功能不会影响到之前的已有的系统稳定性。</li>
+</ul>
+<h3 id="21-工厂方法模式的优缺点">2.1 工厂方法模式的优缺点</h3>
+<p>优点：</p>
+<ol>
+<li>不需要记住具体类名，甚至连具体参数都不用记忆。</li>
+<li>实现了对象创建和使用的分离。</li>
+<li>系统的可扩展性也就变得非常好，无需修改接口和原类。</li>
+<li>对于新产品的创建，符合开闭原则。</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>增加系统中类的个数，复杂度和理解度增加。</li>
+<li>增加了系统的抽象性和理解难度。</li>
+</ol>
+<p>适用场景：</p>
+<ol>
+<li>
+<p>客户端不知道它所需要的对象的类。</p>
+</li>
+<li>
+<p>抽象工厂类通过其子类来指定创建哪个对象</p>
+</li>
+</ol>
+<h2 id="抽象工厂方法模式"><strong>抽象工厂方法模式</strong></h2>
+<ul>
+<li>工厂方法模式通过引入工厂等级结构，解决了简单工厂模式中工厂类职责太重的问题，但由于工厂方法模式中的每个工厂只生产一类产品，可能会导致系统中存在大量的工厂类，势必会增加系统的开销。因此，可以考虑将一些相关的产品组成一个“产品族”，由同一个工厂来统一生产，这就是本文将要学习的抽象工厂模式的基本思想。</li>
+</ul>
+<h3 id="31-抽象工厂方法模式的实现">3.1 抽象工厂方法模式的实现</h3>
+<p>代码如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="c1">// ======= 抽象层 =========
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">AbstractApple</span> <span class="kd">interface</span> <span class="p">{</span>
+        <span class="nf">ShowApple</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">AbstractBanana</span> <span class="kd">interface</span> <span class="p">{</span>
+        <span class="nf">ShowBanana</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">AbstractPear</span> <span class="kd">interface</span> <span class="p">{</span>
+        <span class="nf">ShowPear</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c1">//抽象工厂
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">AbstractFactory</span> <span class="kd">interface</span> <span class="p">{</span>
+        <span class="nf">CreateApple</span><span class="p">()</span> <span class="nx">AbstractApple</span>
+        <span class="nf">CreateBanana</span><span class="p">()</span> <span class="nx">AbstractBanana</span>
+        <span class="nf">CreatePear</span><span class="p">()</span> <span class="nx">AbstractPear</span>
+<span class="p">}</span>
+
+<span class="c1">// ======== 实现层 =========
+</span><span class="c1"></span><span class="cm">/*  中国产品族 */</span>
+<span class="kd">type</span> <span class="nx">ChinaApple</span> <span class="kd">struct</span> <span class="p">{}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">ca</span> <span class="o">*</span><span class="nx">ChinaApple</span><span class="p">)</span> <span class="nf">ShowApple</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;中国苹果&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">ChinaBanana</span> <span class="kd">struct</span> <span class="p">{}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">cb</span> <span class="o">*</span><span class="nx">ChinaBanana</span><span class="p">)</span> <span class="nf">ShowBanana</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;中国香蕉&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">ChinaPear</span> <span class="kd">struct</span> <span class="p">{}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">cp</span> <span class="o">*</span><span class="nx">ChinaPear</span><span class="p">)</span> <span class="nf">ShowPear</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;中国梨&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">ChinaFactory</span> <span class="kd">struct</span> <span class="p">{}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">cf</span> <span class="o">*</span><span class="nx">ChinaFactory</span><span class="p">)</span> <span class="nf">CreateApple</span><span class="p">()</span> <span class="nx">AbstractApple</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">apple</span> <span class="nx">AbstractApple</span>
+
+        <span class="nx">apple</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">ChinaApple</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">apple</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">cf</span> <span class="o">*</span><span class="nx">ChinaFactory</span><span class="p">)</span> <span class="nf">CreateBanana</span><span class="p">()</span> <span class="nx">AbstractBanana</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">banana</span> <span class="nx">AbstractBanana</span>
+
+        <span class="nx">banana</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">ChinaBanana</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">banana</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">cf</span> <span class="o">*</span><span class="nx">ChinaFactory</span><span class="p">)</span> <span class="nf">CreatePear</span><span class="p">()</span> <span class="nx">AbstractPear</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">pear</span> <span class="nx">AbstractPear</span>
+
+        <span class="nx">pear</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">ChinaPear</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">pear</span>
+<span class="p">}</span>
+
+<span class="cm">/*  日本产品族 */</span>
+<span class="kd">type</span> <span class="nx">JapanApple</span> <span class="kd">struct</span> <span class="p">{}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">ja</span> <span class="o">*</span><span class="nx">JapanApple</span><span class="p">)</span> <span class="nf">ShowApple</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;日本苹果&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">JapanBanana</span> <span class="kd">struct</span> <span class="p">{}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">jb</span> <span class="o">*</span><span class="nx">JapanBanana</span><span class="p">)</span> <span class="nf">ShowBanana</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;日本香蕉&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">JapanPear</span> <span class="kd">struct</span> <span class="p">{}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">cp</span> <span class="o">*</span><span class="nx">JapanPear</span><span class="p">)</span> <span class="nf">ShowPear</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;日本梨&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">JapanFactory</span> <span class="kd">struct</span> <span class="p">{}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">jf</span> <span class="o">*</span><span class="nx">JapanFactory</span><span class="p">)</span> <span class="nf">CreateApple</span><span class="p">()</span> <span class="nx">AbstractApple</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">apple</span> <span class="nx">AbstractApple</span>
+
+        <span class="nx">apple</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">JapanApple</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">apple</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">jf</span> <span class="o">*</span><span class="nx">JapanFactory</span><span class="p">)</span> <span class="nf">CreateBanana</span><span class="p">()</span> <span class="nx">AbstractBanana</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">banana</span> <span class="nx">AbstractBanana</span>
+
+        <span class="nx">banana</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">JapanBanana</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">banana</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">cf</span> <span class="o">*</span><span class="nx">JapanFactory</span><span class="p">)</span> <span class="nf">CreatePear</span><span class="p">()</span> <span class="nx">AbstractPear</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">pear</span> <span class="nx">AbstractPear</span>
+
+        <span class="nx">pear</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">JapanPear</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">pear</span>
+<span class="p">}</span>
+
+<span class="cm">/*  美国产品族 */</span>
+<span class="kd">type</span> <span class="nx">AmericanApple</span> <span class="kd">struct</span> <span class="p">{}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">aa</span> <span class="o">*</span><span class="nx">AmericanApple</span><span class="p">)</span> <span class="nf">ShowApple</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;美国苹果&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">AmericanBanana</span> <span class="kd">struct</span> <span class="p">{}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">ab</span> <span class="o">*</span><span class="nx">AmericanBanana</span><span class="p">)</span> <span class="nf">ShowBanana</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;美国香蕉&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">AmericanPear</span> <span class="kd">struct</span> <span class="p">{}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">ap</span> <span class="o">*</span><span class="nx">AmericanPear</span><span class="p">)</span> <span class="nf">ShowPear</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;美国梨&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">AmericanFactory</span> <span class="kd">struct</span> <span class="p">{}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">af</span> <span class="o">*</span><span class="nx">AmericanFactory</span><span class="p">)</span> <span class="nf">CreateApple</span><span class="p">()</span> <span class="nx">AbstractApple</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">apple</span> <span class="nx">AbstractApple</span>
+
+        <span class="nx">apple</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">AmericanApple</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">apple</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">af</span> <span class="o">*</span><span class="nx">AmericanFactory</span><span class="p">)</span> <span class="nf">CreateBanana</span><span class="p">()</span> <span class="nx">AbstractBanana</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">banana</span> <span class="nx">AbstractBanana</span>
+
+        <span class="nx">banana</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">AmericanBanana</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">banana</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">af</span> <span class="o">*</span><span class="nx">AmericanFactory</span><span class="p">)</span> <span class="nf">CreatePear</span><span class="p">()</span> <span class="nx">AbstractPear</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">pear</span> <span class="nx">AbstractPear</span>
+
+        <span class="nx">pear</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">AmericanPear</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nx">pear</span>
+<span class="p">}</span>
+
+<span class="c1">// ======== 业务逻辑层 =======
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">//需求1: 需要美国的苹果、香蕉、梨 等对象
+</span><span class="c1"></span>        <span class="c1">//1-创建一个美国工厂
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">aFac</span> <span class="nx">AbstractFactory</span>
+        <span class="nx">aFac</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">AmericanFactory</span><span class="p">)</span>
+
+        <span class="c1">//2-生产美国苹果
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">aApple</span> <span class="nx">AbstractApple</span>
+        <span class="nx">aApple</span> <span class="p">=</span> <span class="nx">aFac</span><span class="p">.</span><span class="nf">CreateApple</span><span class="p">()</span>
+        <span class="nx">aApple</span><span class="p">.</span><span class="nf">ShowApple</span><span class="p">()</span>
+
+        <span class="c1">//3-生产美国香蕉
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">aBanana</span> <span class="nx">AbstractBanana</span>
+        <span class="nx">aBanana</span> <span class="p">=</span> <span class="nx">aFac</span><span class="p">.</span><span class="nf">CreateBanana</span><span class="p">()</span>
+        <span class="nx">aBanana</span><span class="p">.</span><span class="nf">ShowBanana</span><span class="p">()</span>
+
+        <span class="c1">//4-生产美国梨
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">aPear</span> <span class="nx">AbstractPear</span>
+        <span class="nx">aPear</span> <span class="p">=</span> <span class="nx">aFac</span><span class="p">.</span><span class="nf">CreatePear</span><span class="p">()</span>
+        <span class="nx">aPear</span><span class="p">.</span><span class="nf">ShowPear</span><span class="p">()</span>
+
+        <span class="c1">//需求2: 需要中国的苹果、香蕉
+</span><span class="c1"></span>        <span class="c1">//1-创建一个中国工厂
+</span><span class="c1"></span>        <span class="nx">cFac</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">ChinaFactory</span><span class="p">)</span>
+
+        <span class="c1">//2-生产中国苹果
+</span><span class="c1"></span>        <span class="nx">cApple</span> <span class="o">:=</span> <span class="nx">cFac</span><span class="p">.</span><span class="nf">CreateApple</span><span class="p">()</span>
+        <span class="nx">cApple</span><span class="p">.</span><span class="nf">ShowApple</span><span class="p">()</span>
+
+        <span class="c1">//3-生产中国香蕉
+</span><span class="c1"></span>        <span class="nx">cBanana</span> <span class="o">:=</span> <span class="nx">cFac</span><span class="p">.</span><span class="nf">CreateBanana</span><span class="p">()</span>
+        <span class="nx">cBanana</span><span class="p">.</span><span class="nf">ShowBanana</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li>抽象工厂模式是否符合“开闭原则”？</li>
+</ul>
+<h3 id="312-抽象工厂模式的优缺点">3.1.2 抽象工厂模式的优缺点</h3>
+<p>优点：</p>
+<ol>
+<li>拥有工厂方法模式的优点</li>
+<li>当一个产品族中的多个对象被设计成一起工作时，它能够保证客户端始终只使用同一个产品族中的对象。</li>
+<li>增加新的产品族很方便，无须修改已有系统，符合“开闭原则”。</li>
+</ol>
+<p>缺点：</p>
+<ul>
+<li>增加新的产品等级结构麻烦，需要对原有系统进行较大的修改，甚至需要修改抽象层代码，这显然会带来较大的不便，违背了“开闭原则”。</li>
+</ul>
+<hr>
+<p>以上内容是学习刘丹冰老师<a href="https://www.yuque.com/aceld/lfhu8y/zmy7ru" target="_blank" rel="noopener noreffer ">Easy搞定设计模式</a>系列</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-09-23</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-title="设计模式(02)-工厂模式" data-via="an_jinc" data-hashtags="设计模式,面向对象,抽象,工厂模式"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-hashtag="设计模式"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-title="设计模式(02)-工厂模式"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-title="设计模式(02)-工厂模式"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-title="设计模式(02)-工厂模式"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>,&nbsp;<a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">面向对象</a>,&nbsp;<a href="/tags/%E6%8A%BD%E8%B1%A1/">抽象</a>,&nbsp;<a href="/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">工厂模式</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F01-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" class="prev" rel="prev" title="设计模式(01)-面向对象设计原则"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>设计模式(01)-面向对象设计原则</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Alen学无止境</div><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.83.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Alen</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a href="https://beian.miit.gov.cn/shouye.html" target="_blank">桂ICP备2022006375号-1</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"Alen-学无止境","id-2":"Alen-学无止境"},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
